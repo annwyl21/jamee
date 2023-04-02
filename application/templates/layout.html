@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+<!--    put your bootstrap css link here, above the other one-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/index">ChipIn Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+{% block main_content %}
+<!--content will go here-->
+{% endblock%}
+
+
+<hr>
+<footer>
+    <p>&copy; ChipIn 2023 is part of the JAMEE Group - The Shard, 32 London Bridge St, London SE1 9SG</p>
+</footer>
+
+<!--bootstrap js links here-->
+
+</body>
+</html>
