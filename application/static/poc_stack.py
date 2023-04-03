@@ -36,4 +36,4 @@ plt.ylabel("Spending Type £")
 plt.legend(("Rent", "Bills", "Council Tax", "Groceries", "Other"))
 
 plt.savefig('application/static/barstack.png')
-plt.show()
+
