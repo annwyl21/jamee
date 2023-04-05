@@ -58,9 +58,6 @@ def dashboard():
         def __init__(self, name):
             self.name = name
         
-        def get_name(self):
-            return f"My name is {self.name}."
-        
         def create_pie(self, my_variable):
             # creates a dataframe that matplot can use
             df = pd.DataFrame({'expenditure': [my_variable], 'spending': [100]})
@@ -101,9 +98,10 @@ def example():
     mycursor.callproc('data_out_list')
     data_list = []
     for result in mycursor.stored_results():
-        data_list.append(result.fetchall())
-    # for item in data_list:
-    #     my_list_data = item.pop(0)
+        for returned_list in result:
+            for tuple in returned_list:
+                list_item = tuple
+                data_list.append(list_item)
 
     # create a class
     class Finance:
@@ -124,17 +122,31 @@ def example():
             plt.subplot()
             # which data to use and to display a whole figure percentage
             plt.pie(df['spending'], autopct='%d%%')
-            plt.axis('equal')
             plt.title("Test Pie Chart")
-            plt.legend(df['expenditure'], loc='upper right', bbox_to_anchor=(1,1), fontsize=7)
-
+            # uses the variable pulled from the database to create the chart legend
+            plt.legend(df['expenditure'])
             # put that pie chart in a saved file
             plt.savefig('application/static/images/piechart1.png')
+            #return - what to return to remove the None output
+        
+        def create_pie_from_list(self, my_list):
+            # creates a dataframe that matplot can use
+            df = pd.DataFrame({'expenditure': my_list, 'spending': [50, 50]})
 
-            # return the image
-            #return - what to return to remove the None
+            # creates the size of the pie chart
+            plt.figure(figsize=(6,4))
+            # tells the computer to create the pie chart
+            plt.subplot()
+            # which data to use and to display a whole figure percentage
+            plt.pie(df['spending'], autopct='%d%%')
+            plt.title("Test Pie Chart")
+            # uses the variable pulled from the database to create the chart legend
+            plt.legend(df['expenditure'])
+            # put that pie chart in a saved file
+            plt.savefig('application/static/images/piechart2.png')
+            #return - what to return to remove the None output
 
     # create an instance of that class
     create_instance = Finance('Ellen')
 
-    return render_template('example.html', title='Example', call_my_class=create_instance, my_data=my_data, data_list=data_list) #key=value pairs (my_variable = this_thing_here)
+    return render_template('example.html', title='Working Example Page', call_my_class=create_instance, my_data=my_data, data_list=data_list) #key=value pairs (my_variable = this_thing_here)
