@@ -32,9 +32,9 @@ def form_page():
 @app.route('/dashboard')
 def dashboard():
 
-    #mycursor = cnx.cursor()
-    #mycursor.callproc('data_out')
-    #result = mycursor.stored_results()
+    mycursor = cnx.cursor()
+    mycursor.callproc('data_out')
+    iterator = mycursor.stored_results()
     #my_data = result.fetchall()
     
     # create a class
@@ -49,5 +49,5 @@ def dashboard():
     # create an instance of that class
     create_instance = Finance('Ellen')
 
-    return render_template('dashboard.html', title='Dashboard', call_my_class = create_instance)
+    return render_template('dashboard.html', title='Dashboard', call_my_class=create_instance, my_data=iterator)
 
