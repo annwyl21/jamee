@@ -9,21 +9,7 @@
   <div>Total Spending</div>
 </div>
 
-<h2>Call my class</h2>
-<p>{{ call_my_class.get_name() }}</p>
 
-<h2>get result out of database</h2>
-<p>I need to unpack this tuple {{ my_data }}</p>
-
-<h2>get result out of database</h2>
-<p>grabbing an item out of my tuple {{ my_data[0] }}</p>
-
-<h2>unpack the returned tuple</h2>
-{% set value_a = my_data[0] %}
-<p>My unpacked tuple gives me .... {{ value_a }}</p>
-
-<h2>insert an image into a page</h2>
-<img src="{{ url_for('static', filename='images/piechart.png') }}" height='300' width='450' alt="spending pie chart" />
 
 <h2>create the pie chart by calling the class and display the image</h2>
 <p>{{ call_my_class.create_pie(value_a) }}</p>

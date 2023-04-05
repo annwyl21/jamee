@@ -44,3 +44,9 @@ git push --set-upstream origin the_name_of_your_branch
 - click the green pull request button
 - add the pull request and tag the reviewers, tag yourself as an assignee and tag the project so we see it on the board
 ![Create pull request](application/static/images/pull_rqst.jpg)
+
+# Problem-Solving - please add to this checklist
+
+- Is flask started?
+- Is MySql running?
+- The example page uses code from the test1 database, has that database been built by running code from scripts/test_finance.sql

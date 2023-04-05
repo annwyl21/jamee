@@ -44,6 +44,14 @@ def dashboard():
     for item in the_data:
         my_data = item.pop(0)
 
+    mycursor = cnx.cursor()
+    mycursor.callproc('data_out_list')
+    data_list = []
+    for result in mycursor.stored_results():
+        data_list.append(result.fetchall())
+    # for item in data_list:
+    #     my_list_data = item.pop(0)
+
     # create a class
     class Finance:
 
@@ -76,5 +84,57 @@ def dashboard():
     # create an instance of that class
     create_instance = Finance('Ellen')
 
-    return render_template('dashboard.html', title='Dashboard', call_my_class=create_instance, my_data=my_data) #key=value pairs (my_variable = this_thing_here)
+    return render_template('dashboard.html', title='Dashboard', call_my_class=create_instance, my_data=my_data, data_list=data_list) #key=value pairs (my_variable = this_thing_here)
 
+@app.route('/example')
+def example():
+
+    mycursor = cnx.cursor()
+    mycursor.callproc('data_out')
+    the_data = []
+    for result in mycursor.stored_results():
+        the_data.append(result.fetchall())
+    for item in the_data:
+        my_data = item.pop(0)
+
+    mycursor = cnx.cursor()
+    mycursor.callproc('data_out_list')
+    data_list = []
+    for result in mycursor.stored_results():
+        data_list.append(result.fetchall())
+    # for item in data_list:
+    #     my_list_data = item.pop(0)
+
+    # create a class
+    class Finance:
+
+        def __init__(self, name):
+            self.name = name
+        
+        def get_name(self):
+            return f"My name is {self.name}."
+        
+        def create_pie(self, my_variable):
+            # creates a dataframe that matplot can use
+            df = pd.DataFrame({'expenditure': [my_variable], 'spending': [100]})
+
+            # creates the size of the pie chart
+            plt.figure(figsize=(6,4))
+            # tells the computer to create the pie chart
+            plt.subplot()
+            # which data to use and to display a whole figure percentage
+            plt.pie(df['spending'], autopct='%d%%')
+            plt.axis('equal')
+            plt.title("Test Pie Chart")
+            plt.legend(df['expenditure'], loc='upper right', bbox_to_anchor=(1,1), fontsize=7)
+
+            # put that pie chart in a saved file
+            plt.savefig('application/static/images/piechart1.png')
+
+            # return the image
+            #return - what to return to remove the None
+
+    # create an instance of that class
+    create_instance = Finance('Ellen')
+
+    return render_template('example.html', title='Example', call_my_class=create_instance, my_data=my_data, data_list=data_list) #key=value pairs (my_variable = this_thing_here)
