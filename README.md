@@ -21,10 +21,19 @@ git checkout the_name_of_your_branch
 ```
 
 ## To upload your code
+
+- the 1st time you upload to your new branch you need to tell github about the branch using the 'set upstream' command
+    - there will be an onscreen prompt with the correct code to use
+    - after that it will go back to being just 'git push origin'
+
 ```bash
 git add the_filename
 git commit -m "your_message"
 git push origin
+
+OR
+
+git push --set-upstream origin the_name_of_your_branch
 ```
 
 ## To create a 'pull request' so you can merge your branch with the main and have others review the code.
