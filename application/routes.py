@@ -34,11 +34,11 @@ def dashboard():
 
     mycursor = cnx.cursor()
     mycursor.callproc('data_out')
-    #iterator = mycursor.stored_results()
-    #my_data = result.fetchall()
-    my_data = []
+    the_data = []
     for result in mycursor.stored_results():
-        my_data.append(result.fetchall())
+        the_data.append(result.fetchall())
+    for item in the_data:
+        my_data = item.pop(0)
 
     # create a class
     class Finance:

@@ -13,6 +13,13 @@
 <p>{{ call_my_class.get_name() }}</p>
 
 <h2>get result out of database</h2>
-<p>{{ my_data }}</p>
+<p>I need to unpack this tuple {{ my_data }}</p>
+
+<h2>get result out of database</h2>
+<p>grabbing an item out of my tuple {{ my_data[0] }}</p>
+
+<h2>unpack the returned tuple</h2>
+{% set value_a = my_data[0] %}
+<p>My unpacked tuple gives me .... {{ value_a }}</p>
 
 {% endblock %}
