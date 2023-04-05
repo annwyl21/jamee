@@ -3,8 +3,20 @@ A website/ dashboard for personal financial tracking
 
 ## Before Coding
 
+- PULL the most recent version of the code
+- STATUS to check which branch you are currently on
+- CHECKOUT -b will create a new branch and switch you on to that branch
+
+OR
+
+- CHECKOUT (without -b) will switch you between the branches
+
 ```bash
-git branch the_name_of_your_branch
+git pull
+git status
+
+git checkout -b the_name_of_your_branch
+OR
 git checkout the_name_of_your_branch
 ```
 
