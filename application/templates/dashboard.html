@@ -22,4 +22,12 @@
 {% set value_a = my_data[0] %}
 <p>My unpacked tuple gives me .... {{ value_a }}</p>
 
+<h2>insert an image into a page</h2>
+<img src="{{ url_for('static', filename='images/piechart.png') }}" height='300' width='450' alt="spending pie chart" />
+
+<h2>create the pie chart by calling the class and display the image</h2>
+<p>{{ call_my_class.create_pie(value_a) }}</p>
+<!-- calling the class prints None on the screen because the class method doesn't return anything-->
+<img src="{{ url_for('static', filename='images/piechart1.png') }}" height='300' width='450' alt="spending pie chart" />
+
 {% endblock %}
