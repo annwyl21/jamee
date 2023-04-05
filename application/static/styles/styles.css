@@ -4,3 +4,7 @@ margin: auto;
 background-color: #C5D1EB;
 color: #0B1D51;
 }
+
+table, th, td {
+    border: 1px solid black;
+  }

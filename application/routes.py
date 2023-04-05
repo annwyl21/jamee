@@ -37,20 +37,13 @@ def form_page():
 def dashboard():
 
     mycursor = cnx.cursor()
-    mycursor.callproc('data_out')
-    the_data = []
-    for result in mycursor.stored_results():
-        the_data.append(result.fetchall())
-    for item in the_data:
-        my_data = item.pop(0)
-
-    mycursor = cnx.cursor()
     mycursor.callproc('data_out_list')
     data_list = []
     for result in mycursor.stored_results():
-        data_list.append(result.fetchall())
-    # for item in data_list:
-    #     my_list_data = item.pop(0)
+        for returned_list in result:
+            for tuple in returned_list:
+                list_item = tuple
+                data_list.append(list_item)
 
     # create a class
     class Finance:
@@ -61,7 +54,6 @@ def dashboard():
         def create_pie(self, my_variable):
             # creates a dataframe that matplot can use
             df = pd.DataFrame({'expenditure': [my_variable], 'spending': [100]})
-
             # creates the size of the pie chart
             plt.figure(figsize=(6,4))
             # tells the computer to create the pie chart
@@ -71,17 +63,26 @@ def dashboard():
             plt.axis('equal')
             plt.title("Test Pie Chart")
             plt.legend(df['expenditure'], loc='upper right', bbox_to_anchor=(1,1), fontsize=7)
-
             # put that pie chart in a saved file
             plt.savefig('application/static/images/piechart1.png')
-
             # return the image
             #return - what to return to remove the None
-
     # create an instance of that class
     create_instance = Finance('Ellen')
 
-    return render_template('dashboard.html', title='Dashboard', call_my_class=create_instance, my_data=my_data, data_list=data_list) #key=value pairs (my_variable = this_thing_here)
+    return render_template('dashboard.html', title='Dashboard', data_list=data_list) #key=value pairs (my_variable = this_thing_here)
+
+@app.route('/admin')
+def admin():
+    mycursor = cnx.cursor()
+    mycursor.callproc('data_out_list')
+    data_list = []
+    for result in mycursor.stored_results():
+        for returned_list in result:
+            for tuple in returned_list:
+                list_item = tuple
+                data_list.append(list_item)
+    return render_template('admin', title='Admin', data_list=data_list)
 
 @app.route('/example')
 def example():
@@ -104,7 +105,7 @@ def example():
                 data_list.append(list_item)
 
     # create a class
-    class Finance:
+    class Test:
 
         def __init__(self, name):
             self.name = name
@@ -147,6 +148,6 @@ def example():
             #return - what to return to remove the None output
 
     # create an instance of that class
-    create_instance = Finance('Ellen')
+    create_single_instance = Test('Some Name')
 
-    return render_template('example.html', title='Working Example Page', call_my_class=create_instance, my_data=my_data, data_list=data_list) #key=value pairs (my_variable = this_thing_here)
+    return render_template('example.html', title='Working Example Page', call_my_class=create_single_instance, my_data=my_data, data_list=data_list) #key=value pairs (my_variable = this_thing_here)

@@ -5,15 +5,50 @@
 {% block main_content %}
 
 <div>
-  <div>Total Income</div>
-  <div>Total Spending</div>
+  <h1>Dashboard</h1>
+  this page is ready for some responsive formatting - graphs should sit next to each other on wider screens but stack on phone screens and the spending breakdowns should sit across the wider screens side by side but stack on a phone screen
+  <br>
+
+  <!-- Code for the pie chart - to be linked to real data when the database is complete-->
+  <h2>Pie Chart showing your spending breakdown</h2>
+  <img src="{{ url_for('static', filename='images/piechart.png') }}" height='300' width='450' alt="spending pie chart">
+  <br>
+
+  <!-- Code for the stacked bar chart - to be linked to real data when the database is complete-->
+  <h2>Stacked Bar Chart showing your spending compared to average UK household spending</h2>
+  <img src="{{ url_for('static', filename='images/barstack.png') }}" height='300' width='450' alt="stacked bar chart">
+  <br>
+
+  <!-- Code for the loop to display weekly spending - needs python code to divide value into a weekly amount on the routes.py -->
+  <h2>Your weekly Spending</h2>
+  <table>
+    <tr>
+      <th></th>
+      <th>&pound;'s</th>
+    </tr>
+    {% for item in data_list %}
+    <tr>
+      <td>hmm</td>
+      <td>{{ item }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <br>
+
+  <!-- Code for the loop to display monthly spending - needs python code to divide value into a monthly amount on the routes.py -->
+  <h2>Your monthly spending</h2>
+  <table>
+    <th></th>
+    <th>&pound;'s</th>
+  </table>
+  <br>
+
+  <!-- Code for the loop to display annual spending - needs python code to divide value into a annual amount on the routes.py -->
+  <h2>Your annual spending</h2>
+  <table>
+    <th></th>
+    <th>&pound;'s</th>
+  </table>
 </div>
-
-
-
-<h2>create the pie chart by calling the class and display the image</h2>
-<p>{{ call_my_class.create_pie(value_a) }}</p>
-<!-- calling the class prints None on the screen because the class method doesn't return anything-->
-<img src="{{ url_for('static', filename='images/piechart1.png') }}" height='300' width='450' alt="spending pie chart" />
 
 {% endblock %}
