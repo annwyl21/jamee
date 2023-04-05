@@ -1,6 +1,6 @@
 from flask import render_template
 from application import app
-# from finance import Finance - problem to solve, where does the class need to be for the application to see it
+#from finance import Finance # problem to solve, where does the class need to be for the application to see it
 
 # import a module to connect to sql
 import mysql.connector
@@ -34,9 +34,12 @@ def dashboard():
 
     mycursor = cnx.cursor()
     mycursor.callproc('data_out')
-    iterator = mycursor.stored_results()
+    #iterator = mycursor.stored_results()
     #my_data = result.fetchall()
-    
+    my_data = []
+    for result in mycursor.stored_results():
+        my_data.append(result.fetchall())
+
     # create a class
     class Finance:
 
@@ -49,5 +52,5 @@ def dashboard():
     # create an instance of that class
     create_instance = Finance('Ellen')
 
-    return render_template('dashboard.html', title='Dashboard', call_my_class=create_instance, my_data=iterator)
+    return render_template('dashboard.html', title='Dashboard', call_my_class=create_instance, my_data=my_data) #key=value pairs (my_variable = this_thing_here)
 
