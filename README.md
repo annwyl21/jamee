@@ -31,7 +31,7 @@ git push origin
 
 - navigate to the repo on the web
 - go to your branch where you have uploaded the code
-![Find your branch](application/static/branch.jpg)
+![Find your branch](application/static/images/branch.jpg)
 - click the green pull request button
 - add the pull request and tag the reviewers, tag yourself as an assignee and tag the project so we see it on the board
-![Create pull request](application/static/pull_rqst.jpg)
+![Create pull request](application/static/images/pull_rqst.jpg)
