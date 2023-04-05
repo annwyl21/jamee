@@ -127,7 +127,7 @@ def example():
             # uses the variable pulled from the database to create the chart legend
             plt.legend(df['expenditure'])
             # put that pie chart in a saved file
-            plt.savefig('application/static/images/piechart1.png')
+            plt.savefig('application/static/images/piechart1.png', transparent=True)
             #return - what to return to remove the None output
         
         def create_pie_from_list(self, my_list):
@@ -144,8 +144,15 @@ def example():
             # uses the variable pulled from the database to create the chart legend
             plt.legend(df['expenditure'])
             # put that pie chart in a saved file
-            plt.savefig('application/static/images/piechart2.png')
+            plt.savefig('application/static/images/piechart2.png', transparent=True)
             #return - what to return to remove the None output
+        
+        def database_insert(self, value): #  not sure if this works until I get a form working
+            mycursor = cnx.cursor()
+            data_to_insert = value
+            args=[data_to_insert]
+            mycursor.callproc('add_data', args)
+            cnx.commit()
 
     # create an instance of that class
     create_single_instance = Test('Some Name')

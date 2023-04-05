@@ -31,3 +31,10 @@ create procedure data_out_list()
 begin
 select test_data from test1;
 end //
+
+DELIMITER //
+CREATE PROCEDURE add_data(in td varchar(25))
+begin
+insert into test_data
+values(td);
+end //
