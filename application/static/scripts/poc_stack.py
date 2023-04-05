@@ -47,5 +47,5 @@ plt.xlabel("Comparison")
 plt.ylabel("Spending Type in £'s")
 plt.legend(("Housing", "Food and Drink", "Energy Bills", "Fuel", "Train Fares", "Bus Fares", "Eating and Drinking", "Holidays", "Clothes and Footwear"))
 
-plt.savefig('application/static/barstack.png')
+plt.savefig('application/static/images/barstack.png')
 

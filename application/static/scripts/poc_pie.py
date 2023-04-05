@@ -18,4 +18,4 @@ plt.title("Spending distribution for Average UK Household - Renting")
 plt.legend(df['expenditure'], loc='upper right', bbox_to_anchor=(1,1), fontsize=7)
 
 # put that pie chart in a saved file
-plt.savefig('application/static/piechart.png')
+plt.savefig('application/static/images/piechart.png')
