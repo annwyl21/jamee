@@ -1,5 +1,8 @@
 Flask
 
+# import the library to connect to the database
+mysql-connector-python
+
 pandas
 # Pandas is an open source data manipulation tool
 
