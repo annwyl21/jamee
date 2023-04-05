@@ -1,6 +1,6 @@
 from flask import render_template
 from application import app
-#from finance import Finance # problem to solve, where does the class need to be for the application to see it
+from application.finance import Finance # problem to solve, where does the class need to be for the application to see it
 
 # import the data manipulation and visualisation tools
 import pandas as pd
@@ -46,27 +46,27 @@ def dashboard():
                 data_list.append(list_item)
 
     # create a class
-    class Finance:
+    # class Finance:
 
-        def __init__(self, name):
-            self.name = name
+    #     def __init__(self, name):
+    #         self.name = name
         
-        def create_pie(self, my_variable):
-            # creates a dataframe that matplot can use
-            df = pd.DataFrame({'expenditure': [my_variable], 'spending': [100]})
-            # creates the size of the pie chart
-            plt.figure(figsize=(6,4))
-            # tells the computer to create the pie chart
-            plt.subplot()
-            # which data to use and to display a whole figure percentage
-            plt.pie(df['spending'], autopct='%d%%')
-            plt.axis('equal')
-            plt.title("Test Pie Chart")
-            plt.legend(df['expenditure'], loc='upper right', bbox_to_anchor=(1,1), fontsize=7)
-            # put that pie chart in a saved file
-            plt.savefig('application/static/images/piechart1.png')
-            # return the image
-            #return - what to return to remove the None
+    #     def create_pie(self, my_variable):
+    #         # creates a dataframe that matplot can use
+    #         df = pd.DataFrame({'expenditure': [my_variable], 'spending': [100]})
+    #         # creates the size of the pie chart
+    #         plt.figure(figsize=(6,4))
+    #         # tells the computer to create the pie chart
+    #         plt.subplot()
+    #         # which data to use and to display a whole figure percentage
+    #         plt.pie(df['spending'], autopct='%d%%')
+    #         plt.axis('equal')
+    #         plt.title("Test Pie Chart")
+    #         plt.legend(df['expenditure'], loc='upper right', bbox_to_anchor=(1,1), fontsize=7)
+    #         # put that pie chart in a saved file
+    #         plt.savefig('application/static/images/piechart1.png')
+    #         # return the image
+    #         #return - what to return to remove the None
     # create an instance of that class
     create_instance = Finance('Ellen')
 
