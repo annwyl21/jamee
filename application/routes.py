@@ -82,7 +82,7 @@ def admin():
             for tuple in returned_list:
                 list_item = tuple
                 data_list.append(list_item)
-    return render_template('admin', title='Admin', data_list=data_list)
+    return render_template('admin.html', title='Admin', data_list=data_list)
 
 @app.route('/example')
 def example():
