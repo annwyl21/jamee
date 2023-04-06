@@ -5,6 +5,8 @@ from application.finance import Finance
 # imports and database connection here are only to make the example page work, for our actual site we are using them from the class page
 import pandas as pd
 from matplotlib import pyplot as plt
+import seaborn as sns
+
 import mysql.connector
 cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
 
@@ -44,6 +46,18 @@ def dashboard():
     # create the list from the database and assign to a variable
     user_spending = dashboard.database_grab_list()
 
+    # currently using hard-coded data to create graphs - this will be replaced by the above link to databases and stored procesdures when they have been written
+    headers_list = ['housing', 'food and drink', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+    pie_user_list = [981, 372, 107, 102, 15, 35, 382, 115, 161]
+    user_list = ['My Spending', 981, 372, 107, 102, 15, 35, 382, 115, 161]
+    comparison_list = ['UK Average', 1054, 368, 112, 98, 18, 18, 26, 128, 181]
+    
+    # create a pie chart
+    dashboard.create_pie(headers_list, pie_user_list)
+
+    # create a stacked bar chart
+    dashboard.create_stacked_bar(user_list, comparison_list)
+
     return render_template('dashboard.html', title='Dashboard', user_spending=user_spending) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
 
 
@@ -55,7 +69,7 @@ def admin():
     admin = Finance("admin")
 
     # create the list from the database and assign to a variable
-    user_spending = dashboard.database_grab_list()
+    user_spending = admin.database_grab_list()
 
     return render_template('admin.html', title='Admin', data_list=user_spending)
 
@@ -97,10 +111,12 @@ def example():
             return f"My name is {self.name}."
         
         def create_pie(self, my_variable):
+            #seaborn palette choices: deep, muted, pastel, bright, dark, and colorblind
+            colours = sns.color_palette('deep')#[0:5] I think this is how many colours we want
             df = pd.DataFrame({'expenditure': [my_variable], 'spending': [100]})
             plt.figure(figsize=(6,4))
             plt.subplot()
-            plt.pie(df['spending'], autopct='%d%%')
+            plt.pie(df['spending'], colors = colours, autopct='%d%%')
             plt.title("Test Pie Chart")
             plt.legend(df['expenditure'])
             plt.savefig('application/static/images/piechart1.png', transparent=True)

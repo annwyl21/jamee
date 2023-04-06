@@ -8,7 +8,7 @@ pandas
 
 matplotlib
 numpy
-# Matplotlib is a cross-platform, data visualization and graphical plotting library for Python and its numerical extension NumPy.
+# Matplotlib is a cross-platform, data visualization and graphical plotting library for Python and its numerical extension NumPy
 
-# seaborn
-# Seaborn is a library for making statistical graphics in Python. It builds on top of matplotlib and integrates closely with pandas data structures - it makes the matplot graphs look just a bit prettier.
+seaborn
+# Seaborn is a library for making statistical graphics in Python. It builds on top of matplotlib and integrates closely with pandas data structures - it makes the matplot graphs look just a bit prettier
