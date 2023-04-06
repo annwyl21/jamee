@@ -15,7 +15,7 @@ cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',d
 def home():
     return render_template('index.html', title='ChipIn Home Page')
 
-
+# This is a good place to use a redirect because / and /index are both routes to the home page, I think?
 
 @app.route('/index')
 def index():
