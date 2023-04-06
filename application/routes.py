@@ -11,15 +11,27 @@ cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',d
 
 
 
-@app.route('/index')
+@app.route('/')
 def index():
     return render_template('index.html', title='ChipIn Home Page')
 
 
 
-@app.route('/articles')
-def articles():
-    return render_template('articles.html', title='Articles')
+@app.route('/benefits/<name>')
+def benefits(name):
+
+    # create an instance of the class
+    template = Finance("benefits")
+
+    # create the list from the database and assign to a variable
+    list_of_information_to_display_on_page = template.database_grab_list()
+
+    if name =='child_benefit':
+        return render_template('articles.html', title='Child Benefit', variable=list_of_information_to_display_on_page[0])
+    elif name == 'jsa':
+        return render_template('articles.html', title='JSA', variable=list_of_information_to_display_on_page[1])
+    else:
+        return render_template('articles.html', title='template only', variable='Sorry, this is the template page')
 
 
 
