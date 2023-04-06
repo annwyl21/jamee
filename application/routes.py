@@ -1,6 +1,6 @@
 from flask import render_template
 from application import app
-from application.finance import Finance # problem to solve, where does the class need to be for the application to see it
+from application.static.scripts.finance import Finance # problem to solve, where does the class need to be for the application to see it
 
 # import the data manipulation and visualisation tools
 import pandas as pd
@@ -70,7 +70,7 @@ def dashboard():
     # create an instance of that class
     create_instance = Finance('Ellen')
 
-    return render_template('dashboard.html', title='Dashboard', data_list=data_list) #key=value pairs (my_variable = this_thing_here)
+    return render_template('dashboard.html', title='Dashboard', data_list=data_list) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
 
 @app.route('/admin')
 def admin():
@@ -86,7 +86,8 @@ def admin():
 
 @app.route('/example')
 def example():
-
+    
+    # code to connect the the database, call a stored procedure and return 1 piece of data
     mycursor = cnx.cursor()
     mycursor.callproc('data_out')
     the_data = []
