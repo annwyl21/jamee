@@ -50,3 +50,10 @@ git push --set-upstream origin the_name_of_your_branch
 - Is flask started?
 - Is MySql running?
 - The example page uses code from the test1 database, has that database been built by running code from scripts/test_finance.sql
+
+# Site Guide
+
+- install the requirements
+- run the app.py file to start the site locally
+- finance.py is our CLASS page for our OOP
+- static folder holds 3 further folders; images, styles and scripts (which has .sql and .py files and possibly .js too if we write some)
