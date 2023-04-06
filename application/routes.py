@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, redirect
 from application import app
 from application.finance import Finance
 
@@ -32,6 +32,7 @@ def benefits(name):
         return render_template('articles.html', title='JSA', variable=list_of_information_to_display_on_page[1])
     else:
         return render_template('articles.html', title='template only', variable='Sorry, this is the template page')
+#  This conditional code doesn't work just now, i think a redirect is needed here
 
 
 
