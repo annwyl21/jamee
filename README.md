@@ -3,7 +3,7 @@ A website/ dashboard for personal financial tracking
 
 ## Before Coding
 
-- PULL the most recent version of the code
+- PULL the most recent version of the code onto your MAIN branch
 - STATUS to check which branch you are currently on
 - CHECKOUT -b will create a new branch and switch you on to that branch
 
