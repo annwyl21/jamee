@@ -50,15 +50,14 @@ def dashboard():
 
 @app.route('/admin')
 def admin():
-    mycursor = cnx.cursor()
-    mycursor.callproc('data_out_list')
-    data_list = []
-    for result in mycursor.stored_results():
-        for returned_list in result:
-            for tuple in returned_list:
-                list_item = tuple
-                data_list.append(list_item)
-    return render_template('admin.html', title='Admin', data_list=data_list)
+    
+    # create an instance of the class
+    admin = Finance("admin")
+
+    # create the list from the database and assign to a variable
+    user_spending = dashboard.database_grab_list()
+
+    return render_template('admin.html', title='Admin', data_list=user_spending)
 
 
 
