@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block main_content %}
+
+<h1>A page of working examples</h1>
+
+<h2>insert an image into a page</h2>
+<img src="{{ url_for('static', filename='images/miro.jpg') }}" height='300' width='550' alt="Our Miro board" />
+
+<h2>Call my class</h2>
+<p>{{ call_my_class.get_name() }}</p>
+
+<h2>get result out of database</h2>
+<p>I need to unpack this tuple {{ my_data }}</p>
+
+<h2>get specific result out of database</h2>
+<p>grabbing a specific item out of my tuple {{ my_data[0] }}</p>
+
+<h2>unpacking the returned tuple</h2>
+{% set value_a = my_data[0] %}
+<p>My unpacked tuple gives me .... {{ value_a }}</p>
+
+<h2>a returned tuple that contains a list</h2>
+<p>look here ... {{ data_list }}</p>
+
+<h2>print that returned tuple list on the screen</h2>
+<ul>
+    {% for item in data_list %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+
+<h2>create the pie chart using a single value from the database by calling the class and display the image</h2>
+<p>{{ call_my_class.create_pie(value_a) }}</p>
+<!-- calling the class prints None on the screen because the class method doesn't return anything-->
+<img src="{{ url_for('static', filename='images/piechart1.png') }}" height='300' width='450' alt="chart uses a single value from the database" />
+
+<h2>create the pie chart using a list of values from the database by calling the class and display the image</h2>
+<p>{{ call_my_class.create_pie_from_list(data_list) }}</p>
+<!-- calling the class prints None on the screen because the class method doesn't return anything-->
+<img src="{{ url_for('static', filename='images/piechart2.png') }}" height='300' width='450' alt="chart uses a list of values from the database" />
+
+{% endblock %}
