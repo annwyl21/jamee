@@ -139,8 +139,7 @@ def example():
     # create the list from the database and assign to a variable
     list_of_data_from_database = use_class.database_grab_list()
 
-    # use the class to create a graph
-    use_class.create_pie(list_of_data_from_database)
+
 
     # created a test class and added a graph method - see example page for resulting problem that we solved by moving the class to another page
     class Test:
@@ -149,7 +148,7 @@ def example():
         def get_name(self):
             return f"My name is {self.name}."
         
-        def create_pie(self, my_variable):
+        def create_pie_chart(self, my_variable):
             #seaborn palette choices: deep, muted, pastel, bright, dark, and colorblind
             colours = sns.color_palette('deep')#[0:5] I think this is how many colours we want
             df = pd.DataFrame({'expenditure': [my_variable], 'spending': [100]})
@@ -169,6 +168,8 @@ def example():
             cnx.commit()
         
     # create an instance of that class
-    create_single_instance = Test('Some Name')
+    test_instance = Test('Some Name')
+    # use the class to create a graph
+    test_instance.create_pie_chart(list_of_data_from_database)
 
-    return render_template('example.html', title='Working Example Page', call_my_class=create_single_instance, my_data=my_data) #key=value pairs (my_variable = this_thing_here)
+    return render_template('example.html', title='Working Example Page', call_my_class=test_instance, my_data=my_data) #key=value pairs (my_variable = this_thing_here)
