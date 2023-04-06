@@ -55,7 +55,7 @@ def dashboard():
     # create a pie chart
     dashboard.create_pie(headers_list, pie_user_list)
 
-     # create a stacked bar chart
+    # create a stacked bar chart
     dashboard.create_stacked_bar(user_list, comparison_list)
 
     return render_template('dashboard.html', title='Dashboard', user_spending=user_spending) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
