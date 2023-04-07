@@ -59,7 +59,7 @@ def dashboard():
     # create a stacked bar chart
     dashboard.create_stacked_bar(user_list, comparison_list)
 
-    return render_template('dashboard.html', title='Dashboard', user_spending=user_spending) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
+    return render_template('dashboard.html', title='Dashboard') #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
 
 
 
@@ -75,19 +75,19 @@ def admin():
 # Repeated Routes to Different Benefits
 @app.route('/<benefit_name>')
 def benefits(benefit_name):
-    info = Finance("benefits").database_grab_list()
+    
     if benefit_name == 'child_benefit':
-        return render_template('articles.html', title='Child Benefit', variable=info[0])
+        return render_template('articles.html', title='Child Benefit')
     elif benefit_name == 'housing_benefit':
-        return render_template('articles.html', title='Housing Benefit', variable=info[1])
+        return render_template('articles.html', title='Housing Benefit')
     elif benefit_name == 'esa':
-        return render_template('articles.html', title='ESA', variable=info[0])
+        return render_template('articles.html', title='ESA')
     elif benefit_name == 'jsa':
-        return render_template('articles.html', title='JSA', variable=info[1])
+        return render_template('articles.html', title='JSA')
     elif benefit_name == 'universal_credit':
-        return render_template('articles.html', title='Universal Credit', variable=info[0])
+        return render_template('articles.html', title='Universal Credit')
     else:
-        return render_template('articles.html', title='benefit_cap', variable=info[1])
+        return render_template('articles.html', title='benefit_cap')
 
 
 
