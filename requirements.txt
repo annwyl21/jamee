@@ -1,4 +1,6 @@
 Flask
+flask_wtf
+wtforms
 
 # import the library to connect to the database
 mysql-connector-python
@@ -12,3 +14,6 @@ numpy
 
 seaborn
 # Seaborn is a library for making statistical graphics in Python. It builds on top of matplotlib and integrates closely with pandas data structures - it makes the matplot graphs look just a bit prettier
+
+pytest
+# The pytest framework makes it easy to write small, readable tests, and can scale to support complex functional testing for applications and libraries.

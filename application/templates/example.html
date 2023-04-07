@@ -9,6 +9,17 @@
 <h2>Call my class</h2>
 <p>{{ call_my_class.get_name() }}</p>
 
+<h2>insert a value into a form - this is tested using pytest elsewhere</h2>
+<div class="form">
+    <form method='POST' action=''>
+        {{ form.hidden_tag() }}
+        {{ form.name.label }} {{ form.name }}
+        <br>
+        {{ form.submit }}
+        {{ message }}
+    </form>
+</div>
+
 <h2>get result out of database</h2>
 <p>I need to unpack this tuple {{ my_data }}</p>
 
