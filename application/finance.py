@@ -2,9 +2,9 @@
 import pandas as pd
 from matplotlib import pyplot as plt
 
-import a module to connect to sql and open a local connection to the local server assigned to the variable 'cnx'
-import mysql.connector
-cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
+#import a module to connect to sql and open a local connection to the local server assigned to the variable 'cnx'
+#import mysql.connector
+#cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
 
 
 # create a class
