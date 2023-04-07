@@ -1,4 +1,6 @@
 Flask
+flask_wtf
+wtforms
 
 # import the library to connect to the database
 mysql-connector-python

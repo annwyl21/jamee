@@ -1,6 +1,7 @@
-from flask import render_template, redirect
+from flask import render_template, request
 from application import app
 from application.finance import Finance
+from application.forms import BasicForm
 
 # imports and database connection here are only to make the example page work, for our actual site we are using them from the class page
 import pandas as pd
@@ -121,8 +122,19 @@ def benefit_cap():
 ################################################################################################
 # code above here - everything below here is for the example page and it is messy, sometimes intentionally messy to show our progress
 
-@app.route('/example')
+@app.route('/example', methods=['GET', 'POST'])
 def example():
+
+    # code for the basic form
+    error = ""
+    form = BasicForm()
+    if request.method == 'POST':
+        name = form.name.data
+        if len(name) == 0:
+            # if length name = 0 then show error message
+            error = "Please supply name."
+        else:
+            return render_template('index.html', title='ChipIn Home Page')
     
     # code to connect to the database, call a stored procedure and return 1 piece of data
     mycursor = cnx.cursor()
@@ -172,4 +184,4 @@ def example():
     # use the class to create a graph
     test_instance.create_pie_chart(list_of_data_from_database)
 
-    return render_template('example.html', title='Working Example Page', call_my_class=test_instance, my_data=my_data) #key=value pairs (my_variable = this_thing_here)
+    return render_template('example.html', title='Working Example Page', call_my_class=test_instance, my_data=my_data, form=form, message=error) #key=value pairs (my_variable = this_thing_here)
