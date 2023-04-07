@@ -8,3 +8,8 @@ color: #0B1D51;
 table, th, td {
     border: 1px solid black;
   }
+
+.dashboard-green {
+    border: 1px solid black;
+    background-color: green;
+}

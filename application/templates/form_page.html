@@ -2,13 +2,15 @@
 
 {% block main_content %}
 
-<div class="green">
+<h1>Dashboard</h1>
+
+<div class="dashboard-green">
     <div>Income</div>
     <div>Salary</div>
     <div>Other</div>
 </div>
 
-<div class="blue">
+<div class="dashboard-blue">
     <div>Outgoings</div>
     <div>Rent/Mortgage</div>
     <div>Electricity</div>
@@ -20,7 +22,7 @@
     <div>Savings/CTF</div>
 </div>
 
-<div class="choices">
+<div class="dashboard-choices">
     <div>Auto-complete choices</div>
     <div>Married with 2 kids</div>
     <div>Single</div>
@@ -31,3 +33,15 @@
 </div>
 
 {% endblock %}
+
+<!--<div class="form">-->
+<!--    <form method="POST">-->
+<!--        {{ form.hidden_tag() }}-->
+<!--        {{ form.first_name.label }} {{ form.first_name }}-->
+<!--        <br>-->
+<!--        {{ form.last_name.label }} {{ form.last_name }}-->
+<!--        <br>-->
+<!--        {{ form.submit }}-->
+<!--    {{ message }}-->
+<!--    </form>-->
+<!--</div>-->

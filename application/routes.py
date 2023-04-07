@@ -2,12 +2,14 @@ from flask import render_template
 from application import app
 from application.finance import Finance
 
-# imports and database connection here are only to make the example page work, for our actual site we are using them from the class page
-import pandas as pd
-from matplotlib import pyplot as plt
-import mysql.connector
-cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
-
+# eyasmin commenting this out - start
+#
+# # imports and database connection here are only to make the example page work, for our actual site we are using them from the class page
+# import pandas as pd
+# from matplotlib import pyplot as plt
+# import mysql.connector
+# cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
+# eyasmin commenting this out - end
 
 
 
