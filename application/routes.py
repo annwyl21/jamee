@@ -75,42 +75,22 @@ def admin():
 
 
 
-# Repeated Routes to Benefits - Pretty Sure there is a better way to do this, they just feed in different data into the same page, there must be a conditional!
-@app.route('/child_benefit')
-def child_benefit():
-    child_benefit = Finance("child_benefit")
-    list_of_information_to_display_on_page = child_benefit.database_grab_list()
-    return render_template('articles.html', title='Child Benefit', variable=list_of_information_to_display_on_page[0])
-
-@app.route('/housing_benefit')
-def housing_benefit():
-    housing_benefit = Finance("housing_benefit")
-    list_of_information_to_display_on_page = housing_benefit.database_grab_list()
-    return render_template('articles.html', title='Housing Benefit', variable=list_of_information_to_display_on_page[1])
-
-@app.route('/esa')
-def esa():
-    esa = Finance("esa")
-    list_of_information_to_display_on_page = esa.database_grab_list()
-    return render_template('articles.html', title='ESA', variable=list_of_information_to_display_on_page[0])
-
-@app.route('/jsa')
-def jsa():
-    jsa = Finance("jsa")
-    list_of_information_to_display_on_page = jsa.database_grab_list()
-    return render_template('articles.html', title='JSA', variable=list_of_information_to_display_on_page[1])
-
-@app.route('/universal_credit')
-def universal_credit():
-    universal_credit = Finance("universal_credit")
-    list_of_information_to_display_on_page = universal_credit.database_grab_list()
-    return render_template('articles.html', title='Universal Credit', variable=list_of_information_to_display_on_page[0])
-
-@app.route('/benefit_cap')
-def benefit_cap():
-    benefit_cap = Finance("benefit_cap")
-    list_of_information_to_display_on_page = benefit_cap.database_grab_list()
-    return render_template('articles.html', title='benefit_cap', variable=list_of_information_to_display_on_page[1])
+# Repeated Routes to Different Benefits
+@app.route('/<benefit_name>')
+def benefits(benefit_name):
+    info = Finance("benefits").database_grab_list()
+    if benefit_name == 'child_benefit':
+        return render_template('articles.html', title='Child Benefit', variable=info[0])
+    elif benefit_name == 'housing_benefit':
+        return render_template('articles.html', title='Housing Benefit', variable=info[1])
+    elif benefit_name == 'esa':
+        return render_template('articles.html', title='ESA', variable=info[0])
+    elif benefit_name == 'jsa':
+        return render_template('articles.html', title='JSA', variable=info[1])
+    elif benefit_name == 'universal_credit':
+        return render_template('articles.html', title='Universal Credit', variable=info[0])
+    else:
+        return render_template('articles.html', title='benefit_cap', variable=info[1])
 
 
 
