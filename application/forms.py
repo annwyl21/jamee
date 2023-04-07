@@ -19,3 +19,5 @@ class BasicForm(FlaskForm):
     subscriptions = StringField('Subscriptions')
     savings = StringField('Savings/CTF')
     submit = SubmitField('Submit')
+    
+    
