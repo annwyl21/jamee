@@ -1,16 +1,19 @@
-from flask import render_template
+from flask import render_template, request
 from application import app
 from application.finance import Finance
 
-# eyasmin commenting this out - start
-#
+from application.forms import BasicForm
+from application.data_provider_service import DataProviderService
+
 # # imports and database connection here are only to make the example page work, for our actual site we are using them from the class page
 # import pandas as pd
 # from matplotlib import pyplot as plt
 # import mysql.connector
 # cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
-# eyasmin commenting this out - end
 
+
+# instantiating an object of DataProviderService
+DATA_PROVIDER = DataProviderService()
 
 
 @app.route('/index')
@@ -18,11 +21,9 @@ def index():
     return render_template('index.html', title='ChipIn Home Page')
 
 
-
 @app.route('/articles')
 def articles():
     return render_template('articles.html', title='Articles')
-
 
 
 @app.route('/contact')
@@ -30,11 +31,25 @@ def contact():
     return render_template('contact.html', title='Contact Us')
 
 
+@app.route('/form', methods=['GET', 'POST'])
+def form_input():
+    error = ""
+    form = BasicForm()
 
-@app.route('/form')
-def form_page():
-    return render_template('form_page.html', title='Form Page')
+    if request.method == 'POST':
+        salary = form.salary.data
+        rent = form.rent.data
 
+        if len(salary) == 0 or len(rent) == 0:
+            error = 'Please fill in the required Salary and Rent/Mortgage fields.'
+        else:
+            return 'Thank you!'
+            # new_person_id = DATA_PROVIDER.add_person(first_name, last_name)
+            #
+            # success = 'Person with ID ' + str(new_person_id) + ' was created. Thank you!'
+            # return render_template('success.html', success_message=success)
+
+    return render_template('form.html', title='Form Page', form=form, message=error)
 
 
 @app.route('/dashboard')
@@ -60,6 +75,13 @@ def admin():
     user_spending = dashboard.database_grab_list()
 
     return render_template('admin.html', title='Admin', data_list=user_spending)
+
+
+
+
+
+
+
 
 
 

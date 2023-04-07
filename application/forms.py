@@ -8,6 +8,14 @@ from flask_wtf import FlaskForm
 
 
 class BasicForm(FlaskForm):
-    first_name = StringField('First Name')
-    last_name = StringField('Last Name')
-    submit = SubmitField('Add Name')
+    salary = StringField('Salary')
+    other = StringField('Other')
+    rent = StringField('Rent/Mortgage')
+    electricity = StringField('Electricity')
+    gas = StringField('Gas')
+    water = StringField('Water')
+    council = StringField('Council Tax')
+    phone = StringField('Phone Bill')
+    subscriptions = StringField('Subscriptions')
+    savings = StringField('Savings/CTF')
+    submit = SubmitField('Submit')
