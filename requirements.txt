@@ -1,6 +1,7 @@
 Flask
 flask_wtf
 wtforms
+pymysql
 
 # import the library to connect to the database
 mysql-connector-python
@@ -17,3 +18,4 @@ seaborn
 
 pytest
 # The pytest framework makes it easy to write small, readable tests, and can scale to support complex functional testing for applications and libraries.
+

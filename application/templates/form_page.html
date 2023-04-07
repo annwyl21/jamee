@@ -2,32 +2,63 @@
 
 {% block main_content %}
 
-<div class="green">
-    <div>Income</div>
-    <div>Salary</div>
-    <div>Other</div>
-</div>
+<div class="dashboard-container, form">
 
-<div class="blue">
-    <div>Outgoings</div>
-    <div>Rent/Mortgage</div>
-    <div>Electricity</div>
-    <div>Gas</div>
-    <div>Water</div>
-    <div>Council Tax</div>
-    <div>Phone Bill</div>
-    <div>Subscriptions</div>
-    <div>Savings/CTF</div>
-</div>
+    <form method="post">
+    {{ form.hidden_tag() }}
 
-<div class="choices">
-    <div>Auto-complete choices</div>
-    <div>Married with 2 kids</div>
-    <div>Single</div>
-</div>
+    <h1 class="green">Dashboard</h1>
 
-<div>
-    <button>Submit</button>
+    <div class="dashboard-green">
+        <h2 class="green">Income</h2>
+
+        <div class="green">{{ form.salary.label }}</div>
+
+        <div class="input-box">{{ form.salary }}</div>
+
+        <div class="green">{{ form.other.label }}</div>
+
+        <div class="input-box">{{ form.other }}</div>
+    </div>
+
+    <div class="dashboard-blue">
+        <div class="blue">Outgoings</div>
+
+        <div class="blue">{{ form.rent.label }}</div>
+
+        <div class="input-box">{{ form.rent }}</div>
+
+        <div class="blue">{{ form.electricity.label }}</div>
+        <div class="input-box">{{ form.electricity }}</div>
+
+        <div class="blue">{{ form.gas.label }}</div>
+        <div class="input-box">{{ form.gas }}</div>
+
+        <div class="blue">{{ form.water.label }}</div>
+        <div class="input-box">{{ form.water }}</div>
+
+        <div class="blue">{{ form.council.label }}</div>
+        <div class="input-box">{{ form.council }}</div>
+
+        <div class="blue">{{ form.phone.label }}</div>
+        <div class="input-box">{{ form.phone }}</div>
+
+        <div class="blue">{{ form.subscriptions.label }}</div>
+        <div class="input-box">{{ form.subscriptions }}</div>
+
+        <div class="blue">{{ form.savings.label }}</div>
+        <div class="input-box">{{ form.savings }}</div>
+    </div>
+
+    <div class="dashboard-choices">
+        <div class="red">Auto-complete choices</div>
+        <div class="red">Married with 2 kids</div>
+        <div class="red">Single</div>
+        <button>{{ form.submit }}</button>
+    </div>
+
+    {{ message }}
+    </form>
 </div>
 
 {% endblock %}

@@ -2,40 +2,40 @@ from flask import render_template, request
 from application import app
 from application.finance import Finance
 from application.forms import BasicForm
+from application.data_provider_service import DataProviderService
 
-# imports and database connection here are only to make the example page work, for our actual site we are using them from the class page
-import pandas as pd
-from matplotlib import pyplot as plt
-import seaborn as sns
+# instantiating an object of DataProviderService
+DATA_PROVIDER = DataProviderService()
 
-import mysql.connector
-cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
-
-
-
-
+@app.route('/index')
 @app.route('/')
 def home():
     return render_template('index.html', title='ChipIn Home Page')
-
-# This is a good place to use a redirect because / and /index are both routes to the home page, I think?
-
-@app.route('/index')
-def index():
-    return render_template('index.html', title='ChipIn Home Page')
-
-
 
 @app.route('/contact')
 def contact():
     return render_template('contact.html', title='Contact Us')
 
 
+@app.route('/form', methods=['GET', 'POST'])
+def form_input():
+    error = ""
+    form = BasicForm()
 
-@app.route('/form')
-def form_page():
-    return render_template('form_page.html', title='Form Page')
+    if request.method == 'POST':
+        salary = form.salary.data
+        rent = form.rent.data
 
+        if len(salary) == 0 or len(rent) == 0:
+            error = 'Please fill in the required Salary and Rent/Mortgage fields.'
+        else:
+            return 'Thank you!'
+            # new_person_id = DATA_PROVIDER.add_person(first_name, last_name)
+            #
+            # success = 'Person with ID ' + str(new_person_id) + ' was created. Thank you!'
+            # return render_template('success.html', success_message=success)
+
+    return render_template('form.html', title='Form Page', form=form, message=error)
 
 
 @app.route('/dashboard')
@@ -45,7 +45,7 @@ def dashboard():
     dashboard = Finance("dashboard")
 
     # create the list from the database and assign to a variable
-    user_spending = dashboard.database_grab_list()
+    # user_spending = dashboard.database_grab_list()
 
     # currently using hard-coded data to create graphs - this will be replaced by the above link to databases and stored procesdures when they have been written
     headers_list = ['housing', 'food and drink', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
@@ -63,16 +63,12 @@ def dashboard():
 
 
 
+
 @app.route('/admin')
 def admin():
     
-    # create an instance of the class
-    admin = Finance("admin")
+      return render_template('admin.html', title='Admin')
 
-    # create the list from the database and assign to a variable
-    user_spending = admin.database_grab_list()
-
-    return render_template('admin.html', title='Admin', data_list=user_spending)
 
 
 
@@ -102,36 +98,20 @@ def benefits(benefit_name):
 ################################################################################################
 # code above here - everything below here is for the example page and it is messy, sometimes intentionally messy to show our progress
 
+# import mysql.connector
+# cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
+
 @app.route('/example', methods=['GET', 'POST'])
 def example():
-
-    # code for the basic form
-    error = ""
-    form = BasicForm()
-    if request.method == 'POST':
-        name = form.name.data
-        if len(name) == 0:
-            # if length name = 0 then show error message
-            error = "Please supply name."
-        else:
-            return render_template('index.html', title='ChipIn Home Page')
     
     # code to connect to the database, call a stored procedure and return 1 piece of data
-    mycursor = cnx.cursor()
-    mycursor.callproc('data_out')
-    the_data = []
-    for result in mycursor.stored_results():
-        the_data.append(result.fetchall())
-    for item in the_data:
-        my_data = item.pop(0)
-   
-    # create an instance of the class
-    use_class = Finance("example")
-
-    # create the list from the database and assign to a variable
-    list_of_data_from_database = use_class.database_grab_list()
-
-
+    # mycursor = cnx.cursor()
+    # mycursor.callproc('data_out')
+    # the_data = []
+    # for result in mycursor.stored_results():
+    #     the_data.append(result.fetchall())
+    # for item in the_data:
+    #     my_data = item.pop(0)
 
     # created a test class and added a graph method - see example page for resulting problem that we solved by moving the class to another page
     class Test:
@@ -152,16 +132,12 @@ def example():
             plt.savefig('application/static/images/piechart1.png', transparent=True)
             #return - the class method doesn't return anything so it sends back 'None' as an output which is then displayed on our webpage
         
-        def database_insert(self, value): #  not sure if this works until I get a form working
-            mycursor = cnx.cursor()
-            data_to_insert = value
-            args=[data_to_insert]
-            mycursor.callproc('add_data', args)
-            cnx.commit()
+        # def database_insert(self, value): #  not sure if this works until I get a form working
+        #     mycursor = cnx.cursor()
+        #     data_to_insert = value
+        #     args=[data_to_insert]
+        #     mycursor.callproc('add_data', args)
+        #     cnx.commit()
         
-    # create an instance of that class
-    test_instance = Test('Some Name')
-    # use the class to create a graph
-    test_instance.create_pie_chart(list_of_data_from_database)
+    return render_template('example.html', title='Working Example Page') #key=value pairs (my_variable = this_thing_here)
 
-    return render_template('example.html', title='Working Example Page', call_my_class=test_instance, my_data=my_data, form=form, message=error) #key=value pairs (my_variable = this_thing_here)

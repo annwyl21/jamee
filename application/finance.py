@@ -4,29 +4,25 @@ from matplotlib import pyplot as plt
 import numpy as np
 import seaborn as sns
 
-# import a module to connect to sql and open a local connection to the local server assigned to the variable 'cnx'
-import mysql.connector
-cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
-
 # create a class
 class Finance:
     def __init__(self, name):
         self.name = name
+
     def get_name(self):
         return f"My name is {self.name}."
-    
 
     # code to connect to the database, call a stored procedure and return a list of pieces of data
-    def database_grab_list(self):
-        mycursor = cnx.cursor()
-        mycursor.callproc('data_out_list')
-        data_list = []
-        for result in mycursor.stored_results():
-            for returned_list in result:
-                for tuple in returned_list: 
-                    list_item = tuple
-                    data_list.append(list_item)
-        return data_list
+    #def database_grab_list(self):
+        #mycursor = cnx.cursor()
+        #mycursor.callproc('data_out_list')
+        #data_list = []
+        #for result in mycursor.stored_results():
+            #for returned_list in result:
+                #for tuple in returned_list: 
+                    #list_item = tuple
+                    #data_list.append(list_item)
+        #return data_list
         # tells the database connection where to look and assigns that to a variable
         # uses that variable to tell the database connection to run a stored procedure
         # stored results takes the data now stored in the mycursor variable as an iterable
