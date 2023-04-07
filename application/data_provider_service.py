@@ -10,7 +10,7 @@ class DataProviderService:
         port = 3306
         user = 'root'
         password = 'password'
-        database = 'form_db'
+        database = 'form_page'
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database)
         self.cursor = self.conn.cursor()
 
