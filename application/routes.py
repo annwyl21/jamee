@@ -9,7 +9,9 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 
 import mysql.connector
-cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
+
+if not app.config['TESTING']:
+    cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
 
 
 

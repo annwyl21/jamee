@@ -8,6 +8,7 @@ from application import app
 @pytest.fixture
 def client():
     app.config['TESTING'] = True
+    print(app.config)
     return app.test_client()
 
 def test_request_index(client):
