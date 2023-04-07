@@ -2,6 +2,7 @@ import pytest
 from application import app
 
 # documentation link - I don't understand everything but I am going to give it a try
+# https://flask.palletsprojects.com/en/2.2.x/testing/
 # Here I am trying to write a test to check the status code of our pages on loading - looking to see if all the links work
 
 @pytest.fixture
