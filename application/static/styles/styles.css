@@ -10,44 +10,38 @@ table, th, td {
   }
 
 /* form page styling starts */
-.dashboard-container {
+.form-container {
     width: 100%;
     display: inline-block;
 }
 
-.dashboard-green {
+.income-container {
     border: 1px solid black;
     background-color: green;
-    width: 33%;
+    width: 50%;
     /* height: 100px; */
     float: left;
 }
 
-.green {
+.income {
     border: 1px solid black;
     background-color: green;
 }
 
-.dashboard-blue {
+.outgoings-container {
     border: 1px solid black;
     background-color: green;
-    margin-left: 66%;
+    margin-left: 50%;
 }
 
-.blue {
+.outgoings {
     border: 1px solid black;
     background-color: blue;
 }
 
-.dashboard-choices {
+.button {
     border: 1px solid black;
-    background-color: green;
-    margin-left: 33%;
-}
-
-.red {
-    border: 1px solid black;
-    background-color: red;
+    background-color: grey;
 }
 
 .input-box {
