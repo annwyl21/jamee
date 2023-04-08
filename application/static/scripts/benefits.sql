@@ -1,7 +1,7 @@
 -- Using a database as a content management system
 -- url endpoints are in the name field and attach to this base url https://www.gov.uk/
 
-CREATE DATABASE budget_management;
+-- CREATE DATABASE budget_management;
 use budget_management;
 -- drop database budget_management;
 
