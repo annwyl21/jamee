@@ -15,32 +15,32 @@ last_name varchar(50)
 
 CREATE TABLE income
 (income_id int not null auto_increment primary key,
-income_source varchar(50),
+income_source varchar(200),
 income_total decimal
 );
 
 CREATE TABLE expense
 (expense_id int not null auto_increment primary key,
-expense_source varchar(50),
+expense_source varchar(200),
 expense_total decimal
 );
 
 CREATE TABLE category
 -- To look at types of incoming and outgoing money e.g. food, holidays, bills etc 
 (category_id int not null auto_increment primary key,
-category_name varchar(50)
+category_name varchar(100)
 );
 
 CREATE TABLE debt
 (debt_total_id int not null auto_increment primary key,
 debt_total_figure decimal,
-debt_source varchar(50))
+debt_source varchar(100))
 ;
 
 CREATE TABLE savings
 (savings_total_id int not null auto_increment primary key,
 savings_total_figure decimal,
-savings_source varchar(50))
+savings_source varchar(100))
 ;
 
 
@@ -91,7 +91,7 @@ ADD foreign key(expense_id) references expense(expense_id);
 -- insert test data into budget_user table
 -- INSERT INTO budget_user (username, user_password, title, first_name, last_name)
 -- VALUES
-('BillGates', 'microsoft365', 'Mr', 'Bill', 'Gates');
+-- ('BillGates', 'microsoft365', 'Mr', 'Bill', 'Gates');
 
 -- insert data into income table
 -- INSERT INTO income (income_source, income_date, income_total)
@@ -109,23 +109,23 @@ ADD foreign key(expense_id) references expense(expense_id);
 -- ('Housing Bills');
 
 
--- Inserting annual expenses for renters 
-INSERT INTO expense (expense_source, expense_total)
-VALUES
-('Annual average food and drink (renters)', 4415.00),
-('Annual average energy bills (renters)', 1345.00),
-('Annual average rent (renters)', 9247.00),
-('Annual average housing costs (homeowners)', 12650.00),
-('Annual average petrol/diesel (renters)', 1172.00),
-('Annual average train fares (renters)', 216.00),
-('Annual average bus fares (renters)', 318.00),
-('Annual average eating/drinking out (renters)', 3415.00),
-('Annual average holidays (renters)', 1541.00),
-('Annual average clothes (renters)', 2178.00);
+-- Inserting annual expenses for renters and homeowners
+-- INSERT INTO expense (expense_source, expense_total)
+-- VALUES
+-- ('Annual average weekly food and drink (renters and homeowers)', 4415.00),
+-- ('Annual average weekly energy bills (renters and homeowers)', 1345.00),
+-- ('Annual average weekly rent (renters)', 9247.00),
+-- ('Annual average weekly housing costs (homeowners)', 12650.00),
+-- ('Annual average weekly petrol/diesel (renters and homeowers)', 1172.00),
+-- ('Annual average weekly train fares (renters and homeowers)', 216.00),
+-- ('Annual average weekly bus fares (renters and homeowers)', 318.00),
+-- ('Annual average weekly eating/drinking out (renters and homeowers)', 3415.00),
+-- ('Annual average weekly holidays (renters and homeowers)', 1541.00),
+-- ('Annual average weekly clothes (renters and homeowers)', 2178.00);
 
 
 
--- Inserting monthly expenses for renters
+-- Inserting monthly expenses for renters and homeowners
 INSERT INTO expense (expense_source, expense_total)
 VALUES
 ('Monthly average food/drink (renters and homeowers)',368.00), 
@@ -134,24 +134,24 @@ VALUES
 ('Monthly average housing costs (homeowners)', 1054.00),
 ('Monthly average petrol/diesel (renters and homeowers)', 98.00),
 ('Monthly average train fares (renters and homeowers)', 18.00),
-('Monthly average bus fares (renters and homeowers), 26.00'),
+('Monthly average bus fares (renters and homeowers)', 26.00),
 ('Monthly average eating/drinking out (renters and homeowers)', 285.00),
 ('Monthly average holidays (renters and homeowers)',128.00);
 
 
--- Inserting weekly expenses for renters
-INSERT INTO expense (expense_source, expense_total)
- VALUES
- ('Weekly average food/drink (renters and homeowers)', 85.00),
- ('Weekly average energy bills (renters and homeowers)', 26.00),
- ('Weekly average rent (renters)', 178.00),
- ('Weekly average housing costs (homeowners)', 243.00),
- ('Weekly average petrol/diesel (renters and homeowers)', 23.00),
- ('Weekly average train fares (renters and homeowers)', 4.00),
- ('Weekly average bus fares (renters and homeowers)', 6.00),
- ('Weekly eating/drinking out (renters and homeowers)', 66.00),
- ('Weekly average holidays (renters and homeowers)', 30.00),
- ('Weekly average clothes/footwear (renters and homeowers)', 42.00);
+-- Inserting weekly expenses for renters and homeowners
+-- INSERT INTO expense (expense_source, expense_total)
+--  VALUES
+--  ('Weekly average food/drink (renters and homeowers)', 85.00),
+--  ('Weekly average energy bills (renters and homeowers)', 26.00),
+--  ('Weekly average rent (renters)', 178.00),
+--  ('Weekly average housing costs (homeowners)', 243.00),
+--  ('Weekly average petrol/diesel (renters and homeowers)', 23.00),
+--  ('Weekly average train fares (renters and homeowers)', 4.00),
+--  ('Weekly average bus fares (renters and homeowers)', 6.00),
+--  ('Weekly eating/drinking out (renters and homeowers)', 66.00),
+--  ('Weekly average holidays (renters and homeowers)', 30.00),
+--  ('Weekly average clothes/footwear (renters and homeowers)', 42.00);
 
 
 
@@ -174,6 +174,16 @@ inner join income
 on budget_user.user_id = income.income_id;
 
 
+select *
+from expense;
 
+DELIMITER //
+create procedure average_monthly_data()
+begin
+select expense_total from expense;
+end // 
 
+-- drop procedure average_monthly_data;
+
+call average_monthly_data();
 
