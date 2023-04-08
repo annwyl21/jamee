@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+
+<div class="dashboard-container, form">
+
+    <form method="post">
+    {{ form.hidden_tag() }}
+
+    <h1 class="green">Dashboard</h1>
+
+    <div class="dashboard-green">
+        <h2 class="green">Income</h2>
+
+        <div class="green">{{ form.salary.label }}</div>
+
+        <div class="input-box">{{ form.salary }}</div>
+
+        <div class="green">{{ form.other.label }}</div>
+
+        <div class="input-box">{{ form.other }}</div>
+    </div>
+
+    <div class="dashboard-blue">
+        <div class="blue">Outgoings</div>
+
+        <div class="blue">{{ form.rent.label }}</div>
+
+        <div class="input-box">{{ form.rent }}</div>
+
+        <div class="blue">{{ form.electricity.label }}</div>
+        <div class="input-box">{{ form.electricity }}</div>
+
+        <div class="blue">{{ form.gas.label }}</div>
+        <div class="input-box">{{ form.gas }}</div>
+
+        <div class="blue">{{ form.water.label }}</div>
+        <div class="input-box">{{ form.water }}</div>
+
+        <div class="blue">{{ form.council.label }}</div>
+        <div class="input-box">{{ form.council }}</div>
+
+        <div class="blue">{{ form.phone.label }}</div>
+        <div class="input-box">{{ form.phone }}</div>
+
+        <div class="blue">{{ form.subscriptions.label }}</div>
+        <div class="input-box">{{ form.subscriptions }}</div>
+
+        <div class="blue">{{ form.savings.label }}</div>
+        <div class="input-box">{{ form.savings }}</div>
+    </div>
+
+    <div class="dashboard-choices">
+        <div class="red">Auto-complete choices</div>
+        <div class="red">Married with 2 kids</div>
+        <div class="red">Single</div>
+        <button>{{ form.submit }}</button>
+    </div>
+
+    {{ message }}
+    </form>
+</div>
+
+{% endblock %}
