@@ -41,11 +41,7 @@ def form_input():
 @app.route('/dashboard')
 def dashboard():
 
-    # create an instance of the class
-    dashboard = Finance("dashboard")
-
-    # create the list from the database and assign to a variable
-    # user_spending = dashboard.database_grab_list()
+    dashboard = Finance('dashboard')
 
     # currently using hard-coded data to create graphs - this will be replaced by the above link to databases and stored procesdures when they have been written
     headers_list = ['housing', 'food and drink', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
@@ -89,55 +85,4 @@ def benefits(benefit_name):
     else:
         return render_template('articles.html', title='benefit_cap')
 
-
-
-
-
-
-
-################################################################################################
-# code above here - everything below here is for the example page and it is messy, sometimes intentionally messy to show our progress
-
-# import mysql.connector
-# cnx = mysql.connector.connect(user='root',password='password',host='127.0.0.1',database='test_finance')
-
-@app.route('/example', methods=['GET', 'POST'])
-def example():
-    
-    # code to connect to the database, call a stored procedure and return 1 piece of data
-    # mycursor = cnx.cursor()
-    # mycursor.callproc('data_out')
-    # the_data = []
-    # for result in mycursor.stored_results():
-    #     the_data.append(result.fetchall())
-    # for item in the_data:
-    #     my_data = item.pop(0)
-
-    # created a test class and added a graph method - see example page for resulting problem that we solved by moving the class to another page
-    class Test:
-        def __init__(self, name):
-            self.name = name
-        def get_name(self):
-            return f"My name is {self.name}."
-        
-        def create_pie_chart(self, my_variable):
-            #seaborn palette choices: deep, muted, pastel, bright, dark, and colorblind
-            colours = sns.color_palette('deep')#[0:5] I think this is how many colours we want
-            df = pd.DataFrame({'expenditure': [my_variable], 'spending': [100]})
-            plt.figure(figsize=(6,4))
-            plt.subplot()
-            plt.pie(df['spending'], colors = colours, autopct='%d%%')
-            plt.title("Test Pie Chart")
-            plt.legend(df['expenditure'])
-            plt.savefig('application/static/images/piechart1.png', transparent=True)
-            #return - the class method doesn't return anything so it sends back 'None' as an output which is then displayed on our webpage
-        
-        # def database_insert(self, value): #  not sure if this works until I get a form working
-        #     mycursor = cnx.cursor()
-        #     data_to_insert = value
-        #     args=[data_to_insert]
-        #     mycursor.callproc('add_data', args)
-        #     cnx.commit()
-        
-    return render_template('example.html', title='Working Example Page') #key=value pairs (my_variable = this_thing_here)
 

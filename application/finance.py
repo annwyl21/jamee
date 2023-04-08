@@ -8,10 +8,6 @@ import seaborn as sns
 class Finance:
     def __init__(self, name):
         self.name = name
-
-    def get_name(self):
-        return f"My name is {self.name}."
-
     # code to connect to the database, call a stored procedure and return a list of pieces of data
     #def database_grab_list(self):
         #mycursor = cnx.cursor()
