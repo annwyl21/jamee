@@ -56,12 +56,12 @@ class DataProviderService:
         unpacked_data = []
         self.cursor.callproc('average_monthly_data')
         retrieved_data = self.cursor.fetchall()
-        # unpacking a tuple to a list so the strings can be modified
+        # unpacking a tuple to a list so the decimal objects returned can be recast as integers
         for item in retrieved_data:
             unpacked = item
             data.append(unpacked)
         for tuple in data:
-            value = tuple[0]
+            value = int(tuple[0])
             unpacked_data.append(value)
         return unpacked_data
 

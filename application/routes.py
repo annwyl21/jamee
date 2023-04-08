@@ -43,24 +43,24 @@ def dashboard():
 
     dashboard = Finance('dashboard')
 
-    comparison_list_test = DATA_PROVIDER.get_average_monthly_expense_data_for_graph()
+    comparison_list = DATA_PROVIDER.get_average_monthly_expense_data_for_graph()
+    comparison_list.insert(0, 'UK Average')
 
-    # currently using hard-coded data to create graphs - this will be replaced by the above link to databases when I figure out how to use a returned decimal object
+    # currently using hard-coded user data to create graphs
     headers_list = ['housing', 'food and drink', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
     pie_user_list = [981, 372, 107, 102, 15, 35, 382, 115, 161]
     user_list = ['My Spending', 981, 372, 107, 102, 15, 35, 382, 115, 161]
-    comparison_list = ['UK Average', 1054, 368, 112, 98, 18, 18, 26, 128, 181]
     
     # create a pie chart
     dashboard.create_pie(headers_list, pie_user_list)
 
-    # create a stacked bar chart
+    # create a stacked bar chart using data pulled from the database
     dashboard.create_stacked_bar(user_list, comparison_list)
 
     # grab data to create average UK spending table
     av = DATA_PROVIDER.get_average_monthly_expense_data_for_page_table()
 
-    return render_template('dashboard.html', title='Dashboard', data = comparison_list_test, headers=headers_list, uk_average=av) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
+    return render_template('dashboard.html', title='Dashboard', uk_average=av) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
 
 
 
