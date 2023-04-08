@@ -43,7 +43,9 @@ def dashboard():
 
     dashboard = Finance('dashboard')
 
-    # currently using hard-coded data to create graphs - this will be replaced by the above link to databases and stored procesdures when they have been written
+    comparison_list_test = DATA_PROVIDER.get_average_monthly_expense_data_for_graph()
+
+    # currently using hard-coded data to create graphs - this will be replaced by the above link to databases when I figure out how to use a returned decimal object
     headers_list = ['housing', 'food and drink', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
     pie_user_list = [981, 372, 107, 102, 15, 35, 382, 115, 161]
     user_list = ['My Spending', 981, 372, 107, 102, 15, 35, 382, 115, 161]
@@ -55,7 +57,10 @@ def dashboard():
     # create a stacked bar chart
     dashboard.create_stacked_bar(user_list, comparison_list)
 
-    return render_template('dashboard.html', title='Dashboard') #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
+    # grab data to create average UK spending table
+    av = DATA_PROVIDER.get_average_monthly_expense_data_for_page_table()
+
+    return render_template('dashboard.html', title='Dashboard', data = comparison_list_test, headers=headers_list, uk_average=av) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
 
 
 

@@ -8,23 +8,6 @@ import seaborn as sns
 class Finance:
     def __init__(self, name):
         self.name = name
-    # code to connect to the database, call a stored procedure and return a list of pieces of data
-    #def database_grab_list(self):
-        #mycursor = cnx.cursor()
-        #mycursor.callproc('data_out_list')
-        #data_list = []
-        #for result in mycursor.stored_results():
-            #for returned_list in result:
-                #for tuple in returned_list: 
-                    #list_item = tuple
-                    #data_list.append(list_item)
-        #return data_list
-        # tells the database connection where to look and assigns that to a variable
-        # uses that variable to tell the database connection to run a stored procedure
-        # stored results takes the data now stored in the mycursor variable as an iterable
-        # cycles through that list and unpacks the tuples
-        # collects the strings and adds them into the empty list and returns the list
-
 
     # code to create a pie chart using a list
     def create_pie(self, headers_list, user_list):

@@ -9,7 +9,7 @@ class DataProviderService:
         host = 'localhost'
         port = 3306
         user = 'root'
-        password = ''
+        password = 'password'
         database = 'budget_management'
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database)
         self.cursor = self.conn.cursor()
@@ -46,12 +46,28 @@ class DataProviderService:
     
     def get_benefits_data(self, benefit_requested):
         sql = "SELECT benefit_name, how, what FROM benefits where benefit_name = '" + benefit_requested + "'"
-        print(sql)
         self.cursor.execute(sql)
         retrieved_data = self.cursor.fetchall()
-        print(retrieved_data)
         unpacked_benefit_data = retrieved_data[0]
-        print(unpacked_benefit_data)
         return unpacked_benefit_data
     
+    def get_average_monthly_expense_data_for_graph(self):
+        data = []
+        unpacked_data = []
+        self.cursor.callproc('average_monthly_data')
+        retrieved_data = self.cursor.fetchall()
+        # unpacking a tuple to a list so the strings can be modified
+        for item in retrieved_data:
+            unpacked = item
+            data.append(unpacked)
+        for tuple in data:
+            value = tuple[0]
+            unpacked_data.append(value)
+        return unpacked_data
 
+    def get_average_monthly_expense_data_for_page_table(self):
+        sql = "SELECT expense_source, expense_total FROM expense"
+        self.cursor.execute(sql)
+        expenses = self.cursor.fetchall()
+        return expenses
+    
