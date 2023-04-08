@@ -2,9 +2,20 @@
 
 {% block main_content %}
 
-<h1>{{ title }}</h1>
-<p>This single page is going to be the template for all of the benefits information.</p>
+This page is ready for some responsive formatting.
 
-<p>{{ variable }}</p>
+<h1>{{ title }}</h1>
+<br>
+{% set endpoint, how, what  = data %}
+<p>How it works</p>
+<br>
+{{ how }}
+<br><br>
+<p>What you'll get</p>
+<br>
+{{ what }}
+<br>
+<br>
+<p>To find out more about your eligibility, visit https://www.gov.uk/{{ endpoint }}</p>
 
 {% endblock %}

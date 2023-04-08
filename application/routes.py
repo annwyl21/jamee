@@ -71,18 +71,17 @@ def admin():
 # Repeated Routes to Different Benefits
 @app.route('/<benefit_name>')
 def benefits(benefit_name):
-    
-    if benefit_name == 'child_benefit':
-        return render_template('articles.html', title='Child Benefit')
-    elif benefit_name == 'housing_benefit':
-        return render_template('articles.html', title='Housing Benefit')
-    elif benefit_name == 'esa':
-        return render_template('articles.html', title='ESA')
-    elif benefit_name == 'jsa':
-        return render_template('articles.html', title='JSA')
-    elif benefit_name == 'universal_credit':
-        return render_template('articles.html', title='Universal Credit')
-    else:
-        return render_template('articles.html', title='benefit_cap')
+    # Grab 3 pieces of information; url-endpoint, how-data and what-data to auto-complete fields
+    unpacked_benefit_data_tuple = DATA_PROVIDER.get_benefits_data(benefit_name)
+    if benefit_name == 'child-benefit':
+        return render_template('articles.html', title='Child Benefit', data=unpacked_benefit_data_tuple)
+    elif benefit_name == 'housing-benefit':
+        return render_template('articles.html', title='Housing Benefit', data=unpacked_benefit_data_tuple)
+    elif benefit_name == 'employment-support-allowance':
+        return render_template('articles.html', title='ESA', data=unpacked_benefit_data_tuple)
+    elif benefit_name == 'jobseekers-allowance':
+        return render_template('articles.html', title='JSA', data=unpacked_benefit_data_tuple)
+    elif benefit_name == 'universal-credit':
+        return render_template('articles.html', title='Universal Credit', data=unpacked_benefit_data_tuple)
 
 

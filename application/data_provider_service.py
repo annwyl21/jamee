@@ -10,7 +10,7 @@ class DataProviderService:
         port = 3306
         user = 'root'
         password = 'password'
-        database = 'form_page'
+        database = 'budget_management'
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database)
         self.cursor = self.conn.cursor()
 
@@ -43,3 +43,15 @@ class DataProviderService:
             self.cursor.execute(sql, input_values)
             all_form_data = self.cursor.fetchone()
         return all_form_data
+    
+    def get_benefits_data(self, benefit_requested):
+        sql = "SELECT benefit_name, how, what FROM benefits where benefit_name = '" + benefit_requested + "'"
+        print(sql)
+        self.cursor.execute(sql)
+        retrieved_data = self.cursor.fetchall()
+        print(retrieved_data)
+        unpacked_benefit_data = retrieved_data[0]
+        print(unpacked_benefit_data)
+        return unpacked_benefit_data
+    
+
