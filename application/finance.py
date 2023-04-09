@@ -80,6 +80,15 @@ class Finance:
         # use the strings in the expenditure list to label (xticklabels) those markers
         # add titles, legend etc and save
 
+    # code to create a calculator
+    def simple_debt_calculator(self, amount, interest_rate, loan_term):
+        loan_term = loan_term*12
+        interest_rate = interest_rate/100
+        annual_interest = amount * interest_rate
+        monthly_interest = annual_interest/12
+        total_interest = monthly_interest*loan_term
+        return total_interest + amount
+
 
 
 

@@ -2,6 +2,7 @@ from flask import render_template, request
 from application import app
 from application.finance import Finance
 from application.forms import BasicForm
+from application.forms import DebtForm
 from application.data_provider_service import DataProviderService
 
 # instantiating an object of DataProviderService
@@ -73,6 +74,24 @@ def admin():
 
 
 
+@app.route('/debt_calculator_form', methods=['GET', 'POST'])
+def calculate_debt():
+    error = ''
+    form = DebtForm()
+    if request.method == 'POST':
+        debt_amount = form.debt_amount.data
+        debt_interest = form.debt_interest.data
+        debt_term = form.debt_term.data
+        if not debt_amount or not debt_interest or not debt_term:
+            # if any of those are False/ empty
+            error = 'please enter values'
+        else:
+            dc = Finance('dc').simple_debt_calculator(debt_amount, debt_interest, debt_term)
+            return render_template('debt_calculator.html', dc=dc)
+    return render_template('debt_calculator_form.html', form=form, message=error)
+
+
+
 
 # Repeated Routes to Different Benefits
 @app.route('/<benefit_name>')
@@ -89,5 +108,10 @@ def benefits(benefit_name):
         return render_template('articles.html', title='JSA', data=unpacked_benefit_data_tuple)
     elif benefit_name == 'universal-credit':
         return render_template('articles.html', title='Universal Credit', data=unpacked_benefit_data_tuple)
+    else:
+        return render_template('index.html', title='Home Page')
+
+
+
 
 

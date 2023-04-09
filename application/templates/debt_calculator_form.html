@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+
+<h1>Simple Debt Calculator</h1>
+<p>Enter information about your outstanding debt in order to calculate</p>
+<div class="form">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.debt_amount.label }} {{ form.debt_amount}}
+        <br>
+        {{ form.debt_interest.label }} {{ form.debt_interest }}
+        <br>
+        {{ form.debt_term.label }} {{ form.debt_term }}
+        <br>
+        {{ form.submit }}
+        {{ message }}
+    </form>
+
+</div>
+
+{% endblock %}
