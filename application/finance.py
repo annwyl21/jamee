@@ -11,6 +11,7 @@ class Finance:
 
     # code to create a pie chart using a list
     def create_pie(self, headers_list, user_list):
+        plt.switch_backend('Agg') 
         colours = sns.color_palette('deep')
         df = pd.DataFrame({'expenditure': headers_list, 'spending': user_list})
         plt.figure(figsize=(6,4))
@@ -31,6 +32,7 @@ class Finance:
     # code to create a stacked bar chart using a list
     def create_stacked_bar(self, user_list, comparison_list):
         #c = sns.color_palette('deep')
+        plt.switch_backend('Agg') 
         expenditure = [user_list[0], comparison_list[0]]
         housing = [user_list[1], comparison_list[1]]
         groceries = [user_list[2], comparison_list[2]]
