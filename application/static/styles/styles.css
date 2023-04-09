@@ -11,7 +11,7 @@ table, th, td {
 
 /* form page styling starts */
 form {
-    margin: 20px;
+    margin: 10px;
 }
 
 .form-container {
@@ -34,7 +34,7 @@ form {
     margin-left: 50%;
 }
 
-h3 {
+h1, h3 {
     border: 1px solid black;
     background-color: red;
     text-align: center;
