@@ -83,10 +83,11 @@ def calculate_debt():
         debt_interest = form.debt_interest.data
         debt_term = form.debt_term.data
         if not debt_amount or not debt_interest or not debt_term:
-            # if any of those are False, as in empty
+            # if any of those are False/ empty
             error = 'please enter values'
         else:
-            render_template('debt_calculator.html', debt_amount=debt_amount, debt_interest=debt_interest, debt_term = debt_term)
+            dc = Finance('dc').simple_debt_calculator(debt_amount, debt_interest, debt_term)
+            return render_template('debt_calculator.html', dc=dc)
     return render_template('debt_calculator_form.html', form=form, message=error)
 
 
@@ -108,7 +109,7 @@ def benefits(benefit_name):
     elif benefit_name == 'universal-credit':
         return render_template('articles.html', title='Universal Credit', data=unpacked_benefit_data_tuple)
     else:
-        benefit_name == ''
+        return render_template('index.html', title='Home Page')
 
 
 
