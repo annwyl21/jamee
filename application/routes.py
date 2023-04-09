@@ -24,10 +24,11 @@ def form_input():
 
     if request.method == 'POST':
         salary = form.salary.data
-        rent = form.rent.data
+        housing = form.housing.data
 
-        if len(salary) == 0 or len(rent) == 0:
-            error = 'Please fill in the required Salary and Rent/Mortgage fields.'
+        if salary or housing:
+        # if len(salary) == 0 or len(housing) == 0:
+            error = 'Please fill in the required Salary and Housing fields.'
         else:
             return 'Thank you!'
             # new_person_id = DATA_PROVIDER.add_person(first_name, last_name)

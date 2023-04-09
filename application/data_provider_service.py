@@ -16,9 +16,9 @@ class DataProviderService:
 
         # %s are placeholders for values that will be passed into the SQL query
 
-    def add_form_data(self, salary, other, rent, electricity, gas, water, council, phone, subscriptions, savings):
-        sql = """insert into form (salary, other, rent, electricity, gas, water, council, phone, subscriptions, savings) values (%s, %s)"""
-        input_values = (salary, other, rent, electricity, gas, water, council, phone, subscriptions, savings)
+    def add_form_data(self, salary, other, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes):
+        sql = """insert into form (salary, other, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes) values (%s, %s)"""
+        input_values = (salary, other, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
         try:
             self.cursor.execute(sql, input_values)
             self.conn.commit()

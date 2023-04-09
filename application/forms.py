@@ -19,7 +19,6 @@ class BasicForm(FlaskForm):
     eating = IntegerField('Eating and Drinking')
     holidays = IntegerField('Holidays')
     clothes = IntegerField('Clothes and Footwear')
-    childcare = IntegerField('Childcare')
     submit = SubmitField('Submit')
     
     
