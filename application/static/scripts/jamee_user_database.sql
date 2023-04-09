@@ -235,3 +235,17 @@ values
     'Universal Credit is a payment to help with your living costs. It is paid monthly - or twice a month for some people in Scotland. You may be able to get it if you are on a low income, out of work or you cannot work.', 
     'How much Universal Credit you get depends on; your standard allowance any extra amounts that apply to you and any money taken off your payment. Universal Credit is paid monthly and is based on your circumstances each month. This is called your assessment period and it starts the day you make your claim.');
 
+create table form
+(id int not null auto_increment primary key,
+salary varchar(200),
+other varchar(200),
+food_drink varchar(200),
+housing varchar(200),
+energy varchar(200),
+petrol varchar(200),
+train varchar(200),
+bus varchar(200),
+eating varchar(200),
+holidays varchar(200),
+clothes varchar(200),
+childcare varchar (200));
