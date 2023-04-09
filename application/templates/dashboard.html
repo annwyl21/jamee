@@ -5,14 +5,12 @@
   <h1>Dashboard</h1>
 </div>
 
-{{ data }}
-
 <!-- TEXT & LEGEND first bit of responsive code -->
   <div class="container-fluid bg-1 text-center">
     <div class="row">
 <!-- This is where the 12 columns are divided into 2 groups of 6 -->
       <div class="col-sm-6">
-        <!-- <table>
+        <table>
           <tr>
             <th>Average UK Monthly Spending</th>
             <th>&pound;'s</th>
@@ -23,7 +21,7 @@
             <td>{{ item [1] }}</td>
           </tr>
           {% endfor %}
-        </table> -->
+        </table>
       </div>
       <div class="col-sm-6">
         <!-- Code to insert the legend, I need to create an image for that-->
@@ -64,12 +62,10 @@
             <th></th>
             <th>&pound;'s</th>
           </tr>
-          {% for item in user_spending %}
           <tr>
             <td>hmm</td>
-            <td>{{ item }}</td>
+            <td></td>
           </tr>
-          {% endfor %}
         </table>
       </div>
       <div class="col-sm-4">
