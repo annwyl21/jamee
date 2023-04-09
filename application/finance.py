@@ -18,8 +18,8 @@ class Finance:
         plt.subplot()
         plt.pie(df['spending'], colors=colours, autopct='%d%%')
         plt.axis('equal')
-        plt.title("Test Pie Chart")
-        plt.legend(df['expenditure'], loc='upper right', bbox_to_anchor=(1,1), fontsize=7)
+        #plt.title("Test Pie Chart")
+        #plt.legend(df['expenditure'], loc='upper right', bbox_to_anchor=(1,1), fontsize=7)
         plt.savefig('application/static/images/piechart.png', transparent=True)
         # use beautiful seaborn colours
         # creates a dataframe that matplot can use
@@ -64,10 +64,10 @@ class Finance:
         plt.bar(x, clothes, bottom = clothes_bottom)
         ax.set_xticks(range(len(expenditure)))
         ax.set_xticklabels((expenditure))
-        plt.title("Stacked bar chart: Comparison of Spending Distribution for Mortgage Paying Households")
+        #plt.title("Stacked bar chart: Comparison of Spending Distribution for Mortgage Paying Households")
         plt.xlabel("Comparison")
         plt.ylabel("Spending Type in £'s")
-        plt.legend(("Housing", "Food and Drink", "Energy Bills", "Fuel", "Train Fares", "Bus Fares", "Eating and Drinking", "Holidays", "Clothes and Footwear"))
+        #plt.legend(("Housing", "Food and Drink", "Energy Bills", "Fuel", "Train Fares", "Bus Fares", "Eating and Drinking", "Holidays", "Clothes and Footwear"))
         plt.savefig('application/static/images/barstack.png', transparent=True)
         # this can be created using a dataframe but I didn't learn that, I might have to to use the nice seaborn colours
         # assign the list variables to the appropriate y_axis categories
