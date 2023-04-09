@@ -10,6 +10,10 @@ table, th, td {
   }
 
 /* form page styling starts */
+form {
+    margin: 20px;
+}
+
 .form-container {
     width: 100%;
     display: inline-block;
@@ -18,35 +22,36 @@ table, th, td {
 .income-container {
     border: 1px solid black;
     background-color: green;
+
+}
+
+.form-label {
     width: 50%;
-    /* height: 100px; */
     float: left;
 }
 
-.income {
+.form-input {
+    margin-left: 50%;
+}
+
+h3 {
     border: 1px solid black;
-    background-color: green;
+    background-color: red;
+    text-align: center;
 }
 
 .outgoings-container {
     border: 1px solid black;
     background-color: green;
-    margin-left: 50%;
-}
-
-.outgoings {
-    border: 1px solid black;
-    background-color: blue;
 }
 
 .button {
     border: 1px solid black;
-    background-color: grey;
+    background-color: aqua;
 }
 
 .input-box {
     border: 1px solid black;
     background-color: grey;
 }
-
 /* form page styling ends */
