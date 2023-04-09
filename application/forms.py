@@ -20,5 +20,11 @@ class BasicForm(FlaskForm):
     holidays = IntegerField('Holidays')
     clothes = IntegerField('Clothes and Footwear')
     submit = SubmitField('Submit')
+
+class DebtForm(FlaskForm):
+    debt_amount = IntegerField('Debt Amount')
+    debt_interest = IntegerField('Debt Interest Rate (APR)')
+    debt_term = IntegerField('Debt Term in Whole Years')
+    submit = SubmitField('Submit')
     
     
