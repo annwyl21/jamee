@@ -1,7 +1,5 @@
 CREATE DATABASE budget_management;
 
--- drop database budget_management;
-
 USE budget_management;
 
 CREATE TABLE budget_user
@@ -177,11 +175,13 @@ on budget_user.user_id = income.income_id;
 select *
 from expense;
 
+-- stored procedure to grab a list of monthly expense data from the database
 DELIMITER //
 create procedure average_monthly_data()
 begin
 select expense_total from expense;
-end // 
+end //
+DELIMITER ;
 
 -- drop procedure average_monthly_data;
 
@@ -189,10 +189,6 @@ call average_monthly_data();
 
 -- Using a database as a content management system
 -- url endpoints are in the name field and attach to this base url https://www.gov.uk/
-
--- CREATE DATABASE budget_management;
-use budget_management;
--- drop database budget_management;
 
 create table benefits
 	(benefit_id int not null auto_increment primary key,
@@ -247,5 +243,5 @@ train varchar(200),
 bus varchar(200),
 eating varchar(200),
 holidays varchar(200),
-clothes varchar(200),
-childcare varchar (200));
+clothes varchar(200));
+
