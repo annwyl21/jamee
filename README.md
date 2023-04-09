@@ -48,12 +48,18 @@ git push --set-upstream origin the_name_of_your_branch
 # Problem-Solving - please add to this checklist
 
 - Is flask started?
-- Is MySql running?
-- The example page uses code from the test1 database, has that database been built by running code from scripts/test_finance.sql
+- Have you got the correct databse, no duplicates or old versions of the database?
+    - Our Database code is held in Static/ Scripts
+        - run `teardown_script.sql` to drop old versions of the database
+        - run `jamee_user_database.sql` to rebuild the new database
 
 # Site Guide
 
 - install the requirements
 - run the app.py file to start the site locally
-- finance.py is our CLASS page for our OOP
-- static folder holds 3 further folders; images, styles and scripts (which has .sql and .py files and possibly .js too if we write some)
+- static folder holds 3 further folders; images, styles and scripts (which has our mysql database code)
+- we have 3 .py files that hold various classes;
+    - data_provider_service (our database connection and class methods relating to the database)
+    - finance (our graphs and other class mathods relating to our finance calculator code)
+    - forms (our code relating to adding data from the form to the database)
+- we have a tests folder that holds the pytests and a .github folder that holds the code to run the automatic code checker every time we do a pull request so we can merge with confidence

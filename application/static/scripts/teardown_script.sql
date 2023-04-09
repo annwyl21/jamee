@@ -1,0 +1,1 @@
+drop database budget_management;
