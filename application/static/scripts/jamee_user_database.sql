@@ -243,6 +243,5 @@ train varchar(200),
 bus varchar(200),
 eating varchar(200),
 holidays varchar(200),
-clothes varchar(200),
-childcare varchar (200));
+clothes varchar(200));
 
