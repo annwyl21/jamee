@@ -1,4 +1,4 @@
-from wtforms import StringField, SubmitField
+from wtforms import IntegerField, SubmitField
 from flask_wtf import FlaskForm
 
 
@@ -8,16 +8,18 @@ from flask_wtf import FlaskForm
 
 
 class BasicForm(FlaskForm):
-    salary = StringField('Salary')
-    other = StringField('Other')
-    rent = StringField('Rent/Mortgage')
-    electricity = StringField('Electricity')
-    gas = StringField('Gas')
-    water = StringField('Water')
-    council = StringField('Council Tax')
-    phone = StringField('Phone Bill')
-    subscriptions = StringField('Subscriptions')
-    savings = StringField('Savings/CTF')
+    salary = IntegerField('Salary')
+    other = IntegerField('Other')
+    food_drink = IntegerField('Food and Drink')
+    housing = IntegerField('Housing')
+    energy = IntegerField('Energy Bills')
+    petrol = IntegerField('Petrol or Diesel')
+    train = IntegerField('Train Fares')
+    bus = IntegerField('Bus Fares')
+    eating = IntegerField('Eating and Drinking')
+    holidays = IntegerField('Holidays')
+    clothes = IntegerField('Clothes and Footwear')
+    childcare = IntegerField('Childcare')
     submit = SubmitField('Submit')
     
     

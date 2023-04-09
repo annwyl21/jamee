@@ -2,63 +2,122 @@
 
 {% block main_content %}
 
-<div class="dashboard-container, form">
+<div class="form-container, form, container">
 
     <form method="post">
     {{ form.hidden_tag() }}
 
-    <h1 class="green">Dashboard</h1>
+    <h1 class="green">Please input your amounts</h1>
 
-    <div class="dashboard-green">
-        <h2 class="green">Income</h2>
+    <div class="income-container">
+      <h3>Income</h3>
 
-        <div class="green">{{ form.salary.label }}</div>
+      <div class="form-label">
+        <div class="income">{{ form.salary.label }}</div>
+        <div class="income">{{ form.other.label }}</div>
+      </div>
 
-        <div class="input-box">{{ form.salary }}</div>
+      <div class="form-input">
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.salary }}
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.other }}
+        </div>
+        <!-- <div class="input-box">{{ form.salary }}</div>
+        <div class="input-box">{{ form.other }}</div> -->
+      </div>
 
-        <div class="green">{{ form.other.label }}</div>
-
-        <div class="input-box">{{ form.other }}</div>
     </div>
 
-    <div class="dashboard-blue">
-        <div class="blue">Outgoings</div>
+    <div class="outgoings-container">
+      <h3>Outgoings</h3>
 
-        <div class="blue">{{ form.rent.label }}</div>
+      <div class="form-label">
+        <div class="outgoings">{{ form.food_drink.label }}</div>
+        <div class="outgoings">{{ form.housing.label }}</div>
+        <div class="outgoings">{{ form.energy.label }}</div>
+        <div class="outgoings">{{ form.petrol.label }}</div>
+        <div class="outgoings">{{ form.train.label }}</div>
+        <div class="outgoings">{{ form.bus.label }}</div>
+        <div class="outgoings">{{ form.eating.label }}</div>
+        <div class="outgoings">{{ form.holidays.label }}</div>
+        <div class="outgoings">{{ form.clothes.label }}</div>
+        <div class="outgoings">{{ form.childcare.label }}</div>
+      </div>
 
-        <div class="input-box">{{ form.rent }}</div>
+      <div class="form-input">
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.food_drink }}
+        </div>
 
-        <div class="blue">{{ form.electricity.label }}</div>
-        <div class="input-box">{{ form.electricity }}</div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.housing }}
+        </div>
 
-        <div class="blue">{{ form.gas.label }}</div>
-        <div class="input-box">{{ form.gas }}</div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.energy }}
+        </div>
 
-        <div class="blue">{{ form.water.label }}</div>
-        <div class="input-box">{{ form.water }}</div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.petrol }}
+        </div>
 
-        <div class="blue">{{ form.council.label }}</div>
-        <div class="input-box">{{ form.council }}</div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.train }}
+        </div>
 
-        <div class="blue">{{ form.phone.label }}</div>
-        <div class="input-box">{{ form.phone }}</div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.bus }}
+        </div>
 
-        <div class="blue">{{ form.subscriptions.label }}</div>
-        <div class="input-box">{{ form.subscriptions }}</div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.eating }}
+        </div>
 
-        <div class="blue">{{ form.savings.label }}</div>
-        <div class="input-box">{{ form.savings }}</div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.holidays }}
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.clothes }}
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">£</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.childcare }}
+        </div>
+
+        <!-- <div class="input-box">{{ form.food_drink }}</div>
+        <div class="input-box">{{ form.housing }}</div>
+        <div class="input-box">{{ form.energy }}</div>
+        <div class="input-box">{{ form.petrol }}</div>
+        <div class="input-box">{{ form.train }}</div>
+        <div class="input-box">{{ form.bus }}</div>
+        <div class="input-box">{{ form.eating }}</div>
+        <div class="input-box">{{ form.holidays }}</div>
+        <div class="input-box">{{ form.clothes }}</div>
+        <div class="input-box">{{ form.childcare }}</div> -->
+      </div>
     </div>
 
-    <div class="dashboard-choices">
-        <div class="red">Auto-complete choices</div>
-        <div class="red">Married with 2 kids</div>
-        <div class="red">Single</div>
-        <button>{{ form.submit }}</button>
-    </div>
+    <button>{{ form.submit }}</button>
+
 
     {{ message }}
     </form>
 </div>
 
 {% endblock %}
+

@@ -10,49 +10,48 @@ table, th, td {
   }
 
 /* form page styling starts */
-.dashboard-container {
+form {
+    margin: 10px;
+}
+
+.form-container {
     width: 100%;
     display: inline-block;
 }
 
-.dashboard-green {
+.income-container {
     border: 1px solid black;
     background-color: green;
-    width: 33%;
-    /* height: 100px; */
+
+}
+
+.form-label {
+    width: 50%;
     float: left;
 }
 
-.green {
-    border: 1px solid black;
-    background-color: green;
+.form-input {
+    margin-left: 50%;
 }
 
-.dashboard-blue {
-    border: 1px solid black;
-    background-color: green;
-    margin-left: 66%;
-}
-
-.blue {
-    border: 1px solid black;
-    background-color: blue;
-}
-
-.dashboard-choices {
-    border: 1px solid black;
-    background-color: green;
-    margin-left: 33%;
-}
-
-.red {
+h1, h3 {
     border: 1px solid black;
     background-color: red;
+    text-align: center;
+}
+
+.outgoings-container {
+    border: 1px solid black;
+    background-color: green;
+}
+
+.button {
+    border: 1px solid black;
+    background-color: aqua;
 }
 
 .input-box {
     border: 1px solid black;
     background-color: grey;
 }
-
 /* form page styling ends */
