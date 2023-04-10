@@ -9,6 +9,25 @@ class Finance:
     def __init__(self, name):
         self.name = name
 
+    # code to create a calculator
+    def simple_debt_calculator(self, amount, interest_rate, loan_term):
+        loan_term = loan_term*12
+        interest_rate = interest_rate/100
+        annual_interest = amount * interest_rate
+        monthly_interest = annual_interest/12
+        total_interest = monthly_interest*loan_term
+        return total_interest + amount
+
+    def dashboard_weekly_calculator(self, test_list):
+        # ready to code
+        return [231, 0, 0, 0, 0, 0, 0, 0, 0]
+    
+    def dashboard_annual_calculator(self, test_list):
+        return [12000, 0, 0, 0, 0, 0, 0, 0, 0]
+
+
+
+
     # code to create a pie chart using a list
     def create_pie(self, headers_list, user_list):
         plt.switch_backend('Agg') 
@@ -79,16 +98,6 @@ class Finance:
         # just have 2 markers (x-ticks) on the x-axis because the length of the expenditure list is 2
         # use the strings in the expenditure list to label (xticklabels) those markers
         # add titles, legend etc and save
-
-    # code to create a calculator
-    def simple_debt_calculator(self, amount, interest_rate, loan_term):
-        loan_term = loan_term*12
-        interest_rate = interest_rate/100
-        annual_interest = amount * interest_rate
-        monthly_interest = annual_interest/12
-        total_interest = monthly_interest*loan_term
-        return total_interest + amount
-
 
 
 
