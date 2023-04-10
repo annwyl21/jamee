@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from application import app
 from application.finance import Finance
 from application.forms import BasicForm
@@ -17,7 +17,8 @@ def home():
 def contact():
     return render_template('contact.html', title='Contact Us')
 
-
+# https://www.codecademy.com/learn/learn-flask/modules/flask-templates-and-forms/cheatsheet
+# consider using a redirect here so the submit of the form redirects to the template
 @app.route('/form', methods=['GET', 'POST'])
 def form_input():
     error = ""
@@ -87,8 +88,12 @@ def calculate_debt():
             error = 'please enter values'
         else:
             dc = Finance('dc').simple_debt_calculator(debt_amount, debt_interest, debt_term)
-            return render_template('debt_calculator.html', dc=dc)
+            return redirect(url_for('debt_calculator', data=dc))
     return render_template('debt_calculator_form.html', form=form, message=error)
+                         
+@app.route('/debt_calculator/<data>')
+def debt_calculator(data):
+    return render_template('debt_calculator.html', dc=data)
 
 
 
