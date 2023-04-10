@@ -72,10 +72,8 @@ def test_request_benefits(client):
 # GIVEN a simple debt calculator
 def test_simple_debt_calc():
 # WHEN I enter my debt amount of 10K, my interest rate of 5% and the loan period of 5 years 
-    amount = 10000
-    interest_rate = 5
-    loan_term = 5
-    results = Finance('test').simple_debt_calculator(amount, interest_rate, loan_term)
+    information = [10000, 5, 5, 'years']
+    results = Finance('test').simple_debt_calculator(information)
 # THEN the calculator should show me that the total cost of my loan over 12 years will be 12.5K
     assert results == 12500, "Simple Debt Calculator Incorrect"
     

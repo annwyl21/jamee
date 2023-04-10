@@ -17,7 +17,8 @@ def home():
 def contact():
     return render_template('contact.html', title='Contact Us')
 
-
+# https://www.codecademy.com/learn/learn-flask/modules/flask-templates-and-forms/cheatsheet
+# consider using a redirect here so the submit of the form redirects to the template
 @app.route('/form', methods=['GET', 'POST'])
 def form_input():
     error = ""
@@ -69,25 +70,33 @@ def dashboard():
 
 @app.route('/admin')
 def admin():
-    
-      return render_template('admin.html', title='Admin')
+    average_debt_data = DATA_PROVIDER.average_debt_report()
+    debt_type_frequency = DATA_PROVIDER.frequency_debt_report()
+    Finance('report').generate_debt_report(average_debt_data, debt_type_frequency)
+    return render_template('admin.html', title='Admin', average_debt_data = average_debt_data, debt_type = debt_type_frequency)
 
 
 
 @app.route('/debt_calculator_form', methods=['GET', 'POST'])
 def calculate_debt():
+    debt_info = []
     error = ''
     form = DebtForm()
     if request.method == 'POST':
+        debt_type = form.debt_type.data
         debt_amount = form.debt_amount.data
         debt_interest = form.debt_interest.data
         debt_term = form.debt_term.data
+        debt_monthsyears = form.monthsyears.data
+        debt_info += [debt_amount, debt_interest, debt_term, debt_monthsyears, debt_type]
         if not debt_amount or not debt_interest or not debt_term:
             # if any of those are False/ empty
             error = 'please enter values'
         else:
-            dc = Finance('dc').simple_debt_calculator(debt_amount, debt_interest, debt_term)
-            return render_template('debt_calculator.html', dc=dc)
+            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type)
+            dc = Finance('dc').simple_debt_calculator(debt_info)
+            debt_info += [dc, new_debt_id]
+            return render_template('debt_calculator.html', debt_info=debt_info)
     return render_template('debt_calculator_form.html', form=form, message=error)
 
 

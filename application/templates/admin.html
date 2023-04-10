@@ -3,15 +3,23 @@
 {% block main_content %}
 
 <div>
-  <h1>Welcome to the **secret** admin page</h1>
-  <p>This is a report generation page.
+  <h1>Site Statistics</h1>
+  <br>
+  <h4>Debt Calculator</h4>
+  <p>
     <br>
+    When people visit our site they use our debt calculator to find out how much they will repay in total over the repayment period.
+    <br>
+    The average amount of debt people search for is &pound;{{ '%.2f' % average_debt_data }}.
+    <br>
+    Those debts are usually in the form of a {{ debt_type[0] }}.
+    <br>
+    In total {{ debt_type[1] }} calculations have been performed on our site to find out the total repayment cost for a {{ debt_type[0] }}
   </p>
-        
-        <form>
-            <input type="radio" id="create_file" name="create_file" value="file">
-            <label for="create_file">Create a file from test1 database</label>
-          </form>
+  <br>
+  <h4>Savings Calculator</h4>
+  <br>
 </div>
 
 {% endblock %}
+

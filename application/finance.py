@@ -10,13 +10,16 @@ class Finance:
         self.name = name
 
     # code to create a calculator
-    def simple_debt_calculator(self, amount, interest_rate, loan_term):
-        loan_term = loan_term*12
-        interest_rate = interest_rate/100
-        annual_interest = amount * interest_rate
+    def simple_debt_calculator(self, debt_info):
+        if debt_info[3] == 'months':
+            loan_term = debt_info[2]
+        else:
+            loan_term = debt_info[2]*12
+        interest_rate = debt_info[1]/100
+        annual_interest = debt_info[0] * interest_rate
         monthly_interest = annual_interest/12
         total_interest = monthly_interest*loan_term
-        return total_interest + amount
+        return total_interest + debt_info[0]
 
     def dashboard_weekly_calculator(self, test_list):
         # ready to code
@@ -24,8 +27,11 @@ class Finance:
     
     def dashboard_annual_calculator(self, test_list):
         return [12000, 0, 0, 0, 0, 0, 0, 0, 0]
-
-
+    
+    def generate_debt_report(self, average_debt_data, debt_type_frequency):
+        average_debt_data = f"{average_debt_data:,.2f}"
+        with open('./file_output/debt_file.txt', 'w') as debt_file:
+            debt_file.write("Debt Calculator\nWhen people visit our site they use our debt calculator to find out how much they will repay in total over the repayment period.\nThe average amount of debt people search for is GBP" + average_debt_data + ".\nThose debts are usually in the form of a " + debt_type_frequency[0] + ".\nIn total " + str(debt_type_frequency[1]) + " calculations have been performed on our site to find out the total repayment cost for a " + debt_type_frequency[0] + ".")
 
 
     # code to create a pie chart using a list

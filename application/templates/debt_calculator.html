@@ -6,7 +6,14 @@
 <h1>Your results</h1>
 
 <p>
-    {{ dc }}
+    Your debt is in the form of a {{ debt_info[4] }}
+    <br>
+    You borrowed &pound;{{ '%.2f' % debt_info[0] }} at {{ debt_info[1] }}% APR interest over {{ debt_info[2] }} {{ debt_info[3] }}
+    <br>
+    <br>
+    In total, you will repay &pound;{{ '%.2f' % debt_info[5] }} back to the lender
 </p>
+
+{{ debt_info[6] }}
 
 {% endblock %}

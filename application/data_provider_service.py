@@ -71,3 +71,29 @@ class DataProviderService:
         expenses = self.cursor.fetchall()
         return expenses
     
+    def add_debt_data(self, debt_total_figure, debt_source):
+        sql = """insert into debt (debt_total_figure, debt_source) values (%s, %s)"""
+        input_values = (debt_total_figure, debt_source)
+        try:
+            self.cursor.execute(sql, input_values)
+            self.conn.commit()
+        except Exception as exc:
+            print(exc)
+            self.conn.rollback()
+            print("rolled back")
+        sql_new_form_id = "select debt_total_id from debt order by debt_total_id desc limit 1"
+        self.cursor.execute(sql_new_form_id)
+        new_form = self.cursor.fetchone()
+        return new_form[0]
+    
+    def average_debt_report(self):
+        sql = """select avg(debt_total_figure) from debt"""
+        self.cursor.execute(sql)
+        average_debt_entered = self.cursor.fetchone()
+        return average_debt_entered[0]
+    
+    def frequency_debt_report(self):
+        sql = """SELECT debt_source, COUNT(*) AS freq FROM debt group by debt_source"""
+        self.cursor.execute(sql)
+        frequency_debt_type_entered = self.cursor.fetchall()
+        return frequency_debt_type_entered[0]
