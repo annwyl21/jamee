@@ -72,6 +72,7 @@ def dashboard():
 def admin():
     average_debt_data = DATA_PROVIDER.average_debt_report()
     debt_type_frequency = DATA_PROVIDER.frequency_debt_report()
+    Finance('report').generate_debt_report(average_debt_data, debt_type_frequency)
     return render_template('admin.html', title='Admin', average_debt_data = average_debt_data, debt_type = debt_type_frequency)
 
 
