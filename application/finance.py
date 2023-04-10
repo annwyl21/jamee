@@ -10,13 +10,16 @@ class Finance:
         self.name = name
 
     # code to create a calculator
-    def simple_debt_calculator(self, amount, interest_rate, loan_term):
-        loan_term = loan_term*12
-        interest_rate = interest_rate/100
-        annual_interest = amount * interest_rate
+    def simple_debt_calculator(self, debt_info):
+        if debt_info[3] == 'months':
+            loan_term = debt_info[2]
+        else:
+            loan_term = debt_info[2]*12
+        interest_rate = debt_info[1]/100
+        annual_interest = debt_info[0] * interest_rate
         monthly_interest = annual_interest/12
         total_interest = monthly_interest*loan_term
-        return total_interest + amount
+        return total_interest + debt_info[0]
 
     def dashboard_weekly_calculator(self, test_list):
         # ready to code

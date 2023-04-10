@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request
 from application import app
 from application.finance import Finance
 from application.forms import BasicForm
@@ -70,30 +70,33 @@ def dashboard():
 
 @app.route('/admin')
 def admin():
-    
-      return render_template('admin.html', title='Admin')
+    average_debt_data = DATA_PROVIDER.average_debt_report()
+    debt_type_frequency = DATA_PROVIDER.frequency_debt_report()
+    return render_template('admin.html', title='Admin', average_debt_data = average_debt_data, debt_type = debt_type_frequency)
 
 
 
 @app.route('/debt_calculator_form', methods=['GET', 'POST'])
 def calculate_debt():
+    debt_info = []
     error = ''
     form = DebtForm()
     if request.method == 'POST':
+        debt_type = form.debt_type.data
         debt_amount = form.debt_amount.data
         debt_interest = form.debt_interest.data
         debt_term = form.debt_term.data
+        debt_monthsyears = form.monthsyears.data
+        debt_info += [debt_amount, debt_interest, debt_term, debt_monthsyears, debt_type]
         if not debt_amount or not debt_interest or not debt_term:
             # if any of those are False/ empty
             error = 'please enter values'
         else:
-            dc = Finance('dc').simple_debt_calculator(debt_amount, debt_interest, debt_term)
-            return redirect(url_for('debt_calculator', data=dc))
+            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type)
+            dc = Finance('dc').simple_debt_calculator(debt_info)
+            debt_info += [dc, new_debt_id]
+            return render_template('debt_calculator.html', debt_info=debt_info)
     return render_template('debt_calculator_form.html', form=form, message=error)
-                         
-@app.route('/debt_calculator/<data>')
-def debt_calculator(data):
-    return render_template('debt_calculator.html', dc=data)
 
 
 

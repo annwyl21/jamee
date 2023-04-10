@@ -4,19 +4,31 @@
 
 <h1>Simple Debt Calculator</h1>
 <p>Enter information about your outstanding debt in order to calculate</p>
-<div class="form">
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        {{ form.debt_amount.label }} {{ form.debt_amount}}
-        <br>
-        {{ form.debt_interest.label }} {{ form.debt_interest }}
-        <br>
-        {{ form.debt_term.label }} {{ form.debt_term }}
-        <br>
-        {{ form.submit }}
-        {{ message }}
-    </form>
 
-</div>
+
+    <!-- Responsive Code to manage the form -->
+  <div class="container-fluid bg-1 text-left">
+    <div class="row">
+    <!-- Giving it a bit of space -->
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-11">
+        <div class="form">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                {{ form.debt_type}}
+                <br>
+                {{ form.debt_amount}} {{ form.debt_amount.label }}
+                <br>
+                {{ form.debt_interest }} {{ form.debt_interest.label }}
+                <br>
+                {{ form.debt_term }} {{ form.debt_term.label }} {{ form.monthsyears }}
+                <br>
+                {{ form.submit }}
+                {{ message }}
+            </form>
+        </div>
+    </div>
+  </div>
 
 {% endblock %}
