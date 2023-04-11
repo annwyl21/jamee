@@ -31,7 +31,7 @@ class Finance:
     def generate_debt_report(self, average_debt_data, debt_type_frequency):
         average_debt_data = f"{average_debt_data:,.2f}"
         with open('./file_output/debt_file.txt', 'w') as debt_file:
-            debt_file.write("Debt Calculator\nWhen people visit our site they use our debt calculator to find out how much they will repay in total over the repayment period.\nThe average amount of debt people search for is GBP" + average_debt_data + ".\nThose debts are usually in the form of a " + debt_type_frequency[0] + ".\nIn total " + str(debt_type_frequency[1]) + " calculations have been performed on our site to find out the total repayment cost for a " + debt_type_frequency[0] + ".")
+            debt_file.write("Debt Calculator\nWhen people visit our site they use our debt calculator to find out how much they will repay in total over the repayment period.\nThe average amount of debt people search for is GBP" + average_debt_data + ".\nThose debts are usually in the form of a " + debt_type_frequency[0][0])
 
 
     # code to create a pie chart using a list

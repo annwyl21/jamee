@@ -96,4 +96,4 @@ class DataProviderService:
         sql = """SELECT debt_source, COUNT(*) AS freq FROM debt group by debt_source"""
         self.cursor.execute(sql)
         frequency_debt_type_entered = self.cursor.fetchall()
-        return frequency_debt_type_entered[0]
+        return frequency_debt_type_entered

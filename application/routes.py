@@ -79,6 +79,7 @@ def admin():
 
 @app.route('/debt_calculator_form', methods=['GET', 'POST'])
 def calculate_debt():
+    external_link_investopedia = 'https://www.investopedia.com/terms/d/debt.asp'
     debt_info = []
     error = ''
     form = DebtForm()
@@ -89,6 +90,7 @@ def calculate_debt():
         debt_term = form.debt_term.data
         debt_monthsyears = form.monthsyears.data
         debt_info += [debt_amount, debt_interest, debt_term, debt_monthsyears, debt_type]
+        #print(debt_info)
         if not debt_amount or not debt_interest or not debt_term:
             # if any of those are False/ empty
             error = 'please enter values'
@@ -97,7 +99,7 @@ def calculate_debt():
             dc = Finance('dc').simple_debt_calculator(debt_info)
             debt_info += [dc, new_debt_id]
             return render_template('debt_calculator.html', debt_info=debt_info)
-    return render_template('debt_calculator_form.html', form=form, message=error)
+    return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
 
 

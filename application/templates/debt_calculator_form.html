@@ -2,21 +2,34 @@
 
 {% block main_content %}
 
-<h1>Simple Debt Calculator</h1>
-<p>Enter information about your outstanding debt in order to calculate</p>
+<h1>How much will I pay back in total ?</h1>
 
-
-    <!-- Responsive Code to manage the form -->
+<!-- Responsive Code to manage the form -->
   <div class="container-fluid bg-1 text-left">
     <div class="row">
     <!-- Giving it a bit of space -->
-    <div class="col-sm-1">
+    <div class="col-sm-8">
+      <p><h4>There are 4 types of consumer debt:</h4>
+        <ul>
+          <li><strong>Secured debt</strong> is also known as collateralized debt. That means the borrower has pledged something of value to back up the debt. With a car loan, for example, the vehicle usually serves as collateral. If the borrower fails to repay the money they borrowed to buy the car, the lender can seize and sell it. Similarly, when someone takes out a mortgage to buy a home, the home itself typically serves as collateral. If the borrower fails to make payments, the lender can foreclose and take the home. A company that wants to borrow money might pledge a piece of machinery, real estate, or cash in the bank as collateral.</li>
+          <li><strong>Unsecured Debt</strong> does not require any collateral as security. Instead, the lender decides whether to grant a loan based on the borrower's creditworthiness, as indicated by their credit score, credit history, and other factors. Most credit cards and most personal loans are examples of unsecured debt. Because unsecured debt can be riskier to the lender it generally commands a higher interest rate than secured debt.</li>
+          <li><strong>Revolving Debt</strong> provides the borrower with a line of credit that they are able to borrow from as they wish. The borrower can take up to a certain amount, pay the debt back, and borrow up to that amount again. The most common form of revolving debt is credit card debt. As long as the borrower fulfills their obligations, typically by making monthly payments of at least a certain minimum amount, the line of credit remains available for as long as the account is active. Over time, with a favorable repayment history, the amount of revolving debt that's available to the borrower may increase.</li>
+          <li><strong>Mortgages</strong> are a type of secured debt used to purchase real estate, such as a house or condo. Mortgages are usually paid back over long periods, such as 15 or 30 years. Mortgages are often the largest debt, apart from student loans, that consumers will ever take on, and they come in many different varieties. Two broad categories are fixed-rate mortgages and adjustable-rate mortgages, or ARMs. In the case of ARMs, the interest rate can change periodically, usually based on the performance of a particular index.</li>
+          <li><a href="{{ external_link_investopedia }}", target="_blank">Find out more</a></li>
+        </ul>
+      </p>
     </div>
-    <div class="col-sm-11">
+    <div class="col-sm-4">
+      <br>
+      <h4>Debt Calculator</h4>
         <div class="form">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
-                {{ form.debt_type}}
+                  <Select name="debt_type">
+                    {% for item in form.debt_type %}
+                      {{ item }}                     
+                    {% endfor %}
+                  </Select>
                 <br>
                 {{ form.debt_amount}} {{ form.debt_amount.label }}
                 <br>
