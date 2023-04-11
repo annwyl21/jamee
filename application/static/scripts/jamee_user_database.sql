@@ -245,3 +245,16 @@ eating varchar(200),
 holidays varchar(200),
 clothes varchar(200));
 
+insert into debt(debt_total_figure, debt_source)
+values
+	(10000, 'Personal Loan'),
+    (5000, 'Personal Loan'),
+    (3000, 'Personal Loan'),
+    (50000, 'Mortgage'),
+    (100000, 'Mortgage'),
+    (75000, 'Mortgage'),
+    (10000, 'Car Loan'),
+    (25000, 'Car Loan'),
+    (75000, 'Car Loan'),
+    (400, 'Credit Card'),
+    (750, 'Credit Card');  

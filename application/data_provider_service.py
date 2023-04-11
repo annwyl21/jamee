@@ -93,7 +93,7 @@ class DataProviderService:
         return average_debt_entered[0]
     
     def frequency_debt_report(self):
-        sql = """SELECT debt_source, COUNT(*) AS freq FROM debt group by debt_source"""
+        sql = """SELECT debt_source, COUNT(*) AS freq FROM debt group by debt_source order by freq desc"""
         self.cursor.execute(sql)
         frequency_debt_type_entered = self.cursor.fetchall()
-        return frequency_debt_type_entered[0]
+        return frequency_debt_type_entered

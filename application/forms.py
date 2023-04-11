@@ -1,4 +1,4 @@
-from wtforms import IntegerField, SubmitField, RadioField
+from wtforms import IntegerField, SubmitField, RadioField, SelectField
 from flask_wtf import FlaskForm
 
 
@@ -25,8 +25,8 @@ class DebtForm(FlaskForm):
     debt_amount = IntegerField('Debt Amount')
     debt_interest = IntegerField('Debt Interest Rate (APR)')
     debt_term = IntegerField('Debt Term in')
-    monthsyears = RadioField('label', choices=[('months','months'),('years','years')])
-    debt_type = RadioField('label', choices=[('Mortgage', 'mortgage'), ('Personal Loan', 'personal_loan'), ('Credit Card', 'credit_card')])
+    monthsyears = RadioField('label', choices=[('Months','Months'),('Years','Years')])
+    debt_type = SelectField('debt_type', choices=[('Mortgage', 'Mortgage'), ('Overdraft', 'Overdraft'), ('Personal Loan', 'Personal Loan'), ('Car Loan', 'Car Loan'), ('Credit Card', 'Credit Card'), ('Store or catalogue', 'Store or Catalogue'), ('BNPL', 'BNPL Buy Now, Pay Later'), ('Other', 'Other, eg. Payday Loan')])
     submit = SubmitField('Submit')
     
     

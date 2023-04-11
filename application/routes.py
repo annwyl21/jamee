@@ -70,15 +70,19 @@ def dashboard():
 
 @app.route('/admin')
 def admin():
-    average_debt_data = DATA_PROVIDER.average_debt_report()
+    average_debt_data = DATA_PROVIDER.average_debt_report() # returns a decimal object
+    average_debt = int(average_debt_data) # recast decimal object as an integer
+    average = f"{average_debt:,.02f}" # make the integer a formatted string with thousand separator and 2 decimal places for pence
     debt_type_frequency = DATA_PROVIDER.frequency_debt_report()
+    print(debt_type_frequency)    
     Finance('report').generate_debt_report(average_debt_data, debt_type_frequency)
-    return render_template('admin.html', title='Admin', average_debt_data = average_debt_data, debt_type = debt_type_frequency)
+    return render_template('admin.html', title='Admin', average_debt_data = average, debt_type = debt_type_frequency)
 
 
 
 @app.route('/debt_calculator_form', methods=['GET', 'POST'])
 def calculate_debt():
+    external_link_investopedia = 'https://www.investopedia.com/terms/d/debt.asp'
     debt_info = []
     error = ''
     form = DebtForm()
@@ -89,6 +93,7 @@ def calculate_debt():
         debt_term = form.debt_term.data
         debt_monthsyears = form.monthsyears.data
         debt_info += [debt_amount, debt_interest, debt_term, debt_monthsyears, debt_type]
+        #print(debt_info)
         if not debt_amount or not debt_interest or not debt_term:
             # if any of those are False/ empty
             error = 'please enter values'
@@ -96,8 +101,9 @@ def calculate_debt():
             new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type)
             dc = Finance('dc').simple_debt_calculator(debt_info)
             debt_info += [dc, new_debt_id]
+            debt_info[5] = f"{debt_info[5]:,.02f}"
             return render_template('debt_calculator.html', debt_info=debt_info)
-    return render_template('debt_calculator_form.html', form=form, message=error)
+    return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
 
 
