@@ -32,11 +32,10 @@ def form_input():
         # if len(salary) == 0 or len(housing) == 0:
             error = 'Please fill in the required Salary and Housing fields.'
         else:
-            return 'Thank you!'
+            # return 'Thank you!'
             # new_person_id = DATA_PROVIDER.add_person(first_name, last_name)
-            #
             # success = 'Person with ID ' + str(new_person_id) + ' was created. Thank you!'
-            # return render_template('success.html', success_message=success)
+            return render_template('dashboard.html')  # success_message=success)
 
     return render_template('form.html', title='Form Page', form=form, message=error)
 
