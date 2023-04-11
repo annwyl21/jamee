@@ -98,6 +98,7 @@ def calculate_debt():
             new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type)
             dc = Finance('dc').simple_debt_calculator(debt_info)
             debt_info += [dc, new_debt_id]
+            debt_info[5] = f"{debt_info[5]:,.02f}"
             return render_template('debt_calculator.html', debt_info=debt_info)
     return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
