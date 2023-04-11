@@ -1,4 +1,4 @@
 Debt Calculator
 When people visit our site they use our debt calculator to find out how much they will repay in total over the repayment period.
-The average amount of debt people search for is GBP2,550.00.
-Those debts are usually in the form of a Credit Card
+The average amount of debt people search for is GBP24,290.00.
+Those debts are usually in the form of a Personal Loan
