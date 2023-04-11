@@ -10,19 +10,19 @@
     <br>
     When people visit our site they use our debt calculator to find out how much they will repay in total over the repayment period.
     <br>
-    The average amount of debt people search for is &pound;{{ '%.2f' % average_debt_data }}.
+    The average amount of debt people search for is &pound;{{ average_debt_data }}.
     <br>
     Those debts are usually in the form of a {{ debt_type[0][0] }}.
     <br>
     <table>
       <tr>
-        <th>Number of Calculations Performed on our site</th>
-        <th>To find out Total Repayment Cost in &pound;'s</th>
+        <th>Type of loan investigated</th>
+        <th>Number of calculations</th>
       </tr>
       {% for item in debt_type %}
       <tr>
-        <td>{{ item [1] }}</td>
         <td>{{ item [0] }}</td>
+        <td>{{ item [1] }}</td>
       </tr>
       {% endfor %}
     </table>

@@ -25,8 +25,8 @@ class DebtForm(FlaskForm):
     debt_amount = IntegerField('Debt Amount')
     debt_interest = IntegerField('Debt Interest Rate (APR)')
     debt_term = IntegerField('Debt Term in')
-    monthsyears = RadioField('label', choices=[('months','Months'),('years','Years')])
-    debt_type = SelectField('debt_type', choices=[('mortgage', 'Mortgage'), ('overdraft', 'Overdraft'), ('personal_loan', 'Personal Loan'), ('car_loan', 'Car Loan'), ('credit-Card', 'Credit Card'), ('store_catalogue', 'Store/ Catalogue'), ('BNPL', 'BNPL Buy Now, Pay Later'), ('other', 'Other, eg. Payday Loan')])
+    monthsyears = RadioField('label', choices=[('Months','Months'),('Years','Years')])
+    debt_type = SelectField('debt_type', choices=[('Mortgage', 'Mortgage'), ('Overdraft', 'Overdraft'), ('Personal Loan', 'Personal Loan'), ('Car Loan', 'Car Loan'), ('Credit Card', 'Credit Card'), ('Store or catalogue', 'Store or Catalogue'), ('BNPL', 'BNPL Buy Now, Pay Later'), ('Other', 'Other, eg. Payday Loan')])
     submit = SubmitField('Submit')
     
     
