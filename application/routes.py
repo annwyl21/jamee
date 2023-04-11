@@ -26,17 +26,25 @@ def form_input():
 
     if request.method == 'POST':
         salary = form.salary.data
+        other = form.other.data
+        food_drink = form.food_drink.data
         housing = form.housing.data
+        energy = form.energy.data
+        petrol = form.petrol.data
+        train = form.train.data
+        bus = form.bus.data
+        eating = form.eating.data
+        holidays = form.holidays.data
+        clothes = form.clothes.data
 
-        if salary or housing:
-        # if len(salary) == 0 or len(housing) == 0:
+
+        if not salary or not housing:
             error = 'Please fill in the required Salary and Housing fields.'
         else:
-            return 'Thank you!'
-            # new_person_id = DATA_PROVIDER.add_person(first_name, last_name)
-            #
-            # success = 'Person with ID ' + str(new_person_id) + ' was created. Thank you!'
-            # return render_template('success.html', success_message=success)
+            new_data = DATA_PROVIDER.add_form_data(salary, other, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+            data = []
+            data += [food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes]
+            return render_template('dashboard.html', data=data, new_data=new_data)
 
     return render_template('form.html', title='Form Page', form=form, message=error)
 
