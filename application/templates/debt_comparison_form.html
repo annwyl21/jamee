@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+
+<h1>Should I choose a debt snowball or debt stack method ?</h1>
+
+Enter information about 3 of your debts here and see the difference between a snowball and a stack method...
+
+<div class="form">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <h4>Debt 1</h4>
+          <Select name="debt_type">
+            {% for item in form.debt1_type %}
+              {{ item }}                     
+            {% endfor %}
+          </Select>
+        <br>
+        {{ form.debt1_amount }} {{ form.debt1_amount.label }}
+        <br>
+        {{ form.debt1_repayment }} {{ form.debt1_repayment.label }}
+        <br>
+        {{ form.debt1_interest }} {{ form.debt1_interest.label }}
+        <br>
+
+        <h4>Debt 2</h4>
+        <Select name="debt_type">
+            {% for item in form.debt2_type %}
+              {{ item }}                     
+            {% endfor %}
+          </Select>
+        <br>
+        {{ form.debt2_amount }} {{ form.debt2_amount.label }}
+        <br>
+        {{ form.debt2_repayment }} {{ form.debt2_repayment.label }}
+        <br>
+        {{ form.debt2_interest }} {{ form.debt2_interest.label }}
+        <br>
+
+        <h4>Debt 3</h4>
+        <Select name="debt_type">
+            {% for item in form.debt3_type %}
+              {{ item }}                     
+            {% endfor %}
+          </Select>
+        <br>
+        {{ form.debt3_amount }} {{ form.debt3_amount.label }}
+        <br>
+        {{ form.debt3_repayment }} {{ form.debt3_repayment.label }}
+        <br>
+        {{ form.debt3_interest }} {{ form.debt3_interest.label }}
+        <br>
+        <br>
+        {{ form.submit }}
+        {{ message }}
+    </form>
+
+{% endblock %}
