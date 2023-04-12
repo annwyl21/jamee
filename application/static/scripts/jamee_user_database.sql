@@ -33,8 +33,8 @@ CREATE TABLE debt
 (debt_total_id int not null auto_increment primary key,
 debt_total_figure decimal,
 debt_source varchar(100),
-debt_interest int(5),
-debt_term int(5),
+debt_interest int,
+debt_term int,
 debt_monthsyears varchar(10)
 );
 
@@ -248,7 +248,7 @@ eating varchar(200),
 holidays varchar(200),
 clothes varchar(200));
 
-insert into debt(debt_total_figure, debt_source)
+insert into debt(debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears)
 values
 	(10000, 'Personal Loan', 5, 5, 'years'),
     (5000, 'Personal Loan', 5, 5, 'years'),
@@ -261,4 +261,3 @@ values
     (75000, 'Car Loan', 4, 5, 'years'),
     (400, 'Credit Card', 14, 2, 'months'),
     (750, 'Credit Card', 15, 10, 'months'); 
-     
