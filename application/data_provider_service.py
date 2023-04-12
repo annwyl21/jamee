@@ -120,3 +120,15 @@ class DataProviderService:
         self.cursor.execute(sql, id)
         data = self.cursor.fetchone()
         return data
+    
+    def average_savings_report(self):
+        sql = """select avg(savings_total_figure) from savings"""
+        self.cursor.execute(sql)
+        average_debt_entered = self.cursor.fetchone()
+        return average_debt_entered[0]
+    
+    def frequency_savings_report(self):
+        sql = """SELECT savings_source, COUNT(*) AS freq FROM savings group by savings_source order by freq desc"""
+        self.cursor.execute(sql)
+        frequency_debt_type_entered = self.cursor.fetchall()
+        return frequency_debt_type_entered

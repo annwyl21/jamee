@@ -82,7 +82,14 @@ def admin():
     average = f"{average_debt:,.02f}" # make the integer a formatted string with thousand separator and 2 decimal places for pence
     debt_type_frequency = DATA_PROVIDER.frequency_debt_report()   
     Finance.generate_debt_report(average_debt_data, debt_type_frequency)
-    return render_template('admin.html', title='Reports', average_debt_data = average, debt_type = debt_type_frequency)
+
+    average_savings_data = DATA_PROVIDER.average_savings_report() # returns a decimal object
+    average_savings = int(average_savings_data) # recast decimal object as an integer
+    avg = f"{average_savings:,.02f}" # make the integer a formatted string with thousand separator and 2 decimal places for pence
+    savings_type_frequency = DATA_PROVIDER.frequency_savings_report()   
+    Finance.generate_savings_report(average_savings_data, savings_type_frequency)
+
+    return render_template('admin.html', title='Reports', average_debt_data = average, debt_type = debt_type_frequency, average_savings_data=avg, savings_type=savings_type_frequency )
 
 
 

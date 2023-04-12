@@ -50,6 +50,14 @@ class Finance:
             for tuple_item in debt_type_frequency:
                 still_debt_file.write(str(tuple_item[1]) + ' searches about a ' + tuple_item[0] + '\n')
 
+    def generate_savings_report(self, average_savings_data, savings_type_frequency):
+        average_savings_data = f"{average_savings_data:,.2f}"
+        with open('./file_output/savings_file.txt', 'w') as savings_file:
+            savings_file.write("Savings Calculator\nWhen people visit our site they use our savings calculator to find out how much they could save over a given number of years.\nThe average lump sum people search for is GBP" + average_savings_data + ".\nThose savings are usually for a " + savings_type_frequency[0][0] + '.\n')
+        with open('./file_output/savings_file.txt', 'a') as still_savings_file:
+            for tuple_item in savings_type_frequency:
+                still_savings_file.write(str(tuple_item[1]) + ' searches about a ' + tuple_item[0] + '\n')
+
 
     # code to create a pie chart using a list
     def create_pie(self, headers_list, user_list):
