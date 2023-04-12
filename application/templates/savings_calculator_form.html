@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+
+<h1>How much could my savings be worth ?</h1>
+
+<!-- Responsive Code to manage the form -->
+  <div class="container-fluid bg-1 text-left">
+    <div class="row">
+    <!-- Giving it a bit of space -->
+    <div class="col-sm-8">
+      <p><h4>Saving is tough, try these tips to help:</h4>
+
+        <!-- Accordion, we could add a small image in each accordian collapse box here -->
+      <div class="accordion" id="babybirdaccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              <strong>Tip 1</strong>
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <strong>Tip 1</strong> If this tip says stop drinking coffee from coffee shops I will hunt you down.
+              <br>
+            <!-- <img src="./images/babyRobinOnGate.JPG" class="img-responsive margin" width="50%" alt="Baby robin on gate"> -->
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <strong>Tip 2</strong>
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <strong>Tip 2</strong> And this tip had better not say cancel Netflix either.
+              <br>
+              <!-- <img src="./images/fledlingGreatTit.JPG" class="img-responsive margin" width="50%" alt="Fluffy great tit sitting in a pear tree"> -->
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <strong>Tip 3</strong>
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <strong>Tip 3</strong> My tip is make some choices, we often spend money because we are bored. We spend money like we spend time to entertain ourselves so make some clear choices about the things you enjoy and really target your spending. If you think about what you want to buy it is easier to say that you don't want to buy something.
+              <br>
+              <!-- <img src="./images/fledglingrobin.JPG" class="img-responsive margin" width="50%" alt="Curious robin sitting in a pear tree"> -->
+            </div>
+          </div>
+        </div>
+      </div>
+<p><a href="{{ external_link_money_saving_expert }}", target="_blank">Ask Martin Lewis, the money saving expert</a></p>
+    </div>
+      <div class="col-sm-4">
+      <br>
+      <h4>Savings Calculator</h4>
+        <div class="form">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+
+                <div class="mb-3">
+                  <label for="savings_lump" class="form-label">{{ form.savings_lump.label }}</label>
+                  <input type="number" class="form-control" id="savings_lump" placeholder="1000000" name="savings_lump">
+                </div>
+                <div class="mb-3">
+                  <label for="monthly_saving_amount" class="form-label">{{ form.monthly_saving_amount.label }}</label>
+                  <input type="number" class="form-control" id="monthly_saving_amount" placeholder="100" name="monthly_saving_amount">
+                </div>
+                <div class="mb-3">
+                  <label for="savings_interest" class="form-label">{{ form.savings_interest.label }}</label>
+                  <input type="number" class="form-control" id="savings_interest" placeholder="15" name="savings_interest">
+                </div>
+                <div class="mb-3">
+                  <label for="savings_term" class="form-label">{{ form.savings_term.label }}</label>
+                  <input type="number" class="form-control" id="savings_term" placeholder="15" name="savings_term">
+                </div>
+                <div class="mb-3">
+                  <label for="savings_goal" class="form-label">{{ form.savings_goal.label }}</label>
+                  <input type="text" class="form-control" id="savings_goal" placeholder="that Tesla" name="savings_goal">
+                </div>
+
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                {{ message }}
+            </form>
+        </div>
+    </div>
+  </div>
+
+{% endblock %}

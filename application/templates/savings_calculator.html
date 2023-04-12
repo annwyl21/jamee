@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+
+<h1>Simple Savings Calculator</h1>
+<h1>Your results</h1>
+
+<p>
+    Your lump sum investment:
+    <br>
+    If you saved &pound;{{ '%.2f' % savings_info[0] }} at {{ savings_info[1] }}% APR interest over {{ savings_info[2] }} {{ savings_info[3] }}
+    <br>
+    <br>
+    In total, your investment would be worth approximately &pound;{{ savings_info[6] }}
+</p>
+
+{{ savings_info[7] }}
+
+{% endblock %}

@@ -1,7 +1,7 @@
 from flask import render_template, request
 from application import app
 from application.finance import Finance
-from application.forms import BasicForm, DebtForm, ComparisonForm
+from application.forms import BasicForm, DebtForm, ComparisonForm, SavingsForm
 from application.data_provider_service import DataProviderService
 
 # instantiating an object of DataProviderService
@@ -85,6 +85,33 @@ def admin():
     Finance('report').generate_debt_report(average_debt_data, debt_type_frequency)
     return render_template('admin.html', title='Admin', average_debt_data = average, debt_type = debt_type_frequency)
 
+
+
+@app.route('/savings_calculator_form', methods=['GET', 'POST'])
+def calculate_savings():
+    external_link_money_saving_expert = 'https://www.moneysavingexpert.com/'
+    savings_info = []
+    error3 = ''
+    form = SavingsForm()
+    if request.method == 'POST':
+        savings_lump = form.savings_lump.data
+        monthly_saving_amount = form.monthly_saving_amount.data
+        savings_interest = form.savings_interest.data
+        savings_term = form.savings_term.data
+        savings_goal = form.savings_goal.data
+        savings_info += [savings_lump, savings_interest, savings_term, 'years', monthly_saving_amount, savings_goal]
+        #print(savings_info)
+        if not savings_lump or not savings_interest or not savings_term or not savings_goal:
+            # if any of those are False/ empty
+            error3 = 'please enter values'
+        else:
+            new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal)
+            sc = Finance('sc').interest_calculator(savings_info)
+            savings_info += [sc, new_savings_id]
+            savings_info[6] = f"{savings_info[6]:,.02f}"
+            return render_template('savings_calculator.html', savings_info=savings_info)
+
+    return render_template('savings_calculator_form.html', form=form, message=error3, external_link_money_saving_expert=external_link_money_saving_expert)
 
 
 @app.route('/debt_calculator_form', methods=['GET', 'POST'])

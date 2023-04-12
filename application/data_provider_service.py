@@ -86,6 +86,22 @@ class DataProviderService:
         new_form = self.cursor.fetchone()
         return new_form[0]
     
+    def add_savings_data(self, savings_total_figure, savings_source):
+        sql = """insert into savings (savings_total_figure, savings_source) values (%s, %s)"""
+        input_values = (savings_total_figure, savings_source)
+        try:
+            self.cursor.execute(sql, input_values)
+            self.conn.commit()
+        except Exception as exc:
+            print(exc)
+            self.conn.rollback()
+            print("rolled back")
+        sql_new_form_id = "select savings_total_id from savings order by savings_total_id desc limit 1"
+        self.cursor.execute(sql_new_form_id)
+        new_form = self.cursor.fetchone()
+        return new_form[0]
+    
+    
     def average_debt_report(self):
         sql = """select avg(debt_total_figure) from debt"""
         self.cursor.execute(sql)
