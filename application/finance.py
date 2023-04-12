@@ -6,10 +6,7 @@ import seaborn as sns
 
 # create a class
 class Finance:
-    def __init__(self, name):
-        self.name = name
 
-    # code to create a calculator
     def interest_calculator(self, debt_info):
         if debt_info[3] == 'months':
             loan_term = debt_info[2]
