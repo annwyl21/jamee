@@ -82,7 +82,14 @@ def admin():
     average = f"{average_debt:,.02f}" # make the integer a formatted string with thousand separator and 2 decimal places for pence
     debt_type_frequency = DATA_PROVIDER.frequency_debt_report()   
     Finance.generate_debt_report(average_debt_data, debt_type_frequency)
-    return render_template('admin.html', title='Reports', average_debt_data = average, debt_type = debt_type_frequency)
+
+    average_savings_data = DATA_PROVIDER.average_savings_report() # returns a decimal object
+    average_savings = int(average_savings_data) # recast decimal object as an integer
+    avg = f"{average_savings:,.02f}" # make the integer a formatted string with thousand separator and 2 decimal places for pence
+    savings_type_frequency = DATA_PROVIDER.frequency_savings_report()   
+    Finance.generate_savings_report(average_savings_data, savings_type_frequency)
+
+    return render_template('admin.html', title='Reports', average_debt_data = average, debt_type = debt_type_frequency, average_savings_data=avg, savings_type=savings_type_frequency )
 
 
 
@@ -98,7 +105,7 @@ def calculate_savings():
         savings_interest = form.savings_interest.data
         savings_term = form.savings_term.data
         savings_goal = form.savings_goal.data
-        if not savings_lump or not savings_goal:
+        if not savings_lump:
             # if any of those are False/ empty
             error3 = 'Please enter an initial lump sum and a savings goal'
         else:
@@ -107,13 +114,15 @@ def calculate_savings():
             if not savings_term:
                 savings_term = 20
             if not monthly_saving_amount:
-                monthly_saving_amount = 100
-            savings_info += ['savings', savings_lump, savings_interest, savings_term, 'years', monthly_saving_amount, savings_goal]
-            new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal)
-            sc = Finance.interest_calculator(savings_info)
-            savings_info += [sc, new_savings_id]
-            savings_info[6] = f"{savings_info[6]:,.02f}"
-            return render_template('savings_calculator.html', savings_info=savings_info)
+                monthly_saving_amount = 0
+            if not savings_goal:
+                savings_goal = 'rainy day'
+            new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal, monthly_saving_amount, savings_interest, savings_term)
+            savings_data = DATA_PROVIDER.get_data_from_id('savings', 'savings_total_id', new_savings_id)
+            print(savings_data)
+            calculated_total_savings = Finance.savings_calculator(savings_data)
+            calculated_total_savings = f"{calculated_total_savings:,.02f}"
+            return render_template('savings_calculator.html', total=calculated_total_savings, savings_data=savings_data)
 
     return render_template('savings_calculator_form.html', form=form, message=error3, external_link_money_saving_expert=external_link_money_saving_expert)
 
@@ -145,8 +154,9 @@ def calculate_debt():
             if not debt_monthsyears:
                 debt_monthsyears = 'years'
             new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term, debt_monthsyears)
-            debt_data = DATA_PROVIDER.get_debt_data(new_debt_id)
-            calculated_total_debt = Finance.interest_calculator(debt_data)
+            debt_data = DATA_PROVIDER.get_data_from_id('debt', 'debt_total_id', new_debt_id)
+            print(debt_data)
+            calculated_total_debt = Finance.debt_calculator(debt_data)
             calculated_total_debt = f"{calculated_total_debt:,.02f}"
             return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_data)
     return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)

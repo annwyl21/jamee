@@ -86,9 +86,9 @@ class DataProviderService:
         new_form = self.cursor.fetchone()
         return new_form[0]
     
-    def add_savings_data(self, savings_total_figure, savings_source):
-        sql = """insert into savings (savings_total_figure, savings_source) values (%s, %s)"""
-        input_values = (savings_total_figure, savings_source)
+    def add_savings_data(self, savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term):
+        sql = """insert into savings (savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term) values (%s, %s, %s, %s, %s)"""
+        input_values = (savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term)
         try:
             self.cursor.execute(sql, input_values)
             self.conn.commit()
@@ -114,9 +114,21 @@ class DataProviderService:
         frequency_debt_type_entered = self.cursor.fetchall()
         return frequency_debt_type_entered
     
-    def get_debt_data(self, debt_id):
-        debt_data = []
-        sql = """Select * from debt where debt_total_id = %s"""
-        self.cursor.execute(sql, debt_id)
-        debt_data = self.cursor.fetchone()
-        return debt_data
+    def get_data_from_id(self, table, table_id, id):
+        data = []
+        sql = 'Select * from ' + table + ' where ' + table_id + ' = %s'
+        self.cursor.execute(sql, id)
+        data = self.cursor.fetchone()
+        return data
+    
+    def average_savings_report(self):
+        sql = """select avg(savings_total_figure) from savings"""
+        self.cursor.execute(sql)
+        average_debt_entered = self.cursor.fetchone()
+        return average_debt_entered[0]
+    
+    def frequency_savings_report(self):
+        sql = """SELECT savings_source, COUNT(*) AS freq FROM savings group by savings_source order by freq desc"""
+        self.cursor.execute(sql)
+        frequency_debt_type_entered = self.cursor.fetchall()
+        return frequency_debt_type_entered
