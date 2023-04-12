@@ -7,13 +7,13 @@ import seaborn as sns
 # create a class
 class Finance:
 
-    def interest_calculator(self, debt_data, debt_interest, debt_term, debt_monthsyears):
+    def interest_calculator(self, debt_data):
         print(debt_data)
-        if debt_monthsyears == 'months':
-            loan_term = debt_term
+        if debt_data[5] == 'months':
+            loan_term = debt_data[4]
         else:
-            loan_term = debt_term*12
-        interest_rate = debt_interest/100
+            loan_term = debt_data[4]*12
+        interest_rate = debt_data[3]/100
         annual_interest = int(debt_data[1]) * interest_rate
         monthly_interest = annual_interest/12        
         total_interest = monthly_interest*loan_term

@@ -144,11 +144,11 @@ def calculate_debt():
                 debt_term = 5
             if not debt_monthsyears:
                 debt_monthsyears = 'years'
-            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type)
+            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term, debt_monthsyears)
             debt_data = DATA_PROVIDER.get_debt_data(new_debt_id)
-            calculated_total_debt = Finance.interest_calculator(debt_data, debt_interest, debt_term, debt_monthsyears)
+            calculated_total_debt = Finance.interest_calculator(debt_data)
             calculated_total_debt = f"{calculated_total_debt:,.02f}"
-            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_data, debt_interest=debt_interest, debt_term=debt_term, debt_monthsyears=debt_monthsyears)
+            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_data)
     return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
 

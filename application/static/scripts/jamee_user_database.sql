@@ -32,8 +32,11 @@ category_name varchar(100)
 CREATE TABLE debt
 (debt_total_id int not null auto_increment primary key,
 debt_total_figure decimal,
-debt_source varchar(100))
-;
+debt_source varchar(100),
+debt_interest int(5),
+debt_term int(5),
+debt_monthsyears varchar(10)
+);
 
 CREATE TABLE savings
 (savings_total_id int not null auto_increment primary key,
