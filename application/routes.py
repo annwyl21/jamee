@@ -209,6 +209,13 @@ def debt_comparison():
             print(comparison_info)
             #Finance.debt_comparison_calc(comparison_info) # Add the name of your function here
             #return render_template('comparison_results.html') # Add the name of your html comparison results page here
+
+            # sort all the nested lists using the 2nd element, don't ask me how this works I am not sure I can re-think it!!!!
+            debt_stack = comparison_info.sort(key = lambda debt_interest: debt_interest[1] )
+            print(debt_stack)
+            
+
+
     return render_template('debt_comparison_form.html', form=form, message=error)
 
 

@@ -23,7 +23,7 @@
             <div class="form">
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
-                    <select class="form-select" aria-label="Select debt type" name="debt_type" selected>
+                    <select class="form-select" aria-label="Select debt type" name="debt1_type" selected>
                       {% for item in form.debt1_type %}
                       {{ item }}                     
                     {% endfor %}
@@ -53,7 +53,28 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <!-- insert form -->
+            <div class="form">
+              <form method="POST" action="">
+                  {{ form.hidden_tag() }}
+                  <select class="form-select" aria-label="Select debt type" name="debt2_type" selected>
+                    {% for item in form.debt2_type %}
+                    {{ item }}                     
+                  {% endfor %}
+                  </select>
+                  <div class="mb-3">
+                    <label for="debt2_amount" class="form-label">{{ form.debt2_amount.label }}</label>
+                    <input type="number" class="form-control" id="debt2_amount" name="debt2_amount" placeholder="5000">
+                  </div>
+                  <div class="mb-3">
+                    <label for="debt2_interest" class="form-label">{{ form.debt2_interest.label }}</label>
+                    <input type="number" class="form-control" id="debt2_amount" name="debt2_interest" placeholder="5">
+                  </div>
+                  <div class="mb-3">
+                    <label for="debt2_repayment" class="form-label">{{ form.debt2_repayment.label }}</label>
+                    <input type="number" class="form-control" id="debt2_repayment" name="debt2_repayment" placeholder="100">
+                  </div>
+                  <br>
+          </div>
           </div>
         </div>
       </div>
@@ -65,7 +86,28 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <!-- insert form -->
+            <div class="form">
+              <form method="POST" action="">
+                  {{ form.hidden_tag() }}
+                  <select class="form-select" aria-label="Select debt type" name="debt3_type" selected>
+                    {% for item in form.debt3_type %}
+                    {{ item }}                     
+                  {% endfor %}
+                  </select>
+                  <div class="mb-3">
+                    <label for="debt3_amount" class="form-label">{{ form.debt3_amount.label }}</label>
+                    <input type="number" class="form-control" id="debt3_amount" name="debt3_amount" placeholder="5000">
+                  </div>
+                  <div class="mb-3">
+                    <label for="debt3_interest" class="form-label">{{ form.debt3_interest.label }}</label>
+                    <input type="number" class="form-control" id="debt3_amount" name="debt3_interest" placeholder="5">
+                  </div>
+                  <div class="mb-3">
+                    <label for="debt3_repayment" class="form-label">{{ form.debt3_repayment.label }}</label>
+                    <input type="number" class="form-control" id="debt3_repayment" name="debt3_repayment" placeholder="100">
+                  </div>
+                  <br>
+          </div>
           </div>
         </div>
       </div>
