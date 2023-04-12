@@ -78,19 +78,34 @@
         <div class="form">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
-                  <Select name="debt_type" selected>
-                    {% for item in form.debt_type %}
-                      {{ item }}                     
-                    {% endfor %}
-                  </Select>
+<!-- https://getbootstrap.com/docs/5.3/forms/select/ Go to the bottom of this page to see how you can style this select form -->
+                <select class="form-select" aria-label="Select debt type" name="debt_type" selected>
+                  {% for item in form.debt_type %}
+                  {{ item }}                     
+                {% endfor %}
+                </select>
+
+
+                <div class="mb-3">
+                  <label for="debt_amount" class="form-label">{{ form.debt_amount.label }}</label>
+                  <input type="number" class="form-control" id="debt_amount" placeholder="1000000" name="debt_amount">
+                </div>
+                <!-- {{ form.debt_amount}} {{ form.debt_amount.label }} -->
+                <div class="mb-3">
+                  <label for="debt_interest" class="form-label">{{ form.debt_interest.label }}</label>
+                  <input type="number" class="form-control" id="debt_amount" placeholder="45" name="debt_interest">
+                </div>
+                <!-- {{ form.debt_interest }} {{ form.debt_interest.label }} -->
+                <div class="mb-3">
+                  <label for="debt_term" class="form-label">{{ form.debt_term.label }}</label>
+                  <input type="number" class="form-control" id="debt_term" placeholder="60" name="debt_term">
+                </div>
+                <!-- {{ form.debt_term }} {{ form.debt_term.label }} -->
+
+                {{ form.monthsyears }}
                 <br>
-                {{ form.debt_amount}} {{ form.debt_amount.label }}
-                <br>
-                {{ form.debt_interest }} {{ form.debt_interest.label }}
-                <br>
-                {{ form.debt_term }} {{ form.debt_term.label }} {{ form.monthsyears }}
-                <br>
-                {{ form.submit }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <!-- {{ form.submit }} -->
                 {{ message }}
             </form>
         </div>
