@@ -106,7 +106,7 @@ def calculate_debt():
             error = 'please enter values'
         else:
             new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type)
-            dc = Finance('dc').simple_debt_calculator(debt_info)
+            dc = Finance('dc').interest_calculator(debt_info)
             debt_info += [dc, new_debt_id]
             debt_info[5] = f"{debt_info[5]:,.02f}"
             return render_template('debt_calculator.html', debt_info=debt_info)

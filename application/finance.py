@@ -10,7 +10,7 @@ class Finance:
         self.name = name
 
     # code to create a calculator
-    def simple_debt_calculator(self, debt_info):
+    def interest_calculator(self, debt_info):
         if debt_info[3] == 'months':
             loan_term = debt_info[2]
         else:
