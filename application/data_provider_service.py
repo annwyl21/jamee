@@ -113,3 +113,10 @@ class DataProviderService:
         self.cursor.execute(sql)
         frequency_debt_type_entered = self.cursor.fetchall()
         return frequency_debt_type_entered
+    
+    def get_debt_data(self, debt_id):
+        debt_data = []
+        sql = """Select * from debt where debt_total_id = %s"""
+        self.cursor.execute(sql, debt_id)
+        debt_data = self.cursor.fetchone()
+        return debt_data

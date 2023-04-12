@@ -121,7 +121,6 @@ def calculate_savings():
 @app.route('/debt_calculator_form', methods=['GET', 'POST'])
 def calculate_debt():
     external_link_investopedia = 'https://www.investopedia.com/terms/d/debt.asp'
-    debt_info = []
     error = ''
     form = DebtForm()
     if request.method == 'POST':
@@ -145,12 +144,11 @@ def calculate_debt():
                 debt_term = 5
             if not debt_monthsyears:
                 debt_monthsyears = 'years'
-            debt_info += ['debt', debt_amount, debt_interest, debt_term, debt_monthsyears, debt_type]
             new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type)
-            dc = Finance.interest_calculator(debt_info)
-            debt_info += [dc, new_debt_id]
-            debt_info[5] = f"{debt_info[5]:,.02f}"
-            return render_template('debt_calculator.html', debt_info=debt_info)
+            debt_data = DATA_PROVIDER.get_debt_data(new_debt_id)
+            calculated_total_debt = Finance.interest_calculator(debt_data, debt_interest, debt_term, debt_monthsyears)
+            calculated_total_debt = f"{calculated_total_debt:,.02f}"
+            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_data, debt_interest=debt_interest, debt_term=debt_term, debt_monthsyears=debt_monthsyears)
     return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
 

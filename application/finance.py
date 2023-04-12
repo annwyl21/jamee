@@ -7,16 +7,17 @@ import seaborn as sns
 # create a class
 class Finance:
 
-    def interest_calculator(self, debt_info):
-        if debt_info[3] == 'months':
-            loan_term = debt_info[2]
+    def interest_calculator(self, debt_data, debt_interest, debt_term, debt_monthsyears):
+        print(debt_data)
+        if debt_monthsyears == 'months':
+            loan_term = debt_term
         else:
-            loan_term = debt_info[2]*12
-        interest_rate = debt_info[1]/100
-        annual_interest = debt_info[0] * interest_rate
-        monthly_interest = annual_interest/12
+            loan_term = debt_term*12
+        interest_rate = debt_interest/100
+        annual_interest = int(debt_data[1]) * interest_rate
+        monthly_interest = annual_interest/12        
         total_interest = monthly_interest*loan_term
-        return total_interest + debt_info[0]
+        return total_interest + int(debt_data[1])
 
     def dashboard_weekly_calculator(self, test_list):
         # ready to code
