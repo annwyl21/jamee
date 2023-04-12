@@ -1,11 +1,14 @@
 from flask import render_template, request
 from application import app
 from application.finance import Finance
-from application.forms import BasicForm, DebtForm, ComparisonForm
+from application.forms import BasicForm, DebtForm, ComparisonForm, SavingsForm
 from application.data_provider_service import DataProviderService
 
 # instantiating an object of DataProviderService
 DATA_PROVIDER = DataProviderService()
+
+# instantiating an object of Finance class
+Finance = Finance()
 
 @app.route('/index')
 @app.route('/')
@@ -51,8 +54,6 @@ def form_input():
 @app.route('/dashboard')
 def dashboard():
 
-    dashboard = Finance('dashboard')
-
     comparison_list = DATA_PROVIDER.get_average_monthly_expense_data_for_graph()
     comparison_list.insert(0, 'UK Average')
 
@@ -61,16 +62,15 @@ def dashboard():
     pie_user_list = [981, 372, 107, 102, 15, 35, 382, 115, 161]
     user_list = ['My Spending', 981, 372, 107, 102, 15, 35, 382, 115, 161]
     
-    # create a pie chart
-    dashboard.create_pie(headers_list, pie_user_list)
-
-    # create a stacked bar chart using data pulled from the database
-    dashboard.create_stacked_bar(user_list, comparison_list)
+    Finance.create_pie(headers_list, pie_user_list)
+    Finance.create_stacked_bar(user_list, comparison_list)
 
     # grab data to create average UK spending table
     av = DATA_PROVIDER.get_average_monthly_expense_data_for_page_table()
+    # create a dictionary to use for spending loops
+    headers_to_user_input = {key:value for key, value in zip(headers_list, pie_user_list)}
 
-    return render_template('dashboard.html', title='Dashboard', uk_average=av) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
+    return render_template('dashboard.html', title='Dashboard', uk_average=av, user_list=headers_to_user_input) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
 
 
 
@@ -80,17 +80,47 @@ def admin():
     average_debt_data = DATA_PROVIDER.average_debt_report() # returns a decimal object
     average_debt = int(average_debt_data) # recast decimal object as an integer
     average = f"{average_debt:,.02f}" # make the integer a formatted string with thousand separator and 2 decimal places for pence
-    debt_type_frequency = DATA_PROVIDER.frequency_debt_report()
-    print(debt_type_frequency)    
-    Finance('report').generate_debt_report(average_debt_data, debt_type_frequency)
-    return render_template('admin.html', title='Admin', average_debt_data = average, debt_type = debt_type_frequency)
+    debt_type_frequency = DATA_PROVIDER.frequency_debt_report()   
+    Finance.generate_debt_report(average_debt_data, debt_type_frequency)
+    return render_template('admin.html', title='Reports', average_debt_data = average, debt_type = debt_type_frequency)
 
+
+
+@app.route('/savings_calculator_form', methods=['GET', 'POST'])
+def calculate_savings():
+    external_link_money_saving_expert = 'https://www.moneysavingexpert.com/'
+    savings_info = []
+    error3 = ''
+    form = SavingsForm()
+    if request.method == 'POST':
+        savings_lump = form.savings_lump.data
+        monthly_saving_amount = form.monthly_saving_amount.data
+        savings_interest = form.savings_interest.data
+        savings_term = form.savings_term.data
+        savings_goal = form.savings_goal.data
+        if not savings_lump or not savings_goal:
+            # if any of those are False/ empty
+            error3 = 'Please enter an initial lump sum and a savings goal'
+        else:
+            if not savings_interest:
+                savings_interest = 6
+            if not savings_term:
+                savings_term = 20
+            if not monthly_saving_amount:
+                monthly_saving_amount = 100
+            savings_info += ['savings', savings_lump, savings_interest, savings_term, 'years', monthly_saving_amount, savings_goal]
+            new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal)
+            sc = Finance.interest_calculator(savings_info)
+            savings_info += [sc, new_savings_id]
+            savings_info[6] = f"{savings_info[6]:,.02f}"
+            return render_template('savings_calculator.html', savings_info=savings_info)
+
+    return render_template('savings_calculator_form.html', form=form, message=error3, external_link_money_saving_expert=external_link_money_saving_expert)
 
 
 @app.route('/debt_calculator_form', methods=['GET', 'POST'])
 def calculate_debt():
     external_link_investopedia = 'https://www.investopedia.com/terms/d/debt.asp'
-    debt_info = []
     error = ''
     form = DebtForm()
     if request.method == 'POST':
@@ -99,17 +129,26 @@ def calculate_debt():
         debt_interest = form.debt_interest.data
         debt_term = form.debt_term.data
         debt_monthsyears = form.monthsyears.data
-        debt_info += [debt_amount, debt_interest, debt_term, debt_monthsyears, debt_type]
-        #print(debt_info)
-        if not debt_amount or not debt_interest or not debt_term:
-            # if any of those are False/ empty
-            error = 'please enter values'
+        if not debt_amount:
+            # if any of those are False/ empty follow this condition to enter default form values
+            if not debt_amount:
+                error = 'Please enter a debt amount'
         else:
-            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type)
-            dc = Finance('dc').simple_debt_calculator(debt_info)
-            debt_info += [dc, new_debt_id]
-            debt_info[5] = f"{debt_info[5]:,.02f}"
-            return render_template('debt_calculator.html', debt_info=debt_info)
+            # an explanation of extra data in form:
+            # name='' is the field of data that we want to capture it would be equivalent to {{ form.field_name.data }}
+            # value='' is the default value we want to be captured if the user leaves this blank
+            # placeholder='' is the prompt that we want to be shown so the user understands what data to enter but also that the user needs to enter it
+            if not debt_interest:
+                debt_interest = 5
+            if not debt_term:
+                debt_term = 5
+            if not debt_monthsyears:
+                debt_monthsyears = 'years'
+            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term, debt_monthsyears)
+            debt_data = DATA_PROVIDER.get_debt_data(new_debt_id)
+            calculated_total_debt = Finance.interest_calculator(debt_data)
+            calculated_total_debt = f"{calculated_total_debt:,.02f}"
+            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_data)
     return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
 
@@ -146,7 +185,7 @@ def debt_comparison():
         DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type)
         DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type)
         DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type)
-        #Finance('dc').debt_comparison_calc(comparison_info) # Add the name of your function here
+        #Finance.debt_comparison_calc(comparison_info) # Add the name of your function here
         #return render_template('comparison_results.html') # Add the name of your html comparison results page here
     return render_template('debt_comparison_form.html', form=form, message=error)
 

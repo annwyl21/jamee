@@ -25,10 +25,10 @@ form {
 
 }
 
-.form-label {
+/* .form-label {
     width: 50%;
     float: left;
-}
+} */
 
 .form-input {
     margin-left: 50%;
@@ -55,3 +55,9 @@ h1, h3 {
     background-color: grey;
 }
 /* form page styling ends */
+
+input:placeholder-shown {
+    font-style: italic;
+ }
+
+

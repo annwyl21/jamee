@@ -71,9 +71,9 @@ class DataProviderService:
         expenses = self.cursor.fetchall()
         return expenses
     
-    def add_debt_data(self, debt_total_figure, debt_source):
-        sql = """insert into debt (debt_total_figure, debt_source) values (%s, %s)"""
-        input_values = (debt_total_figure, debt_source)
+    def add_debt_data(self, debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears):
+        sql = """insert into debt (debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears) values (%s, %s, %s, %s, %s)"""
+        input_values = (debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears)
         try:
             self.cursor.execute(sql, input_values)
             self.conn.commit()
@@ -86,6 +86,22 @@ class DataProviderService:
         new_form = self.cursor.fetchone()
         return new_form[0]
     
+    def add_savings_data(self, savings_total_figure, savings_source):
+        sql = """insert into savings (savings_total_figure, savings_source) values (%s, %s)"""
+        input_values = (savings_total_figure, savings_source)
+        try:
+            self.cursor.execute(sql, input_values)
+            self.conn.commit()
+        except Exception as exc:
+            print(exc)
+            self.conn.rollback()
+            print("rolled back")
+        sql_new_form_id = "select savings_total_id from savings order by savings_total_id desc limit 1"
+        self.cursor.execute(sql_new_form_id)
+        new_form = self.cursor.fetchone()
+        return new_form[0]
+    
+    
     def average_debt_report(self):
         sql = """select avg(debt_total_figure) from debt"""
         self.cursor.execute(sql)
@@ -97,3 +113,10 @@ class DataProviderService:
         self.cursor.execute(sql)
         frequency_debt_type_entered = self.cursor.fetchall()
         return frequency_debt_type_entered
+    
+    def get_debt_data(self, debt_id):
+        debt_data = []
+        sql = """Select * from debt where debt_total_id = %s"""
+        self.cursor.execute(sql, debt_id)
+        debt_data = self.cursor.fetchone()
+        return debt_data
