@@ -126,12 +126,22 @@ def calculate_debt():
         debt_interest = form.debt_interest.data
         debt_term = form.debt_term.data
         debt_monthsyears = form.monthsyears.data
-        debt_info += [debt_amount, debt_interest, debt_term, debt_monthsyears, debt_type]
-        #print(debt_info)
-        if not debt_amount or not debt_interest or not debt_term:
-            # if any of those are False/ empty
-            error = 'please enter values'
+        if not debt_amount:
+            # if any of those are False/ empty follow this condition to enter default form values
+            if not debt_amount:
+                error = 'Please enter a debt amount'
         else:
+            # an explanation of extra data in form:
+            # name='' is the field of data that we want to capture it would be equivalent to {{ form.field_name.data }}
+            # value='' is the default value we want to be captured if the user leaves this blank
+            # placeholder='' is the prompt that we want to be shown so the user understands what data to enter but also that the user needs to enter it
+            if not debt_interest:
+                debt_interest = 5
+            if not debt_term:
+                debt_term = 5
+            if not debt_monthsyears:
+                debt_monthsyears = 'years'
+            debt_info += [debt_amount, debt_interest, debt_term, debt_monthsyears, debt_type]
             new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type)
             dc = Finance('dc').interest_calculator(debt_info)
             debt_info += [dc, new_debt_id]
