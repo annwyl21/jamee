@@ -86,9 +86,9 @@ class DataProviderService:
         new_form = self.cursor.fetchone()
         return new_form[0]
     
-    def add_savings_data(self, savings_total_figure, savings_source):
-        sql = """insert into savings (savings_total_figure, savings_source) values (%s, %s)"""
-        input_values = (savings_total_figure, savings_source)
+    def add_savings_data(self, savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term):
+        sql = """insert into savings (savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term) values (%s, %s, %s, %s, %s)"""
+        input_values = (savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term)
         try:
             self.cursor.execute(sql, input_values)
             self.conn.commit()

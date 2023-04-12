@@ -109,7 +109,8 @@ def calculate_savings():
             if not monthly_saving_amount:
                 monthly_saving_amount = 100
             savings_info += ['savings', savings_lump, savings_interest, savings_term, 'years', monthly_saving_amount, savings_goal]
-            new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal)
+            new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal, monthly_saving_amount, savings_interest, savings_term)
+
             sc = Finance.interest_calculator(savings_info)
             savings_info += [sc, new_savings_id]
             savings_info[6] = f"{savings_info[6]:,.02f}"
