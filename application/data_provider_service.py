@@ -71,7 +71,7 @@ class DataProviderService:
         expenses = self.cursor.fetchall()
         return expenses
     
-    def add_debt_data(self, debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears):
+    def add_debt_data(self, debt_total_figure, debt_source='Personal Loan', debt_interest='0', debt_term='0', debt_monthsyears='years'):
         sql = """insert into debt (debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears) values (%s, %s, %s, %s, %s)"""
         input_values = (debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears)
         try:

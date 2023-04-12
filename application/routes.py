@@ -169,34 +169,46 @@ def debt_comparison():
     error = ''
     form = ComparisonForm()
     if request.method == 'POST':
-        debt1 = []
         debt1_type = form.debt1_type.data
         debt1_amount = form.debt1_amount.data
         min1_repayment = form.debt1_repayment.data
         debt1_interest = form.debt1_interest.data
-        debt1 += [debt1_amount, debt1_interest, min1_repayment]
 
-        debt2 = []
         debt2_type = form.debt2_type.data
         debt2_amount = form.debt2_amount.data
         min2_repayment = form.debt2_repayment.data
         debt2_interest = form.debt2_interest.data
-        debt2 += [debt2_amount, debt2_interest, min2_repayment]
 
-        debt3 = []
         debt3_type = form.debt3_type.data
         debt3_amount = form.debt3_amount.data
         min3_repayment = form.debt3_repayment.data
         debt3_interest = form.debt3_interest.data
-        debt3 += [debt3_amount, debt3_interest, min3_repayment]
 
-        comparison_info += [debt1, debt2, debt3]
-        print(comparison_info)
-        DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type)
-        DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type)
-        DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type)
-        #Finance.debt_comparison_calc(comparison_info) # Add the name of your function here
-        #return render_template('comparison_results.html') # Add the name of your html comparison results page here
+        if not debt1_amount or not min1_repayment:
+            error = 'Please enter a debt amount, minimum repayment and rate of interest'
+        else:
+            if not debt1_interest:
+                debt1_interest=0
+            if not debt2_amount or not min2_repayment:
+                debt2_amount=0
+                debt2_interest=0
+                min2_repayment=0
+            if not debt3_amount or not min3_repayment:
+                debt3_amount=0
+                debt3_interest=0
+                min3_repayment=0
+            DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type, debt1_interest)
+            DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type, debt2_interest)
+            DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type, debt3_interest)
+
+            debt_1 = [debt1_amount, debt1_interest, min1_repayment]
+            debt_2 = [debt2_amount, debt2_interest, min2_repayment]
+            debt_3 = [debt3_amount, debt3_interest, min3_repayment]
+
+            comparison_info = [debt_1, debt_2, debt_3]
+            print(comparison_info)
+            #Finance.debt_comparison_calc(comparison_info) # Add the name of your function here
+            #return render_template('comparison_results.html') # Add the name of your html comparison results page here
     return render_template('debt_comparison_form.html', form=form, message=error)
 
 
