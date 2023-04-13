@@ -20,14 +20,12 @@
       <div class="form-input">
         <div class="input-group mb-3">
           <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.salary }}
+          <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" value="{{ form.salary }}">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.other }}
+          <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" value="{{ form.other }}">
         </div>
-        <!-- <div class="input-box">{{ form.salary }}</div>
-        <div class="input-box">{{ form.other }}</div> -->
       </div>
 
     </div>
