@@ -15,9 +15,11 @@ Finance = Finance()
 def home():
     return render_template('index.html', title='ChipIn Home Page')
 
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html', title='Contact Us')
+
 
 # https://www.codecademy.com/learn/learn-flask/modules/flask-templates-and-forms/cheatsheet
 # consider using a redirect here so the submit of the form redirects to the template
@@ -38,7 +40,6 @@ def form_input():
         eating = form.eating.data
         holidays = form.holidays.data
         clothes = form.clothes.data
-
 
         if not salary or not housing:
             error = 'Please fill in the required Salary and Housing fields.'
