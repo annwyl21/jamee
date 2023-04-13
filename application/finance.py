@@ -6,20 +6,34 @@ import seaborn as sns
 
 # create a class
 class Finance:
-    def __init__(self, name):
-        self.name = name
 
-    # code to create a calculator
-    def simple_debt_calculator(self, debt_info):
-        if debt_info[3] == 'months':
-            loan_term = debt_info[2]
+    def debt_calculator(self, debt_data):
+        monthsoryears = debt_data[5]
+        debt_term = debt_data[4]
+        interest_rate = debt_data[3]
+        debt_amount = debt_data[1]
+        if monthsoryears == 'months':
+            loan_term = debt_term
         else:
-            loan_term = debt_info[2]*12
-        interest_rate = debt_info[1]/100
-        annual_interest = debt_info[0] * interest_rate
-        monthly_interest = annual_interest/12
+            loan_term = debt_term*12
+        interest_rate = interest_rate/100
+        annual_interest = int(debt_amount) * interest_rate
+        monthly_interest = annual_interest/12        
         total_interest = monthly_interest*loan_term
-        return total_interest + debt_info[0]
+        return total_interest + int(debt_amount)
+    
+    def savings_calculator(self, savings_data):
+
+        
+        interest_rate = savings_data[4]/100
+        principal_amount = savings_data[1]
+        savings_term_in_years = savings_data[5]
+        monthly_amount_saved = savings_data[3]
+
+        interest = principal_amount*interest_rate*savings_term_in_years
+        saved = (savings_term_in_years*12)*monthly_amount_saved
+
+        return principal_amount + saved + interest
 
     def dashboard_weekly_calculator(self, test_list):
         # ready to code
@@ -35,6 +49,14 @@ class Finance:
         with open('./file_output/debt_file.txt', 'a') as still_debt_file:
             for tuple_item in debt_type_frequency:
                 still_debt_file.write(str(tuple_item[1]) + ' searches about a ' + tuple_item[0] + '\n')
+
+    def generate_savings_report(self, average_savings_data, savings_type_frequency):
+        average_savings_data = f"{average_savings_data:,.2f}"
+        with open('./file_output/savings_file.txt', 'w') as savings_file:
+            savings_file.write("Savings Calculator\nWhen people visit our site they use our savings calculator to find out how much they could save over a given number of years.\nThe average lump sum people search for is GBP" + average_savings_data + ".\nThose savings are usually for a " + savings_type_frequency[0][0] + '.\n')
+        with open('./file_output/savings_file.txt', 'a') as still_savings_file:
+            for tuple_item in savings_type_frequency:
+                still_savings_file.write(str(tuple_item[1]) + ' searches about a ' + tuple_item[0] + '\n')
 
 
     # code to create a pie chart using a list

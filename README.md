@@ -1,6 +1,26 @@
 # jamee
 A website/ dashboard for personal financial tracking
 
+- install the requirements
+- run the app.py file to start the site locally
+
+# Problem-Solving
+
+- Is flask started?
+- Have you got the correct databse, no duplicates or old versions of the database?
+    - Our Database code is held in Static/ Scripts
+        - run `teardown_script.sql` to drop old versions of the database
+        - run `jamee_user_database.sql` to rebuild the new database
+
+# Site Guide
+
+- static folder holds 3 folders; images, styles and scripts (which has our mysql database code)
+- we have 3 .py files that hold various classes;
+    - data_provider_service (our database connection and class methods relating to the database)
+    - finance (our graphs and other class mathods relating to our finance calculator code)
+    - forms (our code relating to adding data from the form to the database)
+- we have a tests folder that holds the pytests and a .github folder that holds the code to run the automatic code checker every time we do a pull request so we can merge with confidence
+
 ## Before Coding
 
 - PULL the most recent version of the code onto your MAIN branch
@@ -45,21 +65,4 @@ git push --set-upstream origin the_name_of_your_branch
 - add the pull request and tag the reviewers, tag yourself as an assignee and tag the project so we see it on the board
 ![Create pull request](application/static/images/pull_rqst.jpg)
 
-# Problem-Solving - please add to this checklist
 
-- Is flask started?
-- Have you got the correct databse, no duplicates or old versions of the database?
-    - Our Database code is held in Static/ Scripts
-        - run `teardown_script.sql` to drop old versions of the database
-        - run `jamee_user_database.sql` to rebuild the new database
-
-# Site Guide
-
-- install the requirements
-- run the app.py file to start the site locally
-- static folder holds 3 further folders; images, styles and scripts (which has our mysql database code)
-- we have 3 .py files that hold various classes;
-    - data_provider_service (our database connection and class methods relating to the database)
-    - finance (our graphs and other class mathods relating to our finance calculator code)
-    - forms (our code relating to adding data from the form to the database)
-- we have a tests folder that holds the pytests and a .github folder that holds the code to run the automatic code checker every time we do a pull request so we can merge with confidence

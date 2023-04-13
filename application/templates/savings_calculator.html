@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+
+<h1>Simple Savings Calculator</h1>
+<h1>Your results</h1>
+
+<p>
+    Your lump sum investment to save for a {{ savings_data[2] }}, saving {{ savings_data[3] }} each month:
+    <br>
+    If you saved &pound;{{ '%.2f' % savings_data[1] }} at {{ savings_data[4] }}% APR interest over {{ savings_data[5] }} years
+    <br>
+    <br>
+    In total, your investment would be worth approximately &pound;{{ total }}
+</p>
+
+{% endblock %}

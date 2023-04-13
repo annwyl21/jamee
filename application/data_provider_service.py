@@ -71,9 +71,9 @@ class DataProviderService:
         expenses = self.cursor.fetchall()
         return expenses
     
-    def add_debt_data(self, debt_total_figure, debt_source):
-        sql = """insert into debt (debt_total_figure, debt_source) values (%s, %s)"""
-        input_values = (debt_total_figure, debt_source)
+    def add_debt_data(self, debt_total_figure, debt_source='Personal Loan', debt_interest='0', debt_term='0', debt_monthsyears='years'):
+        sql = """insert into debt (debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears) values (%s, %s, %s, %s, %s)"""
+        input_values = (debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears)
         try:
             self.cursor.execute(sql, input_values)
             self.conn.commit()
@@ -86,6 +86,22 @@ class DataProviderService:
         new_form = self.cursor.fetchone()
         return new_form[0]
     
+    def add_savings_data(self, savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term):
+        sql = """insert into savings (savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term) values (%s, %s, %s, %s, %s)"""
+        input_values = (savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term)
+        try:
+            self.cursor.execute(sql, input_values)
+            self.conn.commit()
+        except Exception as exc:
+            print(exc)
+            self.conn.rollback()
+            print("rolled back")
+        sql_new_form_id = "select savings_total_id from savings order by savings_total_id desc limit 1"
+        self.cursor.execute(sql_new_form_id)
+        new_form = self.cursor.fetchone()
+        return new_form[0]
+    
+    
     def average_debt_report(self):
         sql = """select avg(debt_total_figure) from debt"""
         self.cursor.execute(sql)
@@ -94,6 +110,25 @@ class DataProviderService:
     
     def frequency_debt_report(self):
         sql = """SELECT debt_source, COUNT(*) AS freq FROM debt group by debt_source order by freq desc"""
+        self.cursor.execute(sql)
+        frequency_debt_type_entered = self.cursor.fetchall()
+        return frequency_debt_type_entered
+    
+    def get_data_from_id(self, table, table_id, id):
+        data = []
+        sql = 'Select * from ' + table + ' where ' + table_id + ' = %s'
+        self.cursor.execute(sql, id)
+        data = self.cursor.fetchone()
+        return data
+    
+    def average_savings_report(self):
+        sql = """select avg(savings_total_figure) from savings"""
+        self.cursor.execute(sql)
+        average_debt_entered = self.cursor.fetchone()
+        return average_debt_entered[0]
+    
+    def frequency_savings_report(self):
+        sql = """SELECT savings_source, COUNT(*) AS freq FROM savings group by savings_source order by freq desc"""
         self.cursor.execute(sql)
         frequency_debt_type_entered = self.cursor.fetchall()
         return frequency_debt_type_entered

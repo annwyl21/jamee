@@ -30,6 +30,27 @@
   <br>
   <h4>Savings Calculator</h4>
   <br>
+  <p>
+    <br>
+    When people visit our site they use our savings calculator to find out how much they could save in total over a given number of years.
+    <br>
+    The average lump_sum that people visiting our site have looked into investing is &pound;{{ average_savings_data }}.
+    <br>
+    Those savings are usually for a {{ savings_type[0][0] }}.
+    <br>
+    <table>
+      <tr>
+        <th>Things people save for:</th>
+        <th>count</th>
+      </tr>
+      {% for item in savings_type %}
+      <tr>
+        <td>{{ item [0] }}</td>
+        <td>{{ item [1] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </p>
 </div>
 
 {% endblock %}

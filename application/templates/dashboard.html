@@ -73,8 +73,16 @@
         <!-- Code for the loop to display monthly spending - needs python code to divide value into a monthly amount on the routes.py -->
         <h2>Your monthly spending</h2>
         <table>
-          <th></th>
-          <th>&pound;'s</th>
+          <tr>
+            <th></th>
+            <th>&pound;'s</th>
+          </tr>
+          {% for key, value in user_list %}
+          <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+          </tr>
+          {% endfor %}
         </table>
       </div>
       <div class="col-sm-4">

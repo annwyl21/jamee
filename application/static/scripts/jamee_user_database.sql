@@ -32,15 +32,20 @@ category_name varchar(100)
 CREATE TABLE debt
 (debt_total_id int not null auto_increment primary key,
 debt_total_figure decimal,
-debt_source varchar(100))
-;
+debt_source varchar(100),
+debt_interest int,
+debt_term int,
+debt_monthsyears varchar(10)
+);
 
 CREATE TABLE savings
 (savings_total_id int not null auto_increment primary key,
-savings_total_figure decimal,
-savings_source varchar(100))
-;
-
+savings_total_figure int,
+savings_source varchar(100),
+monthly_saving_amount int,
+savings_interest int,
+savings_term int
+);
 
 -- Adding foreign keys to 'category' table 
 ALTER TABLE category
@@ -245,16 +250,24 @@ eating varchar(200),
 holidays varchar(200),
 clothes varchar(200));
 
-insert into debt(debt_total_figure, debt_source)
+insert into debt(debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears)
 values
-	(10000, 'Personal Loan'),
-    (5000, 'Personal Loan'),
-    (3000, 'Personal Loan'),
-    (50000, 'Mortgage'),
-    (100000, 'Mortgage'),
-    (75000, 'Mortgage'),
-    (10000, 'Car Loan'),
-    (25000, 'Car Loan'),
-    (75000, 'Car Loan'),
-    (400, 'Credit Card'),
-    (750, 'Credit Card');  
+	(10000, 'Personal Loan', 5, 5, 'years'),
+    (5000, 'Personal Loan', 5, 5, 'years'),
+    (3000, 'Personal Loan', 5, 5, 'years'),
+    (50000, 'Mortgage', 2, 25, 'years'),
+    (100000, 'Mortgage', 12, 50, 'years'),
+    (75000, 'Mortgage', 6, 10, 'years'),
+    (10000, 'Car Loan', 14, 5, 'months'),
+    (25000, 'Car Loan', 6, 2, 'years'),
+    (75000, 'Car Loan', 4, 5, 'years'),
+    (400, 'Credit Card', 14, 2, 'months'),
+    (750, 'Credit Card', 15, 10, 'months');
+
+insert into savings(savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term)
+values
+	(100, 'car', 100, 5, 2),
+    (200, 'computer', 50, 8, 5),
+    (300, 'house', 500, 2, 20);
+
+

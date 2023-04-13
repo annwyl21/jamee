@@ -1,12 +1,14 @@
 from flask import render_template, request
 from application import app
 from application.finance import Finance
-from application.forms import BasicForm, DebtForm, ComparisonForm
+from application.forms import BasicForm, DebtForm, ComparisonForm, SavingsForm
 from application.data_provider_service import DataProviderService
 
 # instantiating an object of DataProviderService
 DATA_PROVIDER = DataProviderService()
 
+# instantiating an object of Finance class
+Finance = Finance()
 
 @app.route('/index')
 @app.route('/')
@@ -53,8 +55,6 @@ def form_input():
 @app.route('/dashboard')
 def dashboard():
 
-    dashboard = Finance('dashboard')
-
     comparison_list = DATA_PROVIDER.get_average_monthly_expense_data_for_graph()
     comparison_list.insert(0, 'UK Average')
 
@@ -63,16 +63,15 @@ def dashboard():
     pie_user_list = [981, 372, 107, 102, 15, 35, 382, 115, 161]
     user_list = ['My Spending', 981, 372, 107, 102, 15, 35, 382, 115, 161]
     
-    # create a pie chart
-    dashboard.create_pie(headers_list, pie_user_list)
-
-    # create a stacked bar chart using data pulled from the database
-    dashboard.create_stacked_bar(user_list, comparison_list)
+    Finance.create_pie(headers_list, pie_user_list)
+    Finance.create_stacked_bar(user_list, comparison_list)
 
     # grab data to create average UK spending table
     av = DATA_PROVIDER.get_average_monthly_expense_data_for_page_table()
+    # create a dictionary to use for spending loops
+    headers_to_user_input = {key:value for key, value in zip(headers_list, pie_user_list)}
 
-    return render_template('dashboard.html', title='Dashboard', uk_average=av) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
+    return render_template('dashboard.html', title='Dashboard', uk_average=av, user_list=headers_to_user_input) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
 
 
 
@@ -82,17 +81,56 @@ def admin():
     average_debt_data = DATA_PROVIDER.average_debt_report() # returns a decimal object
     average_debt = int(average_debt_data) # recast decimal object as an integer
     average = f"{average_debt:,.02f}" # make the integer a formatted string with thousand separator and 2 decimal places for pence
-    debt_type_frequency = DATA_PROVIDER.frequency_debt_report()
-    print(debt_type_frequency)    
-    Finance('report').generate_debt_report(average_debt_data, debt_type_frequency)
-    return render_template('admin.html', title='Admin', average_debt_data = average, debt_type = debt_type_frequency)
+    debt_type_frequency = DATA_PROVIDER.frequency_debt_report()   
+    Finance.generate_debt_report(average_debt_data, debt_type_frequency)
 
+    average_savings_data = DATA_PROVIDER.average_savings_report() # returns a decimal object
+    average_savings = int(average_savings_data) # recast decimal object as an integer
+    avg = f"{average_savings:,.02f}" # make the integer a formatted string with thousand separator and 2 decimal places for pence
+    savings_type_frequency = DATA_PROVIDER.frequency_savings_report()   
+    Finance.generate_savings_report(average_savings_data, savings_type_frequency)
+
+    return render_template('admin.html', title='Reports', average_debt_data = average, debt_type = debt_type_frequency, average_savings_data=avg, savings_type=savings_type_frequency )
+
+
+
+@app.route('/savings_calculator_form', methods=['GET', 'POST'])
+def calculate_savings():
+    external_link_money_saving_expert = 'https://www.moneysavingexpert.com/'
+    savings_info = []
+    error3 = ''
+    form = SavingsForm()
+    if request.method == 'POST':
+        savings_lump = form.savings_lump.data
+        monthly_saving_amount = form.monthly_saving_amount.data
+        savings_interest = form.savings_interest.data
+        savings_term = form.savings_term.data
+        savings_goal = form.savings_goal.data
+        if not savings_lump:
+            # if any of those are False/ empty
+            error3 = 'Please enter an initial lump sum and a savings goal'
+        else:
+            if not savings_interest:
+                savings_interest = 6
+            if not savings_term:
+                savings_term = 20
+            if not monthly_saving_amount:
+                monthly_saving_amount = 0
+            if not savings_goal:
+                savings_goal = 'rainy day'
+            new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal, monthly_saving_amount, savings_interest, savings_term)
+            savings_data = DATA_PROVIDER.get_data_from_id('savings', 'savings_total_id', new_savings_id)
+            print(savings_data)
+            calculated_total_savings = Finance.savings_calculator(savings_data)
+            calculated_total_savings = f"{calculated_total_savings:,.02f}"
+            return render_template('savings_calculator.html', total=calculated_total_savings, savings_data=savings_data)
+
+    return render_template('savings_calculator_form.html', form=form, message=error3, external_link_money_saving_expert=external_link_money_saving_expert)
 
 
 @app.route('/debt_calculator_form', methods=['GET', 'POST'])
 def calculate_debt():
     external_link_investopedia = 'https://www.investopedia.com/terms/d/debt.asp'
-    debt_info = []
     error = ''
     form = DebtForm()
     if request.method == 'POST':
@@ -101,17 +139,27 @@ def calculate_debt():
         debt_interest = form.debt_interest.data
         debt_term = form.debt_term.data
         debt_monthsyears = form.monthsyears.data
-        debt_info += [debt_amount, debt_interest, debt_term, debt_monthsyears, debt_type]
-        #print(debt_info)
-        if not debt_amount or not debt_interest or not debt_term:
-            # if any of those are False/ empty
-            error = 'please enter values'
+        if not debt_amount:
+            # if any of those are False/ empty follow this condition to enter default form values
+            if not debt_amount:
+                error = 'Please enter a debt amount'
         else:
-            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type)
-            dc = Finance('dc').simple_debt_calculator(debt_info)
-            debt_info += [dc, new_debt_id]
-            debt_info[5] = f"{debt_info[5]:,.02f}"
-            return render_template('debt_calculator.html', debt_info=debt_info)
+            # an explanation of extra data in form:
+            # name='' is the field of data that we want to capture it would be equivalent to {{ form.field_name.data }}
+            # value='' is the default value we want to be captured if the user leaves this blank
+            # placeholder='' is the prompt that we want to be shown so the user understands what data to enter but also that the user needs to enter it
+            if not debt_interest:
+                debt_interest = 5
+            if not debt_term:
+                debt_term = 5
+            if not debt_monthsyears:
+                debt_monthsyears = 'years'
+            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term, debt_monthsyears)
+            debt_data = DATA_PROVIDER.get_data_from_id('debt', 'debt_total_id', new_debt_id)
+            print(debt_data)
+            calculated_total_debt = Finance.debt_calculator(debt_data)
+            calculated_total_debt = f"{calculated_total_debt:,.02f}"
+            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_data)
     return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
 
@@ -122,34 +170,46 @@ def debt_comparison():
     error = ''
     form = ComparisonForm()
     if request.method == 'POST':
-        debt1 = []
         debt1_type = form.debt1_type.data
         debt1_amount = form.debt1_amount.data
         min1_repayment = form.debt1_repayment.data
         debt1_interest = form.debt1_interest.data
-        debt1 += [debt1_amount, debt1_interest, min1_repayment]
 
-        debt2 = []
         debt2_type = form.debt2_type.data
         debt2_amount = form.debt2_amount.data
         min2_repayment = form.debt2_repayment.data
         debt2_interest = form.debt2_interest.data
-        debt2 += [debt2_amount, debt2_interest, min2_repayment]
 
-        debt3 = []
         debt3_type = form.debt3_type.data
         debt3_amount = form.debt3_amount.data
         min3_repayment = form.debt3_repayment.data
         debt3_interest = form.debt3_interest.data
-        debt3 += [debt3_amount, debt3_interest, min3_repayment]
 
-        comparison_info += [debt1, debt2, debt3]
-        print(comparison_info)
-        DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type)
-        DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type)
-        DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type)
-        #Finance('dc').debt_comparison_calc(comparison_info) # Add the name of your function here
-        #return render_template('comparison_results.html') # Add the name of your html comparison results page here
+        if not debt1_amount or not min1_repayment:
+            error = 'Please enter a debt amount, minimum repayment and rate of interest'
+        else:
+            if not debt1_interest:
+                debt1_interest=0
+            if not debt2_amount or not min2_repayment:
+                debt2_amount=0
+                debt2_interest=0
+                min2_repayment=0
+            if not debt3_amount or not min3_repayment:
+                debt3_amount=0
+                debt3_interest=0
+                min3_repayment=0
+            DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type, debt1_interest)
+            DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type, debt2_interest)
+            DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type, debt3_interest)
+
+            debt_1 = [debt1_amount, debt1_interest, min1_repayment]
+            debt_2 = [debt2_amount, debt2_interest, min2_repayment]
+            debt_3 = [debt3_amount, debt3_interest, min3_repayment]
+
+            comparison_info = [debt_1, debt_2, debt_3]
+            #Finance.debt_comparison_calc(comparison_info) # Add the name of your function here
+            #return render_template('comparison_results.html') # Add the name of your html comparison results page here
+
     return render_template('debt_comparison_form.html', form=form, message=error)
 
 
