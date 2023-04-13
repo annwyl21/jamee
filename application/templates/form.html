@@ -4,110 +4,147 @@
 
 <div class="form-container, form, container">
 
-    <form method="post">
+  <form method="post">
     {{ form.hidden_tag() }}
 
     <h1 class="green">Please input your amounts</h1>
 
-    <div class="income-container">
-      <h3>Income</h3>
+    <br>
 
-      <div class="form-label">
-        <div class="income">{{ form.salary.label }}</div>
-        <div class="income">{{ form.other.label }}</div>
-      </div>
+    <h3>Income</h3>
 
-      <div class="form-input">
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" value="{{ form.salary }}">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" value="{{ form.other }}">
-        </div>
-      </div>
-
+    <div class="mb-3">
+      <label form="salary" class="form-label">{{ form.salary.label }}</label>
+      <input type="number" class="form-control" id="salary" name="salary" placeholder="Salary">
     </div>
 
-    <div class="outgoings-container">
-      <h3>Outgoings</h3>
+    <div class="mb-3">
+      <label form="other" class="form-label">{{ form.other.label }}</label>
+      <input type="number" class="form-control" id="other" name="other" placeholder="Other">
+    </div>
+<!--    <div class="form-label">-->
+<!--      <div class="income">{{ form.salary.label }}</div>-->
+<!--      <div class="income">{{ form.other.label }}</div>-->
+<!--    </div>-->
 
-      <div class="form-label">
-        <div class="outgoings">{{ form.food_drink.label }}</div>
-        <div class="outgoings">{{ form.housing.label }}</div>
-        <div class="outgoings">{{ form.energy.label }}</div>
-        <div class="outgoings">{{ form.petrol.label }}</div>
-        <div class="outgoings">{{ form.train.label }}</div>
-        <div class="outgoings">{{ form.bus.label }}</div>
-        <div class="outgoings">{{ form.eating.label }}</div>
-        <div class="outgoings">{{ form.holidays.label }}</div>
-        <div class="outgoings">{{ form.clothes.label }}</div>
-      </div>
+<!--    <div class="form-input">-->
+<!--      <div class="input-group mb-3">-->
+<!--        <span class="input-group-text">£</span>-->
+<!--        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" value="{{ form.salary }}">-->
+<!--      </div>-->
+<!--      <div class="input-group mb-3">-->
+<!--        <span class="input-group-text">£</span>-->
+<!--        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" value="{{ form.other }}">-->
+<!--      </div>-->
 
-      <div class="form-input">
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.food_drink }}
-        </div>
+    <h3>Outgoings</h3>
 
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.housing }}
-        </div>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.energy }}
-        </div>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.petrol }}
-        </div>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.train }}
-        </div>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.bus }}
-        </div>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.eating }}
-        </div>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.holidays }}
-        </div>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text">£</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.clothes }}
-        </div>
-
-        <!-- <div class="input-box">{{ form.food_drink }}</div>
-        <div class="input-box">{{ form.housing }}</div>
-        <div class="input-box">{{ form.energy }}</div>
-        <div class="input-box">{{ form.petrol }}</div>
-        <div class="input-box">{{ form.train }}</div>
-        <div class="input-box">{{ form.bus }}</div>
-        <div class="input-box">{{ form.eating }}</div>
-        <div class="input-box">{{ form.holidays }}</div>
-        <div class="input-box">{{ form.clothes }}</div> -->
-      </div>
+    <div class="mb-3">
+      <label form="food_drink" class="form-label">{{ form.food_drink.label }}</label>
+      <input type="number" class="form-control" id="food_drink" name="food_drink" placeholder="Food & Drink">
     </div>
 
-    <button>{{ form.submit }}</button>
+    <div class="mb-3">
+      <label form="housing" class="form-label">{{ form.housing.label }}</label>
+      <input type="number" class="form-control" id="housing" name="housing" placeholder="Housing">
+    </div>
 
+    <div class="mb-3">
+      <label form="energy" class="form-label">{{ form.energy.label }}</label>
+      <input type="number" class="form-control" id="energy" name="energy" placeholder="Energy">
+    </div>
 
-    {{ message }}
-    </form>
+    <div class="mb-3">
+      <label form="petrol" class="form-label">{{ form.petrol.label }}</label>
+      <input type="number" class="form-control" id="petrol" name="petrol" placeholder="Petrol">
+    </div>
+
+    <div class="mb-3">
+      <label form="train" class="form-label">{{ form.train.label }}</label>
+      <input type="number" class="form-control" id="train" name="train" placeholder="Train">
+    </div>
+
+    <div class="mb-3">
+      <label form="bus" class="form-label">{{ form.bus.label }}</label>
+      <input type="number" class="form-control" id="bus" name="bus" placeholder="Bus">
+    </div>
+
+    <div class="mb-3">
+      <label form="eating" class="form-label">{{ form.eating.label }}</label>
+      <input type="number" class="form-control" id="eating" name="eating" placeholder="Eating">
+    </div>
+
+    <div class="mb-3">
+      <label form="holidays" class="form-label">{{ form.holidays.label }}</label>
+      <input type="number" class="form-control" id="holidays" name="holidays" placeholder="Holidays">
+    </div>
+
+    <div class="mb-3">
+      <label form="clothes" class="form-label">{{ form.clothes.label }}</label>
+      <input type="number" class="form-control" id="clothes" name="clothes" placeholder="Clothes">
+    </div>
+
+<!--    <div class="form-label">-->
+<!--      <div class="outgoings">{{ form.food_drink.label }}</div>-->
+<!--      <div class="outgoings">{{ form.housing.label }}</div>-->
+<!--      <div class="outgoings">{{ form.energy.label }}</div>-->
+<!--      <div class="outgoings">{{ form.petrol.label }}</div>-->
+<!--      <div class="outgoings">{{ form.train.label }}</div>-->
+<!--      <div class="outgoings">{{ form.bus.label }}</div>-->
+<!--      <div class="outgoings">{{ form.eating.label }}</div>-->
+<!--      <div class="outgoings">{{ form.holidays.label }}</div>-->
+<!--      <div class="outgoings">{{ form.clothes.label }}</div>-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <span class="input-group-text">£</span>-->
+<!--      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.food_drink }}-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <span class="input-group-text">£</span>-->
+<!--      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.housing }}-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <span class="input-group-text">£</span>-->
+<!--      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.energy }}-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <span class="input-group-text">£</span>-->
+<!--      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.petrol }}-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <span class="input-group-text">£</span>-->
+<!--      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.train }}-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <span class="input-group-text">£</span>-->
+<!--      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.bus }}-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <span class="input-group-text">£</span>-->
+<!--      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.eating }}-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <span class="input-group-text">£</span>-->
+<!--      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.holidays }}-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--      <span class="input-group-text">£</span>-->
+<!--      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> {{ form.clothes }}-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <br>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
 
 {% endblock %}

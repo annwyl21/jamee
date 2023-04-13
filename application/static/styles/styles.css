@@ -25,15 +25,6 @@ form {
 
 }
 
-.form-label {
-    width: 50%;
-    float: left;
-}
-
-.form-input {
-    margin-left: 50%;
-}
-
 h1, h3 {
     border: 1px solid black;
     background-color: red;
