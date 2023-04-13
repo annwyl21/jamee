@@ -9,7 +9,7 @@ table, th, td {
     border: 1px solid black;
   }
 
-/* form page styling starts */
+/* dashboard page styling starts */
 form {
     margin: 10px;
 }
@@ -19,27 +19,11 @@ form {
     display: inline-block;
 }
 
-.income-container {
-    border: 1px solid black;
-    background-color: green;
-
-}
-
-h1, h3 {
+h2, h3 {
     border: 1px solid black;
     background-color: rgb(244, 84, 84); 
     /* changed to something less bright, but not because I like it just to save my eyes */
     text-align: center;
-}
-
-.outgoings-container {
-    border: 1px solid black;
-    background-color: green;
-}
-
-.button {
-    border: 1px solid black;
-    background-color: aqua;
 }
 
 .input-box {
@@ -51,4 +35,4 @@ input:placeholder-shown {
     font-style: italic;
  }
 
-/* form page styling ends */
+/* dashboard page styling ends */
