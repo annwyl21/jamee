@@ -1,38 +1,32 @@
-body, a {
-margin: auto;
-/* text-align: center; */
+body {
+margin: 10px;
+text-align: center;
 background-color: #C5D1EB;
 color: #0B1D51;
+}
+
+/* this makes the nav bar and its background transparent, overriding the bootstrap template */
+.bg-body-tertiary {
+--bs-bg-opacity: 0;
+}
+
+a {
+
 }
 
 table, th, td {
     border: 1px solid black;
   }
 
-/* dashboard page styling starts */
-form {
-    margin: 10px;
-}
-
-.form-container {
-    width: 100%;
-    display: inline-block;
-}
-
 h2, h3 {
-    border: 1px solid black;
-    background-color: rgb(244, 84, 84); 
-    /* changed to something less bright, but not because I like it just to save my eyes */
     text-align: center;
-}
-
-.input-box {
-    border: 1px solid black;
-    background-color: grey;
 }
 
 input:placeholder-shown {
     font-style: italic;
- }
+}
 
-/* dashboard page styling ends */
+.carousel-item p {
+    text-align: center;
+    margin: 20px;
+}

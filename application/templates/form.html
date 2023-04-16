@@ -2,7 +2,7 @@
 
 {% block main_content %}
 
-<div class="form-container, form, container">
+<div class="form, container">
 
   <form method="post">
     {{ form.hidden_tag() }}
@@ -52,7 +52,7 @@
 
     <div class="mb-3">
       <label form="bus" class="form-label">{{ form.bus.label }}</label>
-      <input type="number" class="form-control" id="bus" name="bus" placeholder="I couldn't get my fridge to work this morning, so I took the bus instead.">
+      <input type="number" class="form-control" id="bus" name="bus" placeholder="I couldn't get my fridge to work, so I took the bus!">
     </div>
 
     <div class="mb-3">
