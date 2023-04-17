@@ -34,10 +34,8 @@ CREATE TABLE debt
 debt_total_figure decimal,
 debt_source varchar(100),
 debt_interest int,
-debt_term int,
-debt_monthsyears varchar(10)
+debt_term int
 );
--- fix above so it is always in months
 
 CREATE TABLE savings
 (savings_total_id int not null auto_increment primary key,
@@ -307,24 +305,26 @@ insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eatin
 values(12, 477, 828, 123, 147, 40, 32, 438, 222, 261);
 
 
-insert into debt(debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears)
+insert into debt(debt_total_figure, debt_source, debt_interest, debt_term)
 values
-	(10000, 'Personal Loan', 5, 5, 'years'),
-    (5000, 'Personal Loan', 5, 5, 'years'),
-    (3000, 'Personal Loan', 5, 5, 'years'),
-    (50000, 'Mortgage', 2, 25, 'years'),
-    (100000, 'Mortgage', 12, 50, 'years'),
-    (75000, 'Mortgage', 6, 10, 'years'),
-    (10000, 'Car Loan', 14, 5, 'months'),
-    (25000, 'Car Loan', 6, 2, 'years'),
-    (75000, 'Car Loan', 4, 5, 'years'),
-    (400, 'Credit Card', 14, 2, 'months'),
-    (750, 'Credit Card', 15, 10, 'months');
+	(10000, 'Personal Loan', 5, 60),
+    (5000, 'Personal Loan', 5, 5),
+    (3000, 'Personal Loan', 5, 5),
+    (50000, 'Mortgage', 2, 25),
+    (100000, 'Mortgage', 12, 600),
+    (75000, 'Mortgage', 6, 50),
+    (10000, 'Car Loan', 14, 5),
+    (25000, 'Car Loan', 6, 2),
+    (75000, 'Car Loan', 4, 60),
+    (400, 'Credit Card', 14, 2),
+    (750, 'Credit Card', 15, 10);
 
 insert into savings(savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term)
 values
 	(100, 'car', 100, 5, 2),
     (200, 'computer', 50, 8, 5),
     (300, 'house', 500, 2, 20);
+
+select * from debt;
 
 

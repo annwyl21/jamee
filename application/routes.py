@@ -116,9 +116,9 @@ def calculate_savings():
             error3 = 'Please enter an initial lump sum and a savings goal'
         else:
             if not savings_interest:
-                savings_interest = 6
+                savings_interest = 5
             if not savings_term:
-                savings_term = 20
+                savings_term = 10
             if not monthly_saving_amount:
                 monthly_saving_amount = 0
             if not savings_goal:
@@ -158,8 +158,10 @@ def calculate_debt():
             if not debt_term:
                 debt_term = 5
             if not debt_monthsyears:
-                debt_monthsyears = 'years'
-            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term, debt_monthsyears)
+                debt_monthsyears = 'months'
+            if debt_monthsyears == "years":
+                debt_term = debt_term*12
+            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term)
             debt_data = DATA_PROVIDER.get_data_from_id('debt', 'debt_total_id', new_debt_id)
             print(debt_data)
             calculated_total_debt = Finance.debt_calculator(debt_data)

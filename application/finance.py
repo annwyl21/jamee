@@ -8,18 +8,13 @@ import seaborn as sns
 class Finance:
 
     def debt_calculator(self, debt_data):
-        monthsoryears = debt_data[5]
         debt_term = debt_data[4]
         interest_rate = debt_data[3]
         debt_amount = debt_data[1]
-        if monthsoryears == 'months':
-            loan_term = debt_term
-        else:
-            loan_term = debt_term*12
         interest_rate = interest_rate/100
         annual_interest = int(debt_amount) * interest_rate
         monthly_interest = annual_interest/12        
-        total_interest = monthly_interest*loan_term
+        total_interest = monthly_interest*debt_term
         return total_interest + int(debt_amount)
     
     def savings_calculator(self, savings_data):
