@@ -49,13 +49,23 @@ def form_input():
             DATA_PROVIDER.add_form_data(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
             
             user_data = DATA_PROVIDER.get_form_data(user_id)
-            uk_average_household_data = DATA_PROVIDER.get_form_data(1)
+            uk_average_homeowner_data = DATA_PROVIDER.get_form_data(1)
             
+            if salary > 75000:
+                salary_comparison_data = DATA_PROVIDER.get_form_data(11)
+            elif salary > 55000:
+                salary_comparison_data = DATA_PROVIDER.get_form_data(9)
+            elif salary > 45000:
+                salary_comparison_data = DATA_PROVIDER.get_form_data(7)
+            elif salary > 35000:
+                salary_comparison_data = DATA_PROVIDER.get_form_data(5)
+            else:
+                salary_comparison_data = DATA_PROVIDER.get_form_data(3)
 
             Finance.create_pie(user_data)
-            Finance.create_stacked_bar(user_data, uk_average_household_data)
+            Finance.create_stacked_bar(user_data, salary_comparison_data, uk_average_homeowner_data)
 
-            uk_average_household_data = Finance.create_table(uk_average_household_data)
+            uk_average_household_data = Finance.create_table(salary_comparison_data)
             weekly = Finance.dashboard_weekly_calculator(user_data)
             monthly = Finance.dashboard_monthly_calculator(user_data)
             annual = Finance.dashboard_annual_calculator(user_data)

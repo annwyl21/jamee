@@ -94,20 +94,20 @@ class Finance:
 
 
     # code to create a stacked bar chart using a list
-    def create_stacked_bar(self, user_list, comparison_list):
+    def create_stacked_bar(self, user_list, salary_average, uk_average):
         #c = sns.color_palette('deep')
         plt.switch_backend('Agg') 
-        expenditure = ['My Spending', 'UK Average']
-        housing = [user_list[0], comparison_list[0]]
-        groceries = [user_list[1], comparison_list[1]]
-        bills = [user_list[2], comparison_list[2]]
-        fuel = [user_list[3], comparison_list[3]]
-        train = [user_list[4], comparison_list[4]]
-        bus = [user_list[5], comparison_list[5]]
-        cafe = [user_list[6], comparison_list[6]]
-        holiday = [user_list[7], comparison_list[7]]
-        clothes = [user_list[8], comparison_list[8]]
-        x = range(2)
+        expenditure = ['My Spending', 'Average in your salary bracket', 'UK Average']
+        housing = [user_list[0], salary_average[0], uk_average[0]]
+        groceries = [user_list[1], salary_average[1], uk_average[1]]
+        bills = [user_list[2], salary_average[2], uk_average[2]]
+        fuel = [user_list[3], salary_average[3], uk_average[3]]
+        train = [user_list[4], salary_average[4] ,uk_average[4]]
+        bus = [user_list[5], salary_average[5] ,uk_average[5]]
+        cafe = [user_list[6], salary_average[6] ,uk_average[6]]
+        holiday = [user_list[7], salary_average[7] ,uk_average[7]]
+        clothes = [user_list[8], salary_average[8] ,uk_average[8]]
+        x = range(3)
         bills_bottom = np.add(housing, groceries)
         fuel_bottom = np.add(bills_bottom, bills) 
         train_bottom = np.add(fuel_bottom, fuel)
