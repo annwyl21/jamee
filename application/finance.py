@@ -34,13 +34,26 @@ class Finance:
         saved = (savings_term_in_years*12)*monthly_amount_saved
 
         return principal_amount + saved + interest
-
-    def dashboard_weekly_calculator(self, test_list):
-        # ready to code
-        return [231, 0, 0, 0, 0, 0, 0, 0, 0]
     
-    def dashboard_annual_calculator(self, test_list):
-        return [12000, 0, 0, 0, 0, 0, 0, 0, 0]
+    def create_table(self, average_data):
+        headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        data_av_uk_homeowner_dict = {key:value for key, value in zip(headers_list, average_data)}
+        return data_av_uk_homeowner_dict
+
+    def dashboard_weekly_calculator(self, user_data):
+        headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        weekly_user_data = {key:value for key, value in zip(headers_list, user_data)}
+        return weekly_user_data
+
+    def dashboard_monthly_calculator(self, user_data):
+        headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        monthly_user_data = {key:value for key, value in zip(headers_list, user_data)}
+        return monthly_user_data
+
+    def dashboard_annual_calculator(self, user_data):
+        headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        annual_user_data = {key:value for key, value in zip(headers_list, user_data)}
+        return annual_user_data
     
     def generate_debt_report(self, average_debt_data, debt_type_frequency):
         average_debt_data = f"{average_debt_data:,.2f}"
@@ -60,10 +73,11 @@ class Finance:
 
 
     # code to create a pie chart using a list
-    def create_pie(self, headers_list, user_list):
+    def create_pie(self, user_data):
+        headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
         plt.switch_backend('Agg') 
         colours = sns.color_palette('deep')
-        df = pd.DataFrame({'expenditure': headers_list, 'spending': user_list})
+        df = pd.DataFrame({'expenditure': headers_list, 'spending': user_data})
         plt.figure(figsize=(6,4))
         plt.subplot()
         plt.pie(df['spending'], colors=colours, autopct='%d%%')
@@ -83,16 +97,16 @@ class Finance:
     def create_stacked_bar(self, user_list, comparison_list):
         #c = sns.color_palette('deep')
         plt.switch_backend('Agg') 
-        expenditure = [user_list[0], comparison_list[0]]
-        housing = [user_list[1], comparison_list[1]]
-        groceries = [user_list[2], comparison_list[2]]
-        bills = [user_list[3], comparison_list[3]]
-        fuel = [user_list[4], comparison_list[4]]
-        train = [user_list[5], comparison_list[5]]
-        bus = [user_list[6], comparison_list[6]]
-        cafe = [user_list[7], comparison_list[7]]
-        holiday = [user_list[8], comparison_list[8]]
-        clothes = [user_list[9], comparison_list[9]]
+        expenditure = ['My Spending', 'UK Average']
+        housing = [user_list[0], comparison_list[0]]
+        groceries = [user_list[1], comparison_list[1]]
+        bills = [user_list[2], comparison_list[2]]
+        fuel = [user_list[3], comparison_list[3]]
+        train = [user_list[4], comparison_list[4]]
+        bus = [user_list[5], comparison_list[5]]
+        cafe = [user_list[6], comparison_list[6]]
+        holiday = [user_list[7], comparison_list[7]]
+        clothes = [user_list[8], comparison_list[8]]
         x = range(2)
         bills_bottom = np.add(housing, groceries)
         fuel_bottom = np.add(bills_bottom, bills) 

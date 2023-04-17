@@ -88,7 +88,10 @@ ALTER TABLE savings
 ADD COLUMN expense_id int,
 ADD foreign key(expense_id) references expense(expense_id);
 
-
+-- Adding foreign key to income table
+ALTER TABLE income
+ADD COLUMN user_id int,
+ADD foreign key(user_id) references budget_user(user_id);
 
 
 -- insert test data into budget_user table
@@ -238,8 +241,6 @@ values
 
 create table form
 (id int not null auto_increment primary key,
-salary varchar(200),
-other varchar(200),
 food_drink varchar(200),
 housing varchar(200),
 energy varchar(200),
@@ -249,6 +250,19 @@ bus varchar(200),
 eating varchar(200),
 holidays varchar(200),
 clothes varchar(200));
+
+ALTER TABLE form
+ADD COLUMN user_id int,
+ADD foreign key(user_id) references budget_user(user_id);
+
+insert into budget_user(username) values('UK Average Homeowner');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(1, 368, 1054, 112, 98, 18, 26, 128, 128, 181);
+
+insert into budget_user(username) values('UK Average Renter');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(2, 368, 771, 112, 98, 18, 26, 285, 128, 181);
+
 
 insert into debt(debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears)
 values
