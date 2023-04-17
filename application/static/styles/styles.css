@@ -10,12 +10,42 @@ color: #0B1D51;
 --bs-bg-opacity: 0;
 }
 
+/*landing page*/
+.carousel-inner img {
+    width: 100%;
+    margin: auto;
+    min-height:200px;
+}
+
+.carousel-caption {
+    margin-bottom: 40px;
+}
+
+/* Hide the carousel text when the screen is less than 600 pixels wide */
+/*@media (max-width: 600px) {
+    .carousel-caption {
+        display: none;
+    }
+}*/
+
+#disclaimer, .col-left p {
+margin-top: 20px;
+}
+
+a {
+
+}
+
 table, th, td {
     border: 1px solid black;
   }
 
-h2, h3 {
+h2, h3, h5, p {
     text-align: center;
+}
+
+.accordion-header, #headingOne {
+    margin-top: 0px;
 }
 
 input:placeholder-shown {
@@ -23,6 +53,14 @@ input:placeholder-shown {
 }
 
 .carousel-item p {
-    text-align: center;
-    margin: 20px;
+    margin: 15x;
 }
+
+.well {
+margin-top: 10px;
+}
+
+.well p {
+margin-bottom: 0px;
+}
+
