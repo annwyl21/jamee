@@ -11,16 +11,15 @@
     <div class="row">
 <!-- This is where the 12 columns are divided into 2 groups of 6 -->
       <div class="col-sm-6">
-        <p>Average UK Spending (pcm) for your salary bracket</p>
+        <p>Average UK Spending (pcm) for salary bracket
+          <br>
+          {{ salary_data }}
+        </p>
         <table>
-          <tr>
-            <th>{{ salary_data }}</th>
-            <th>&pound;'s</th>
-          </tr>
           {% for key, value in average.items() %}
           <tr>
-            <td>{{ key }}</td>
-            <td>{{ value }}</td>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
           </tr>
           {% endfor %}
         </table>
@@ -60,14 +59,10 @@
         <!-- Code for the loop to display weekly spending - needs python code to divide value into a weekly amount on the routes.py -->
         <h2>Your weekly Spending</h2>
         <table>
-          <tr>
-            <th></th>
-            <th>&pound;'s</th>
-          </tr>
           {% for key, value in weekly.items() %}
           <tr>
-            <td>{{ key }}</td>
-            <td>{{ value }}</td>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
           </tr>
           {% endfor %}
         </table>
@@ -76,14 +71,10 @@
         <!-- Code for the loop to display monthly spending - needs python code to divide value into a monthly amount on the routes.py -->
         <h2>Your monthly spending</h2>
         <table>
-          <tr>
-            <th></th>
-            <th>&pound;'s</th>
-          </tr>
           {% for key, value in monthly.items() %}
           <tr>
-            <td>{{ key }}</td>
-            <td>{{ value }}</td>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
           </tr>
           {% endfor %}
         </table>
@@ -92,14 +83,10 @@
         <!-- Code for the loop to display annual spending - needs python code to divide value into a monthly amount on the routes.py -->
         <h2>Your annual spending</h2>
         <table>
-          <tr>
-            <th></th>
-            <th>&pound;'s</th>
-          </tr>
           {% for key, value in annual.items() %}
           <tr>
-            <td>{{ key }}</td>
-            <td>{{ value }}</td>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
           </tr>
           {% endfor %}
         </table>
