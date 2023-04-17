@@ -53,14 +53,19 @@ def form_input():
             
             if salary > 75000:
                 salary_comparison_data = DATA_PROVIDER.get_form_data(11)
+                salary_data = '75K+ pa'
             elif salary > 55000:
                 salary_comparison_data = DATA_PROVIDER.get_form_data(9)
+                salary_data = 'between 55K and 75K pa'
             elif salary > 45000:
                 salary_comparison_data = DATA_PROVIDER.get_form_data(7)
+                salary_data = 'between 45K and 55K pa'
             elif salary > 35000:
                 salary_comparison_data = DATA_PROVIDER.get_form_data(5)
+                salary_data = 'between 35K and 45K pa'
             else:
                 salary_comparison_data = DATA_PROVIDER.get_form_data(3)
+                salary_data = 'less than 25K pa'
 
             Finance.create_pie(user_data)
             Finance.create_stacked_bar(user_data, salary_comparison_data, uk_average_homeowner_data)
@@ -70,7 +75,7 @@ def form_input():
             monthly = Finance.dashboard_monthly_calculator(user_data)
             annual = Finance.dashboard_annual_calculator(user_data)
            
-            return render_template('dashboard.html', title='Dashboard', average=uk_average_household_data, weekly = weekly, monthly=monthly, annual=annual)
+            return render_template('dashboard.html', title='Dashboard', average=uk_average_household_data, weekly = weekly, monthly=monthly, annual=annual, salary_data=salary_data)
 
     return render_template('dashboard_form.html', title='Form Page', form=form, message=error)
     #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)

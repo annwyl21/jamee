@@ -23,35 +23,34 @@ class Finance:
         return total_interest + int(debt_amount)
     
     def savings_calculator(self, savings_data):
-
-        
         interest_rate = savings_data[4]/100
         principal_amount = savings_data[1]
         savings_term_in_years = savings_data[5]
         monthly_amount_saved = savings_data[3]
-
         interest = principal_amount*interest_rate*savings_term_in_years
         saved = (savings_term_in_years*12)*monthly_amount_saved
-
         return principal_amount + saved + interest
     
     def create_table(self, average_data):
         headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
-        data_av_uk_homeowner_dict = {key:value for key, value in zip(headers_list, average_data)}
-        return data_av_uk_homeowner_dict
+        uk_average = {key:value for key, value in zip(headers_list, average_data)}
+        return uk_average
 
     def dashboard_weekly_calculator(self, user_data):
         headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        user_data = [f"{(num*12)/52:,.02f}" for num in user_data]
         weekly_user_data = {key:value for key, value in zip(headers_list, user_data)}
         return weekly_user_data
 
     def dashboard_monthly_calculator(self, user_data):
         headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        user_data = [f"{num:,.02f}" for num in user_data]
         monthly_user_data = {key:value for key, value in zip(headers_list, user_data)}
         return monthly_user_data
 
     def dashboard_annual_calculator(self, user_data):
         headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        user_data = [f"{num*12:,.02f}" for num in user_data]
         annual_user_data = {key:value for key, value in zip(headers_list, user_data)}
         return annual_user_data
     

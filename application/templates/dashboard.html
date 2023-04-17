@@ -11,10 +11,10 @@
     <div class="row">
 <!-- This is where the 12 columns are divided into 2 groups of 6 -->
       <div class="col-sm-6">
-        {{ average_data }}
+        <p>Average UK Spending (pcm) for your salary bracket</p>
         <table>
           <tr>
-            <th>Average Spending for our salary bracket pcm</th>
+            <th>{{ salary_data }}</th>
             <th>&pound;'s</th>
           </tr>
           {% for key, value in average.items() %}
