@@ -218,18 +218,18 @@ def debt_comparison():
 # Repeated Routes to Different Benefits
 @app.route('/<benefit_name>')
 def benefits(benefit_name):
-    # Grab 3 pieces of information; url-endpoint, how-data and what-data to auto-complete fields
-    unpacked_benefit_data_tuple = DATA_PROVIDER.get_benefits_data(benefit_name)
+    # Grab 3 pieces of information from a returned tuple; url-endpoint, how-data and what-data to auto-complete fields
+    info_benefits = DATA_PROVIDER.get_benefits_data(benefit_name)
     if benefit_name == 'child-benefit':
-        return render_template('articles.html', title='Child Benefit', data=unpacked_benefit_data_tuple)
+        return render_template('articles.html', title='Child Benefit', data=info_benefits[0])
     elif benefit_name == 'housing-benefit':
-        return render_template('articles.html', title='Housing Benefit', data=unpacked_benefit_data_tuple)
+        return render_template('articles.html', title='Housing Benefit', data=info_benefits[0])
     elif benefit_name == 'employment-support-allowance':
-        return render_template('articles.html', title='ESA', data=unpacked_benefit_data_tuple)
+        return render_template('articles.html', title='ESA', data=info_benefits[0])
     elif benefit_name == 'jobseekers-allowance':
-        return render_template('articles.html', title='JSA', data=unpacked_benefit_data_tuple)
+        return render_template('articles.html', title='JSA', data=info_benefits[0])
     elif benefit_name == 'universal-credit':
-        return render_template('articles.html', title='Universal Credit', data=unpacked_benefit_data_tuple)
+        return render_template('articles.html', title='Universal Credit', data=info_benefits[0])
     else:
         return render_template('index.html', title='Home Page')
 

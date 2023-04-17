@@ -48,8 +48,7 @@ class DataProviderService:
         sql = "SELECT benefit_name, how, what FROM benefits where benefit_name = '" + benefit_requested + "'"
         self.cursor.execute(sql)
         retrieved_data = self.cursor.fetchall()
-        unpacked_benefit_data = retrieved_data[0]
-        return unpacked_benefit_data
+        return retrieved_data
     
     def get_average_monthly_expense_data_for_graph(self):
         data = []
