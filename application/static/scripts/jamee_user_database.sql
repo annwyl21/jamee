@@ -37,6 +37,7 @@ debt_interest int,
 debt_term int,
 debt_monthsyears varchar(10)
 );
+-- fix above so it is always in months
 
 CREATE TABLE savings
 (savings_total_id int not null auto_increment primary key,
@@ -46,6 +47,7 @@ monthly_saving_amount int,
 savings_interest int,
 savings_term int
 );
+-- fix above so it is always in months
 
 -- Adding foreign keys to 'category' table 
 ALTER TABLE category
