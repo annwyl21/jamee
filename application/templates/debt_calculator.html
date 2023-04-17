@@ -14,4 +14,24 @@
     In total, you will repay &pound;{{ total }} back to the lender
 </p>
 
+A rough plan for the debt feedback page
+
+<p>You have 4 debts.</p>
+<ul>
+    loan type, loan size, interest rate - total that you will pay back to the lender
+
+<p>If you chose to pay them using a snowball approach, they would be paid off in order of debt size:
+    <ul>
+        loan type, loan size, - paid after x months
+        loan type, loan size, - paid after x months
+        loan type, loan size, - paid after x months
+    </ul>
+
+    If you chose a stack approach, they would be paid off in order of interest rate:
+    <ul>
+        loan type, highest interest rate - paid after x months
+        loan type lowest interest rate - paid after x months
+    </ul>
+</p>
+
 {% endblock %}
