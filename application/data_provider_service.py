@@ -120,7 +120,7 @@ class DataProviderService:
     
     def get_data_from_id(self, table, table_id, id):
         data = []
-        sql = 'Select debt_total_figure, debt_source, debt_interest, debt_term, repayment from ' + table + ' where ' + table_id + ' = %s'
+        sql = 'Select * from ' + table + ' where ' + table_id + ' = %s'
         self.cursor.execute(sql, id)
         data = self.cursor.fetchone()
         data = list(data)
@@ -128,8 +128,6 @@ class DataProviderService:
         data = [int(value or 0) for value in data]
         data.insert(1, loan_type)
         return data
-    
-
     
     def get_average_monthly_expense_data_for_graph(self):
         data = []
