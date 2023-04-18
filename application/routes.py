@@ -102,7 +102,6 @@ def admin():
 @app.route('/savings_calculator_form', methods=['GET', 'POST'])
 def calculate_savings():
     external_link_money_saving_expert = 'https://www.moneysavingexpert.com/'
-    savings_info = []
     error3 = ''
     form = SavingsForm()
     if request.method == 'POST':
@@ -168,7 +167,6 @@ def debt_comparison():
     error = ''
     form = ComparisonForm()
     if request.method == 'POST':
-        username = form.username.data
         debt1_type = form.debt1_type.data
         debt1_amount = form.debt1_amount.data
         min1_repayment = form.debt1_repayment.data

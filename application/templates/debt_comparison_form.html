@@ -20,10 +20,6 @@
             <div class="form">
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
-                    <div class="mb-3">
-                      <label for="username" class="form-label">{{ form.username.label }}</label>
-                      <input type="text" class="form-control" id="username" name="username" placeholder="Who are you?">
-                    </div>
                     <select class="form-select" aria-label="Select debt type" name="debt1_type" selected>
                       {% for item in form.debt1_type %}
                       {{ item }}                     

@@ -46,7 +46,7 @@ monthly_saving_amount int,
 savings_interest int,
 savings_term int
 );
--- fix above so it is always in months
+
 
 -- Adding foreign keys to 'category' table 
 ALTER TABLE category
