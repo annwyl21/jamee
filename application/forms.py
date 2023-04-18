@@ -26,8 +26,7 @@ class DebtForm(FlaskForm):
     debt_amount = IntegerField('Debt Amount')
     debt_repayment = IntegerField('Minimum Repayment')
     debt_interest = IntegerField('Debt Interest Rate (APR)')
-    debt_term = IntegerField('Debt Term in')
-    monthsyears = RadioField('label', choices=[('Months','Months'),('Years','Years')])
+    debt_term = IntegerField('Debt Term in months')
     debt_type = SelectField('debt_type', choices=[('Personal Loan', 'Personal Loan'), ('Mortgage', 'Mortgage'), ('Overdraft', 'Overdraft'), ('Car Loan', 'Car Loan'), ('Credit Card', 'Credit Card'), ('Store or catalogue', 'Store or Catalogue'), ('BNPL', 'BNPL Buy Now, Pay Later'), ('Other', 'Other, eg. Payday Loan')])
     submit = SubmitField('Submit')
 
@@ -41,6 +40,7 @@ class SavingsForm(FlaskForm):
     
     
 class ComparisonForm(FlaskForm):
+    username = StringField('Username')
     debt1_amount = IntegerField('Debt Amount')
     debt1_repayment = IntegerField('Minimum Repayment')
     debt1_interest = IntegerField('Debt Interest Rate (APR)')

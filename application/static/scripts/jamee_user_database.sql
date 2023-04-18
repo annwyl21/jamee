@@ -34,7 +34,8 @@ CREATE TABLE debt
 debt_total_figure decimal,
 debt_source varchar(100),
 debt_interest int,
-debt_term int
+debt_term int,
+repayment int
 );
 
 CREATE TABLE savings
