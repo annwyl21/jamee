@@ -201,7 +201,7 @@ def debt_comparison():
             debt1_id = DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type, debt1_interest, min1_repayment)
             debt2_id = DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type, debt2_interest, min2_repayment)
             debt3_id = DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type, debt3_interest, min3_repayment)
-            
+            print('reference', debt1_id, debt2_id, debt3_id)
             debt1 = DATA_PROVIDER.get_data_from_id('debt', 'debt_total_id', debt1_id)
             debt2 = DATA_PROVIDER.get_data_from_id('debt', 'debt_total_id', debt2_id)
             debt3 = DATA_PROVIDER.get_data_from_id('debt', 'debt_total_id', debt3_id)

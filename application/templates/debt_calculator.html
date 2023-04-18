@@ -2,44 +2,42 @@
 
 {% block main_content %}
 
-<h1>Debt Calculator Results</h1>
-
-{% if total %}
-
-<p>
-    Your debt is in the form of a {{ debt_data[1] }}
-    <br>
-    You borrowed &pound;{{ '%.2f' % debt_data[0] }} at {{ debt_data[2] }}% APR interest over {{ debt_data[3] }} months.
-    <br>
-    <br>
-    In total, you will repay &pound;{{ total }} back to the lender
-</p>
-{% endif %}
-
-{% if comparison %}
-
-<p>You entered 3 debts.</p>
-<ul>
-    {% for debt in comparison %}
-    <li>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}APR</li>
-    {% endfor %}
-</ul>
-
-<p>Debt Stack Approach - paying off the debt with the highest interest first
-    <ul>
+<div class="container-fluid bg-1 text-center">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1>Debt Calculator Results</h1>
+        {% if total %}
+        <p>Your debt is in the form of a {{ debt_data[1] }}
+        <br>
+        You borrowed &pound;{{ '%.2f' % debt_data[0] }} at {{ debt_data[2] }}% APR interest over {{ debt_data[3] }} months.
+        <br>
+        <br>
+        In total, you will repay &pound;{{ total }} back to the lender
+        </p>
+        {% endif %}
+        
+        {% if comparison %}
+        <p><h4>Which is better for you ?</h4>
+        <br> 
+        The <b>Debt Stack Approach</b> is to pay off the debt with the <b>highest interest</b> first.
+        <br>
+        The <b>Debt Snowball Approach</b> is to pay off the <b>biggest debt</b> first.
+        <br><br>
         {% for debt in comparison %}
-        <li>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}APR - would be paid off after {{ debt[5] }} months</li>
+        <b>{{ debt[1] }}</b>, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR
+        <br>
+        Using a debt stack, this debt would be paid after {{ debt[5] }} months
+        <br>
+        Using a debt snowball, this debt would be paid after {{ debt[6] }} months
+        <br>
         {% endfor %}
-    </ul>
-</p>
-<p>Debt Snowball Approach - paying off the biggest debt first
-    <ul>
-        {% for debt in comparison %}
-        <li>{{ debt[2] }}, &pound;{{ debt[1] }}, at {{ debt[3] }}APR - would be paid off after {{ debt[6] }} months</li>
-        {% endfor %}
-    </ul>
-</p>
-
-{% endif %}
+        </p>
+        {% endif %}
+      </div>
+        <div class="col-sm-6">
+            <img src="{{ url_for('static', filename='images/anxious_woman.jpeg') }}" height="400" alt="woman solving debt problems">
+        </div>
+    </div>
+  </div>
 
 {% endblock %}
