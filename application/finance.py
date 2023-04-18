@@ -8,39 +8,46 @@ import seaborn as sns
 class Finance:
 
     def debt_calculator(self, debt_data):
-        monthsoryears = debt_data[5]
         debt_term = debt_data[4]
         interest_rate = debt_data[3]
         debt_amount = debt_data[1]
-        if monthsoryears == 'months':
-            loan_term = debt_term
-        else:
-            loan_term = debt_term*12
         interest_rate = interest_rate/100
         annual_interest = int(debt_amount) * interest_rate
         monthly_interest = annual_interest/12        
-        total_interest = monthly_interest*loan_term
+        total_interest = monthly_interest*debt_term
         return total_interest + int(debt_amount)
     
     def savings_calculator(self, savings_data):
-
-        
         interest_rate = savings_data[4]/100
         principal_amount = savings_data[1]
         savings_term_in_years = savings_data[5]
         monthly_amount_saved = savings_data[3]
-
         interest = principal_amount*interest_rate*savings_term_in_years
         saved = (savings_term_in_years*12)*monthly_amount_saved
-
         return principal_amount + saved + interest
-
-    def dashboard_weekly_calculator(self, test_list):
-        # ready to code
-        return [231, 0, 0, 0, 0, 0, 0, 0, 0]
     
-    def dashboard_annual_calculator(self, test_list):
-        return [12000, 0, 0, 0, 0, 0, 0, 0, 0]
+    def create_table(self, average_data):
+        headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        uk_average = {key:value for key, value in zip(headers_list, average_data)}
+        return uk_average
+
+    def dashboard_weekly_calculator(self, user_data):
+        headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        user_data = [f"{(num*12)/52:,.02f}" for num in user_data]
+        weekly_user_data = {key:value for key, value in zip(headers_list, user_data)}
+        return weekly_user_data
+
+    def dashboard_monthly_calculator(self, user_data):
+        headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        user_data = [f"{num:,.02f}" for num in user_data]
+        monthly_user_data = {key:value for key, value in zip(headers_list, user_data)}
+        return monthly_user_data
+
+    def dashboard_annual_calculator(self, user_data):
+        headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
+        user_data = [f"{num*12:,.02f}" for num in user_data]
+        annual_user_data = {key:value for key, value in zip(headers_list, user_data)}
+        return annual_user_data
     
     def generate_debt_report(self, average_debt_data, debt_type_frequency):
         average_debt_data = f"{average_debt_data:,.2f}"
@@ -60,10 +67,11 @@ class Finance:
 
 
     # code to create a pie chart using a list
-    def create_pie(self, headers_list, user_list):
+    def create_pie(self, user_data):
+        headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
         plt.switch_backend('Agg') 
         colours = sns.color_palette('deep')
-        df = pd.DataFrame({'expenditure': headers_list, 'spending': user_list})
+        df = pd.DataFrame({'expenditure': headers_list, 'spending': user_data})
         plt.figure(figsize=(6,4))
         plt.subplot()
         plt.pie(df['spending'], colors=colours, autopct='%d%%')
@@ -80,20 +88,20 @@ class Finance:
 
 
     # code to create a stacked bar chart using a list
-    def create_stacked_bar(self, user_list, comparison_list):
+    def create_stacked_bar(self, user_list, salary_average, uk_average):
         #c = sns.color_palette('deep')
         plt.switch_backend('Agg') 
-        expenditure = [user_list[0], comparison_list[0]]
-        housing = [user_list[1], comparison_list[1]]
-        groceries = [user_list[2], comparison_list[2]]
-        bills = [user_list[3], comparison_list[3]]
-        fuel = [user_list[4], comparison_list[4]]
-        train = [user_list[5], comparison_list[5]]
-        bus = [user_list[6], comparison_list[6]]
-        cafe = [user_list[7], comparison_list[7]]
-        holiday = [user_list[8], comparison_list[8]]
-        clothes = [user_list[9], comparison_list[9]]
-        x = range(2)
+        expenditure = ['My Spending', 'Average in your salary bracket', 'UK Average']
+        housing = [user_list[0], salary_average[0], uk_average[0]]
+        groceries = [user_list[1], salary_average[1], uk_average[1]]
+        bills = [user_list[2], salary_average[2], uk_average[2]]
+        fuel = [user_list[3], salary_average[3], uk_average[3]]
+        train = [user_list[4], salary_average[4] ,uk_average[4]]
+        bus = [user_list[5], salary_average[5] ,uk_average[5]]
+        cafe = [user_list[6], salary_average[6] ,uk_average[6]]
+        holiday = [user_list[7], salary_average[7] ,uk_average[7]]
+        clothes = [user_list[8], salary_average[8] ,uk_average[8]]
+        x = range(3)
         bills_bottom = np.add(housing, groceries)
         fuel_bottom = np.add(bills_bottom, bills) 
         train_bottom = np.add(fuel_bottom, fuel)

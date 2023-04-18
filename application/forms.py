@@ -8,6 +8,7 @@ from flask_wtf import FlaskForm
 
 
 class BasicForm(FlaskForm):
+    username = StringField('Username')
     salary = IntegerField('Salary')
     other = IntegerField('Other')
     food_drink = IntegerField('Food and Drink')

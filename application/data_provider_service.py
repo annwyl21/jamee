@@ -14,11 +14,25 @@ class DataProviderService:
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database)
         self.cursor = self.conn.cursor()
 
-        # %s are placeholders for values that will be passed into the SQL query
-
-    def add_form_data(self, salary, other, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes):
-        sql = """insert into form (salary, other, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        input_values = (salary, other, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+    # INSERT DATA
+    def add_username(self, username):
+        sql = 'INSERT INTO budget_user(username) VALUES (%s)'
+        input_values = (username)
+        try:
+            self.cursor.execute(sql, input_values)
+            self.conn.commit()
+        except Exception as exc:
+            print(exc)
+            self.conn.rollback()
+            print('rolled back')
+        sql_new_user_id = 'SELECT user_id FROM budget_user ORDER BY user_id DESC LIMIT 1'
+        self.cursor.execute (sql_new_user_id)
+        user_id = self.cursor.fetchone()
+        return user_id[0]
+    
+    def add_income_data(self, user_id, income_source, income_total):
+        sql = """insert into income (income_source, income_total, user_id) values (%s, %s, %s)"""
+        input_values = (income_source, income_total, user_id)
         try:
             self.cursor.execute(sql, input_values)
             self.conn.commit()
@@ -26,53 +40,30 @@ class DataProviderService:
             print(exc)
             self.conn.rollback()
             print("rolled back")
-        sql_new_form_id = "select id from form order by id desc limit 1"
+        sql_new_form_id = "select user_id from income order by user_id desc limit 1"
         self.cursor.execute(sql_new_form_id)
         new_form = self.cursor.fetchone()
         return new_form[0]
 
-    def get_form_data(self, form_id=None, limit=None):
-        all_form_data = []
-        if form_id is None:
-            sql = "SELECT * FROM person order by id desc"
-            self.cursor.execute(sql)
-            all_form_data = self.cursor.fetchall()
-        else:
-            sql = """Select * from person where id = %s"""
-            input_values = (form_id,)
+    
+    def add_form_data(self, user_id, food_drink=None, housing=None, energy=None, petrol=None, train=0, bus=None, eating=None, holidays=None, clothes=None):
+        sql = """insert into form (user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        input_values = (user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+        try:
             self.cursor.execute(sql, input_values)
-            all_form_data = self.cursor.fetchone()
-        return all_form_data
+            self.conn.commit()
+        except Exception as exc:
+            print(exc)
+            self.conn.rollback()
+            print("rolled back")
+        sql_new_form_id = "select user_id from form order by id desc limit 1"
+        self.cursor.execute(sql_new_form_id)
+        new_form = self.cursor.fetchone()
+        return new_form[0]
     
-    def get_benefits_data(self, benefit_requested):
-        sql = "SELECT benefit_name, how, what FROM benefits where benefit_name = '" + benefit_requested + "'"
-        self.cursor.execute(sql)
-        retrieved_data = self.cursor.fetchall()
-        return retrieved_data
-    
-    def get_average_monthly_expense_data_for_graph(self):
-        data = []
-        unpacked_data = []
-        self.cursor.callproc('average_monthly_data')
-        retrieved_data = self.cursor.fetchall()
-        # unpacking a tuple to a list so the decimal objects returned can be recast as integers
-        for item in retrieved_data:
-            unpacked = item
-            data.append(unpacked)
-        for tuple in data:
-            value = int(tuple[0])
-            unpacked_data.append(value)
-        return unpacked_data
-
-    def get_average_monthly_expense_data_for_page_table(self):
-        sql = "SELECT expense_source, expense_total FROM expense"
-        self.cursor.execute(sql)
-        expenses = self.cursor.fetchall()
-        return expenses
-    
-    def add_debt_data(self, debt_total_figure, debt_source='Personal Loan', debt_interest='0', debt_term='0', debt_monthsyears='years'):
-        sql = """insert into debt (debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears) values (%s, %s, %s, %s, %s)"""
-        input_values = (debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears)
+    def add_debt_data(self, debt_total_figure, debt_source='Personal Loan', debt_interest=None, debt_term=None):
+        sql = """insert into debt (debt_total_figure, debt_source, debt_interest, debt_term) values (%s, %s, %s, %s)"""
+        input_values = (debt_total_figure, debt_source, debt_interest, debt_term)
         try:
             self.cursor.execute(sql, input_values)
             self.conn.commit()
@@ -99,8 +90,58 @@ class DataProviderService:
         self.cursor.execute(sql_new_form_id)
         new_form = self.cursor.fetchone()
         return new_form[0]
+
+    # RETRIEVE DATA
+    def get_form_data(self, user_id=None, limit=None):
+        #single_user_data = []
+        if user_id is None:
+            sql = "SELECT * FROM form order by id desc limit 1"
+            self.cursor.execute(sql)
+            data = self.cursor.fetchall()
+        else:
+            sql = """Select food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes from form where user_id = %s"""
+            input_values = (user_id)
+            self.cursor.execute(sql, input_values)
+            retrieved_data = self.cursor.fetchone()
+            user_data = list(retrieved_data)
+            user_data = [int(value or 0) for value in user_data]
+        return user_data
     
+    def get_data_from_id(self, table, table_id, id):
+        data = []
+        sql = 'Select * from ' + table + ' where ' + table_id + ' = %s'
+        self.cursor.execute(sql, id)
+        data = self.cursor.fetchone()
+        return data
     
+
+    
+    def get_average_monthly_expense_data_for_graph(self):
+        data = []
+        unpacked_data = []
+        self.cursor.callproc('average_monthly_data')
+        retrieved_data = self.cursor.fetchall()
+        # unpacking a tuple to a list so the decimal objects returned can be recast as integers
+        for item in retrieved_data:
+            unpacked = item
+            data.append(unpacked)
+        for tuple in data:
+            value = int(tuple[0])
+            unpacked_data.append(value)
+        return unpacked_data
+
+
+
+# retrieve data for benefits pages
+    def get_benefits_data(self, benefit_requested):
+        sql = "SELECT benefit_name, how, what FROM benefits where benefit_name = '" + benefit_requested + "'"
+        self.cursor.execute(sql)
+        retrieved_data = self.cursor.fetchall()
+        return retrieved_data
+    
+
+
+# retrieve data for site stats pages
     def average_debt_report(self):
         sql = """select avg(debt_total_figure) from debt"""
         self.cursor.execute(sql)
@@ -112,13 +153,6 @@ class DataProviderService:
         self.cursor.execute(sql)
         frequency_debt_type_entered = self.cursor.fetchall()
         return frequency_debt_type_entered
-    
-    def get_data_from_id(self, table, table_id, id):
-        data = []
-        sql = 'Select * from ' + table + ' where ' + table_id + ' = %s'
-        self.cursor.execute(sql, id)
-        data = self.cursor.fetchone()
-        return data
     
     def average_savings_report(self):
         sql = """select avg(savings_total_figure) from savings"""

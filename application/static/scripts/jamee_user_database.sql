@@ -34,8 +34,7 @@ CREATE TABLE debt
 debt_total_figure decimal,
 debt_source varchar(100),
 debt_interest int,
-debt_term int,
-debt_monthsyears varchar(10)
+debt_term int
 );
 
 CREATE TABLE savings
@@ -46,6 +45,7 @@ monthly_saving_amount int,
 savings_interest int,
 savings_term int
 );
+-- fix above so it is always in months
 
 -- Adding foreign keys to 'category' table 
 ALTER TABLE category
@@ -88,7 +88,10 @@ ALTER TABLE savings
 ADD COLUMN expense_id int,
 ADD foreign key(expense_id) references expense(expense_id);
 
-
+-- Adding foreign key to income table
+ALTER TABLE income
+ADD COLUMN user_id int,
+ADD foreign key(user_id) references budget_user(user_id);
 
 
 -- insert test data into budget_user table
@@ -238,8 +241,6 @@ values
 
 create table form
 (id int not null auto_increment primary key,
-salary varchar(200),
-other varchar(200),
 food_drink varchar(200),
 housing varchar(200),
 energy varchar(200),
@@ -250,24 +251,80 @@ eating varchar(200),
 holidays varchar(200),
 clothes varchar(200));
 
-insert into debt(debt_total_figure, debt_source, debt_interest, debt_term, debt_monthsyears)
+ALTER TABLE form
+ADD COLUMN user_id int,
+ADD foreign key(user_id) references budget_user(user_id);
+
+-- INSERT data for the ONS averages
+insert into budget_user(username) values('UK Average Homeowner');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(1, 368, 1054, 112, 98, 18, 26, 128, 128, 181);
+
+insert into budget_user(username) values('UK Average Renter');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(2, 368, 771, 112, 98, 18, 26, 285, 128, 181);
+
+insert into budget_user(username) values('Average Homeowner earning 25K');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(3, 314, 642, 110, 77, 5, 18, 12, 78, 130);
+
+insert into budget_user(username) values('Average Renter earning 25K');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(4, 314, 732, 110, 77, 5, 18, 12, 78, 130);
+
+insert into budget_user(username) values('Average Homeowner earning 35K');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(5, 357, 837, 105, 90, 10, 35, 248, 105, 142);
+
+insert into budget_user(username) values('Average Renter earning 35K');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(6, 357, 778, 105, 90, 10, 35, 248, 105, 142);
+
+insert into budget_user(username) values('Average Homeowner earning 45K');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(7, 372, 981, 107, 102, 15, 35, 282, 115, 161);
+
+insert into budget_user(username) values('Average Renter earning 45K');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(8, 372, 955, 107, 102, 15, 35, 282, 115, 161);
+
+insert into budget_user(username) values('Average Homeowner earning 55K');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(9, 444, 1448, 119, 155, 24, 23, 390, 166, 266);
+
+insert into budget_user(username) values('Average Renter earning 55K');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(10, 444, 834, 119, 155, 24, 23, 390, 166, 266);
+
+insert into budget_user(username) values('Average Homeowner earning 75K');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(11, 477, 1722, 123, 147, 40, 32, 438, 222, 261);
+
+insert into budget_user(username) values('Average Renter earning 75K');
+insert into form(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+values(12, 477, 828, 123, 147, 40, 32, 438, 222, 261);
+
+
+insert into debt(debt_total_figure, debt_source, debt_interest, debt_term)
 values
-	(10000, 'Personal Loan', 5, 5, 'years'),
-    (5000, 'Personal Loan', 5, 5, 'years'),
-    (3000, 'Personal Loan', 5, 5, 'years'),
-    (50000, 'Mortgage', 2, 25, 'years'),
-    (100000, 'Mortgage', 12, 50, 'years'),
-    (75000, 'Mortgage', 6, 10, 'years'),
-    (10000, 'Car Loan', 14, 5, 'months'),
-    (25000, 'Car Loan', 6, 2, 'years'),
-    (75000, 'Car Loan', 4, 5, 'years'),
-    (400, 'Credit Card', 14, 2, 'months'),
-    (750, 'Credit Card', 15, 10, 'months');
+	(10000, 'Personal Loan', 5, 60),
+    (5000, 'Personal Loan', 5, 5),
+    (3000, 'Personal Loan', 5, 5),
+    (50000, 'Mortgage', 2, 25),
+    (100000, 'Mortgage', 12, 600),
+    (75000, 'Mortgage', 6, 50),
+    (10000, 'Car Loan', 14, 5),
+    (25000, 'Car Loan', 6, 2),
+    (75000, 'Car Loan', 4, 60),
+    (400, 'Credit Card', 14, 2),
+    (750, 'Credit Card', 15, 10);
 
 insert into savings(savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term)
 values
 	(100, 'car', 100, 5, 2),
     (200, 'computer', 50, 8, 5),
     (300, 'house', 500, 2, 20);
+
+select * from debt;
 
 

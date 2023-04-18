@@ -11,15 +11,15 @@
     <div class="row">
 <!-- This is where the 12 columns are divided into 2 groups of 6 -->
       <div class="col-sm-6">
+        <p>Average UK Spending (pcm) for salary bracket
+          <br>
+          {{ salary_data }}
+        </p>
         <table>
+          {% for key, value in average.items() %}
           <tr>
-            <th>Average UK Monthly Spending</th>
-            <th>&pound;'s</th>
-          </tr>
-          {% for item in uk_average %}
-          <tr>
-            <td>{{ item [0] }}</td>
-            <td>{{ item [1] }}</td>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
           </tr>
           {% endfor %}
         </table>
@@ -59,28 +59,22 @@
         <!-- Code for the loop to display weekly spending - needs python code to divide value into a weekly amount on the routes.py -->
         <h2>Your weekly Spending</h2>
         <table>
+          {% for key, value in weekly.items() %}
           <tr>
-            <th></th>
-            <th>&pound;'s</th>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
           </tr>
-          <tr>
-            <td>hmm</td>
-            <td></td>
-          </tr>
+          {% endfor %}
         </table>
       </div>
       <div class="col-sm-4">
         <!-- Code for the loop to display monthly spending - needs python code to divide value into a monthly amount on the routes.py -->
         <h2>Your monthly spending</h2>
         <table>
+          {% for key, value in monthly.items() %}
           <tr>
-            <th></th>
-            <th>&pound;'s</th>
-          </tr>
-          {% for key, value in user_list %}
-          <tr>
-            <td>{{ key }}</td>
-            <td>{{ value }}</td>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
           </tr>
           {% endfor %}
         </table>
@@ -89,8 +83,12 @@
         <!-- Code for the loop to display annual spending - needs python code to divide value into a monthly amount on the routes.py -->
         <h2>Your annual spending</h2>
         <table>
-          <th></th>
-          <th>&pound;'s</th>
+          {% for key, value in annual.items() %}
+          <tr>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
+          </tr>
+          {% endfor %}
         </table>
       </div>
     </div>

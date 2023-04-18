@@ -23,12 +23,12 @@ def contact():
 
 # https://www.codecademy.com/learn/learn-flask/modules/flask-templates-and-forms/cheatsheet
 # consider using a redirect here so the submit of the form redirects to the template
-@app.route('/form', methods=['GET', 'POST'])
+@app.route('/dashboard_form', methods=['GET', 'POST'])
 def form_input():
     error = ""
     form = BasicForm()
-
     if request.method == 'POST':
+        username = form.username.data
         salary = form.salary.data
         other = form.other.data
         food_drink = form.food_drink.data
@@ -40,40 +40,45 @@ def form_input():
         eating = form.eating.data
         holidays = form.holidays.data
         clothes = form.clothes.data
-
-        if not salary or not housing:
-            error = 'Please fill in the required Salary and Housing fields.'
+        if not username: #or not salary or not housing
+            error = 'Please fill in the required Username, Salary and Housing fields.'
+        
         else:
-            new_data = DATA_PROVIDER.add_form_data(salary, other, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
-            data = []
-            data += [food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes]
-            return render_template('dashboard.html', data=data, new_data=new_data)
+            user_id = DATA_PROVIDER.add_username(username)
+            DATA_PROVIDER.add_income_data(user_id, 'salary', salary)
+            DATA_PROVIDER.add_form_data(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
+            
+            user_data = DATA_PROVIDER.get_form_data(user_id)
+            uk_average_homeowner_data = DATA_PROVIDER.get_form_data(1)
+            
+            if salary > 75000:
+                salary_comparison_data = DATA_PROVIDER.get_form_data(11)
+                salary_data = '75K+ pa'
+            elif salary > 55000:
+                salary_comparison_data = DATA_PROVIDER.get_form_data(9)
+                salary_data = 'between 55K and 75K pa'
+            elif salary > 45000:
+                salary_comparison_data = DATA_PROVIDER.get_form_data(7)
+                salary_data = 'between 45K and 55K pa'
+            elif salary > 35000:
+                salary_comparison_data = DATA_PROVIDER.get_form_data(5)
+                salary_data = 'between 35K and 45K pa'
+            else:
+                salary_comparison_data = DATA_PROVIDER.get_form_data(3)
+                salary_data = 'less than 25K pa'
 
-    return render_template('form.html', title='Form Page', form=form, message=error)
+            Finance.create_pie(user_data)
+            Finance.create_stacked_bar(user_data, salary_comparison_data, uk_average_homeowner_data)
 
+            uk_average_household_data = Finance.create_table(salary_comparison_data)
+            weekly = Finance.dashboard_weekly_calculator(user_data)
+            monthly = Finance.dashboard_monthly_calculator(user_data)
+            annual = Finance.dashboard_annual_calculator(user_data)
+           
+            return render_template('dashboard.html', title='Dashboard', average=uk_average_household_data, weekly = weekly, monthly=monthly, annual=annual, salary_data=salary_data)
 
-@app.route('/dashboard')
-def dashboard():
-
-    comparison_list = DATA_PROVIDER.get_average_monthly_expense_data_for_graph()
-    comparison_list.insert(0, 'UK Average')
-
-    # currently using hard-coded user data to create graphs
-    headers_list = ['housing', 'food and drink', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
-    pie_user_list = [981, 372, 107, 102, 15, 35, 382, 115, 161]
-    user_list = ['My Spending', 981, 372, 107, 102, 15, 35, 382, 115, 161]
-    
-    Finance.create_pie(headers_list, pie_user_list)
-    Finance.create_stacked_bar(user_list, comparison_list)
-
-    # grab data to create average UK spending table
-    av = DATA_PROVIDER.get_average_monthly_expense_data_for_page_table()
-    # create a dictionary to use for spending loops
-    headers_to_user_input = {key:value for key, value in zip(headers_list, pie_user_list)}
-
-    return render_template('dashboard.html', title='Dashboard', uk_average=av, user_list=headers_to_user_input) #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
-
-
+    return render_template('dashboard_form.html', title='Form Page', form=form, message=error)
+    #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
 
 
 @app.route('/admin')
@@ -111,9 +116,9 @@ def calculate_savings():
             error3 = 'Please enter an initial lump sum and a savings goal'
         else:
             if not savings_interest:
-                savings_interest = 6
+                savings_interest = 5
             if not savings_term:
-                savings_term = 20
+                savings_term = 10
             if not monthly_saving_amount:
                 monthly_saving_amount = 0
             if not savings_goal:
@@ -153,8 +158,10 @@ def calculate_debt():
             if not debt_term:
                 debt_term = 5
             if not debt_monthsyears:
-                debt_monthsyears = 'years'
-            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term, debt_monthsyears)
+                debt_monthsyears = 'months'
+            if debt_monthsyears == "years":
+                debt_term = debt_term*12
+            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term)
             debt_data = DATA_PROVIDER.get_data_from_id('debt', 'debt_total_id', new_debt_id)
             print(debt_data)
             calculated_total_debt = Finance.debt_calculator(debt_data)
