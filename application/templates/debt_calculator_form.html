@@ -95,16 +95,16 @@
                 <!-- {{ form.debt_amount}} {{ form.debt_amount.label }} -->
                 <div class="mb-3">
                   <label for="debt_interest" class="form-label">{{ form.debt_interest.label }}</label>
+                  <p>&#9733; calculated using 5% APR if no value is entered</p>
                   <input type="number" class="form-control" id="debt_amount" name="debt_interest" placeholder="5">
                 </div>
                 <!-- {{ form.debt_interest }} {{ form.debt_interest.label }} -->
                 <div class="mb-3">
                   <label for="debt_term" class="form-label">{{ form.debt_term.label }}</label>
-                  <input type="number" class="form-control" id="debt_term" name="debt_term" placeholder="5">
+                  <p>&#9733; calculated over 24 months if no value is entered</p>
+                  <input type="number" class="form-control" id="debt_term" name="debt_term" placeholder="24">
                 </div>
                 <!-- {{ form.debt_term }} {{ form.debt_term.label }} -->
-
-                {{ form.monthsyears }}
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <!-- {{ form.submit }} -->

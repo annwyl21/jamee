@@ -2,36 +2,60 @@
 
 {% block main_content %}
 
-<h1>Simple Debt Calculator</h1>
-<h1>Your results</h1>
+<div class="container-fluid bg-1 text-center">
+    <div class="row">
+    <h1>Debt Calculator Results</h1>
+    {% if total %}
+        <div class="col-sm-6">
+            <p>Your debt is in the form of a {{ debt_data[1] }}
+            <br>
+            You borrowed &pound;{{ '%.2f' % debt_data[0] }} at {{ debt_data[2] }}% APR interest over {{ debt_data[3] }} months.
+            <br>
+            <br>
+            In total, you will repay &pound;{{ total }} back to the lender
+            </p>
+        </div>
+    {% endif %}
+        
+    {% if debt_stack %}
+<h4>Which is better for you ?</h4>
+    <div class="col-sm-3">
+        <br> 
+        The <b>Debt Stack Approach</b> is to pay off the debt with the <b>highest interest</b> first.
+        <br>
+        <table>
+            <tr>
+                <th>Debt Stack</th>
+            </tr>
+            {% for debt in debt_stack %}
+            <tr>
+                <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[5] }} months ({{ debt[6] }} years)</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-sm-3">
+        <br>
+        The <b>Debt Snowball Approach</b> is to pay off the <b>biggest debt</b> first.
+        <br>
+        <table>
+            <tr>
+                <th>Debt Snowball</th>
+            </tr>
+            {% for debt in debt_snowball %}
+            <tr>
+                <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[7] }} months ({{ debt[8] }} years)</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
 
-<p>
-    Your debt is in the form of a {{ debt_data[2] }}
-    <br>
-    You borrowed &pound;{{ '%.2f' % debt_data[1] }} at {{ debt_data[3] }}% APR interest over {{ debt_data[4] }} months.
-    <br>
-    <br>
-    In total, you will repay &pound;{{ total }} back to the lender
-</p>
 
-A rough plan for the debt feedback page
-
-<p>You have 4 debts.</p>
-<ul>
-    loan type, loan size, interest rate - total that you will pay back to the lender
-
-<p>If you chose to pay them using a snowball approach, they would be paid off in order of debt size:
-    <ul>
-        loan type, loan size, - paid after x months
-        loan type, loan size, - paid after x months
-        loan type, loan size, - paid after x months
-    </ul>
-
-    If you chose a stack approach, they would be paid off in order of interest rate:
-    <ul>
-        loan type, highest interest rate - paid after x months
-        loan type lowest interest rate - paid after x months
-    </ul>
-</p>
+        <div class="col-sm-6">
+            <img src="{{ url_for('static', filename='images/anxious_woman.jpeg') }}" class="img-responsive margin" width="90%" alt="woman solving debt problems">
+        </div>
+    </div>
+  </div>
 
 {% endblock %}

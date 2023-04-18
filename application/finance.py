@@ -8,14 +8,47 @@ import seaborn as sns
 class Finance:
 
     def debt_calculator(self, debt_data):
-        debt_term = debt_data[4]
-        interest_rate = debt_data[3]
-        debt_amount = debt_data[1]
+        debt_term = debt_data[3]
+        interest_rate = debt_data[2]
+        debt_amount = debt_data[0]
         interest_rate = interest_rate/100
         annual_interest = int(debt_amount) * interest_rate
         monthly_interest = annual_interest/12        
         total_interest = monthly_interest*debt_term
         return total_interest + int(debt_amount)
+    
+    def debt_comparison_calc(self, debt_nested_list):        
+        debt_stack = sorted(debt_nested_list, key=lambda debt: debt[2], reverse=True) # sorted by interest rate
+        debt_stack = self.comparison_calc(debt_stack)
+        print(debt_stack)
+        comparison = [debt_stack]
+        debt_snowball = debt_nested_list
+        debt_snowball.sort(key = lambda debt: debt[0], reverse=True )  # sorted by loan size
+        debt_snowball = self.comparison_calc(debt_snowball)
+        print(debt_snowball)
+        debt_snowball = [debt_snowball]
+        comparison += debt_snowball
+        return comparison
+        
+    def comparison_calc(self, nested_list):
+        num_of_months = 0
+        extra_repayment = 0
+        left_over = 0
+        for debt in nested_list:
+            balance = debt[0]
+            repayment = debt[3]
+            while balance > 0:
+                if balance < repayment:
+                    left_over = repayment - balance
+                    balance = 0
+                balance = balance - repayment - extra_repayment - left_over
+                left_over = 0
+                num_of_months += 1
+            debt.append(num_of_months)
+            years = int(num_of_months/12)
+            debt.append(years)
+            extra_repayment += repayment
+        return nested_list
     
     def savings_calculator(self, savings_data):
         interest_rate = savings_data[4]/100

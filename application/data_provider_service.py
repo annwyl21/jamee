@@ -61,9 +61,9 @@ class DataProviderService:
         new_form = self.cursor.fetchone()
         return new_form[0]
     
-    def add_debt_data(self, debt_total_figure, debt_source='Personal Loan', debt_interest=None, debt_term=None):
-        sql = """insert into debt (debt_total_figure, debt_source, debt_interest, debt_term) values (%s, %s, %s, %s)"""
-        input_values = (debt_total_figure, debt_source, debt_interest, debt_term)
+    def add_debt_data(self, debt_total_figure, debt_source='Personal Loan', debt_interest=None, debt_term=None, repayment=None):
+        sql = """insert into debt (debt_total_figure, debt_source, debt_interest, debt_term, repayment) values (%s, %s, %s, %s, %s)"""
+        input_values = (debt_total_figure, debt_source, debt_interest, debt_term, repayment)
         try:
             self.cursor.execute(sql, input_values)
             self.conn.commit()
@@ -109,9 +109,13 @@ class DataProviderService:
     
     def get_data_from_id(self, table, table_id, id):
         data = []
-        sql = 'Select * from ' + table + ' where ' + table_id + ' = %s'
+        sql = 'Select debt_total_figure, debt_source, debt_interest, debt_term, repayment from ' + table + ' where ' + table_id + ' = %s'
         self.cursor.execute(sql, id)
         data = self.cursor.fetchone()
+        data = list(data)
+        loan_type = data.pop(1)
+        data = [int(value or 0) for value in data]
+        data.insert(1, loan_type)
         return data
     
 
