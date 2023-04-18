@@ -4,38 +4,56 @@
 
 <div class="container-fluid bg-1 text-center">
     <div class="row">
-      <div class="col-sm-6">
-        <h1>Debt Calculator Results</h1>
-        {% if total %}
-        <p>Your debt is in the form of a {{ debt_data[1] }}
-        <br>
-        You borrowed &pound;{{ '%.2f' % debt_data[0] }} at {{ debt_data[2] }}% APR interest over {{ debt_data[3] }} months.
-        <br>
-        <br>
-        In total, you will repay &pound;{{ total }} back to the lender
-        </p>
-        {% endif %}
+    <h1>Debt Calculator Results</h1>
+    {% if total %}
+        <div class="col-sm-6">
+            <p>Your debt is in the form of a {{ debt_data[1] }}
+            <br>
+            You borrowed &pound;{{ '%.2f' % debt_data[0] }} at {{ debt_data[2] }}% APR interest over {{ debt_data[3] }} months.
+            <br>
+            <br>
+            In total, you will repay &pound;{{ total }} back to the lender
+            </p>
+        </div>
+    {% endif %}
         
-        {% if comparison %}
-        <p><h4>Which is better for you ?</h4>
+    {% if debt_stack %}
+<h4>Which is better for you ?</h4>
+    <div class="col-sm-3">
         <br> 
         The <b>Debt Stack Approach</b> is to pay off the debt with the <b>highest interest</b> first.
         <br>
+        <table>
+            <tr>
+                <th>Debt Stack</th>
+            </tr>
+            {% for debt in debt_stack %}
+            <tr>
+                <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[5] }} months ({{ debt[6] }} years)</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-sm-3">
+        <br>
         The <b>Debt Snowball Approach</b> is to pay off the <b>biggest debt</b> first.
-        <br><br>
-        {% for debt in comparison %}
-        <b>{{ debt[1] }}</b>, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR
         <br>
-        Using a debt stack, this debt would be paid after {{ debt[5] }} months
-        <br>
-        Using a debt snowball, this debt would be paid after {{ debt[6] }} months
-        <br>
-        {% endfor %}
-        </p>
-        {% endif %}
-      </div>
+        <table>
+            <tr>
+                <th>Debt Snowball</th>
+            </tr>
+            {% for debt in debt_snowball %}
+            <tr>
+                <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[7] }} months ({{ debt[8] }} years)</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+
         <div class="col-sm-6">
-            <img src="{{ url_for('static', filename='images/anxious_woman.jpeg') }}" height="400" alt="woman solving debt problems">
+            <img src="{{ url_for('static', filename='images/anxious_woman.jpeg') }}" class="img-responsive margin" width="90%" alt="woman solving debt problems">
         </div>
     </div>
   </div>
