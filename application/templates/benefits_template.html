@@ -2,24 +2,18 @@
 
 {% block main_content %}
 
-<div class="container-fluid bg-1 text-center">
-    <div class="row">
-      <div class="col-sm-12">
-        <h1>{{ title }}</h1>
-        <br>
-        {% set endpoint, how, what  = data %}
-        <p>How it works</p>
-        <br>
-        {{ how }}
-        <br><br>
-        <p>What you'll get</p>
-        <br>
-        {{ what }}
-        <br>
-        <br>
-        <p>To find out more about your eligibility, visit https://www.gov.uk/{{ endpoint }}</p>
-      </div>
-    </div>
-  </div>
+<h1>{{ title }}</h1>
+<br>
+{% set endpoint, how, what  = data %}
+<p>How it works</p>
+<br>
+{{ how }}
+<br><br>
+<p>What you'll get</p>
+<br>
+{{ what }}
+<br>
+<br>
+<p>To find out more about your eligibility, visit https://www.gov.uk/{{ endpoint }}</p>
 
 {% endblock %}
