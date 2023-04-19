@@ -81,8 +81,8 @@ def form_input():
     #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
 
 
-@app.route('/admin')
-def admin():
+@app.route('/site_statistics')
+def site_statistics():
     average_debt_data = DATA_PROVIDER.average_debt_report() # returns a decimal object
     average_debt = int(average_debt_data) # recast decimal object as an integer
     average = f"{average_debt:,.02f}" # make the integer a formatted string with thousand separator and 2 decimal places for pence
@@ -95,7 +95,7 @@ def admin():
     savings_type_frequency = DATA_PROVIDER.frequency_savings_report()   
     Finance.generate_savings_report(average_savings_data, savings_type_frequency)
 
-    return render_template('admin.html', title='Reports', average_debt_data = average, debt_type = debt_type_frequency, average_savings_data=avg, savings_type=savings_type_frequency )
+    return render_template('site_statistics.html', title='Site Statistics and Reports', average_debt_data = average, debt_type = debt_type_frequency, average_savings_data=avg, savings_type=savings_type_frequency )
 
 
 
@@ -222,15 +222,15 @@ def benefits(benefit_name):
     # Grab 3 pieces of information from a returned tuple; url-endpoint, how-data and what-data to auto-complete fields
     info_benefits = DATA_PROVIDER.get_benefits_data(benefit_name)
     if benefit_name == 'child-benefit':
-        return render_template('articles.html', title='Child Benefit', data=info_benefits[0])
+        return render_template('benefits_template.html', title='Child Benefit', data=info_benefits[0])
     elif benefit_name == 'housing-benefit':
-        return render_template('articles.html', title='Housing Benefit', data=info_benefits[0])
+        return render_template('benefits_template.html', title='Housing Benefit', data=info_benefits[0])
     elif benefit_name == 'employment-support-allowance':
-        return render_template('articles.html', title='ESA', data=info_benefits[0])
+        return render_template('benefits_template.html', title='ESA', data=info_benefits[0])
     elif benefit_name == 'jobseekers-allowance':
-        return render_template('articles.html', title='JSA', data=info_benefits[0])
+        return render_template('benefits_template.html', title='JSA', data=info_benefits[0])
     elif benefit_name == 'universal-credit':
-        return render_template('articles.html', title='Universal Credit', data=info_benefits[0])
+        return render_template('benefits_template.html', title='Universal Credit', data=info_benefits[0])
     else:
         return render_template('index.html', title='Home Page')
 
