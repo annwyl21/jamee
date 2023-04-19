@@ -17,17 +17,21 @@ class Finance:
         total_interest = monthly_interest*debt_term
         return total_interest + int(debt_amount)
     
-    def debt_comparison_calc(self, debt_nested_list):        
-        debt_stack = sorted(debt_nested_list, key=lambda debt: debt[2], reverse=True) # sorted by interest rate
-        debt_stack = self.comparison_calc(debt_stack)
-        print(debt_stack)
-        comparison = [debt_stack]
-        debt_snowball = debt_nested_list
-        debt_snowball.sort(key = lambda debt: debt[0])  # sorted by loan size
-        debt_snowball = self.comparison_calc(debt_snowball)
-        print(debt_snowball)
-        debt_snowball = [debt_snowball]
+    def debt_comparison_calc(self, stack, snowball, avalanche):      
+        debt_stack = sorted(stack, key=lambda debt: debt[2], reverse=True) # sorted by interest rate descending
+        stack = self.comparison_calc(debt_stack)
+        comparison = (stack,)
+
+        snowball.sort(key = lambda debt: debt[0])  # sorted by loan size ascending
+        debt_snowball = self.comparison_calc(snowball)
+        debt_snowball = (debt_snowball,)
         comparison += debt_snowball
+
+        avalanche.sort(key = lambda debt: debt[0], reverse=True)  # sorted by loan size descending
+        debt_avalanche = self.comparison_calc(avalanche)
+        debt_avalanche = (debt_avalanche,)
+        comparison += debt_avalanche
+
         return comparison
         
     def comparison_calc(self, nested_list):

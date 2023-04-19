@@ -15,11 +15,21 @@
             In total, you will repay &pound;{{ total }} back to the lender
             </p>
         </div>
-    {% endif %}
+        <div class="col-sm-6">
+            <img src="{{ url_for('static', filename='images/anxious_woman.jpeg') }}" class="img-responsive margin" width="90%" alt="woman solving debt problems">
+        </div>
+    </div>
+</div>
+{% endif %}
         
-    {% if debt_stack %}
+    {% if stack %}
+    <div class="col-sm-6">
 <h4>Which is better for you ?</h4>
-    <div class="col-sm-3">
+</div>
+<div class="col-sm-6">
+    <img src="{{ url_for('static', filename='images/anxious_woman.jpeg') }}" class="img-responsive margin" width="30%" alt="woman solving debt problems">
+</div>
+    <div class="col-sm-4">
         <br> 
         The <b>Debt Stack Approach</b> is to pay off the debt with the <b>highest interest</b> first.
         <br>
@@ -30,7 +40,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for debt in debt_stack %}
+            {% for debt in stack %}
             <tr>
                 <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[5] }} months ({{ debt[6] }} years)</td>
             </tr>
@@ -38,9 +48,9 @@
             </tbody>
         </table>
     </div>
-    <div class="col-sm-3">
-        <br>
-        The <b>Debt Snowball Approach</b> is to pay off the <b>biggest debt</b> first.
+    <div class="col-sm-4">
+        <br> 
+        The <b>Debt Snowball Approach</b> is to pay off the <b>smallest debt</b> first.
         <br>
         <table class="table table-striped">
             <thead>
@@ -49,21 +59,36 @@
                 </tr>
             </thead>
             <tbody>
-            {% for debt in debt_snowball %}
+            {% for debt in snowball %}
             <tr>
-                <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[7] }} months ({{ debt[8] }} years)</td>
+                <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[5] }} months ({{ debt[6] }} years)</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-4">
+        <br>
+        The <b>Debt Avalanche Approach</b> is to pay off the <b>biggest debt</b> first.
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Debt Avalanche</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for debt in avalanche %}
+            <tr>
+                <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[5] }} months ({{ debt[6] }} years)</td>
             </tr>
             {% endfor %}
         </tbody>
         </table>
     </div>
+</div>
     {% endif %}
 
 
-        <div class="col-sm-6">
-            <img src="{{ url_for('static', filename='images/anxious_woman.jpeg') }}" class="img-responsive margin" width="90%" alt="woman solving debt problems">
-        </div>
-    </div>
-  </div>
 
 {% endblock %}
