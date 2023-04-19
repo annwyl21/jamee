@@ -42,7 +42,7 @@
             <tbody>
             {% for debt in stack %}
             <tr>
-                <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[5] }} months ({{ debt[6] }} years)</td>
+                <td>{{ debt[1] }}, &pound;{{ debt[0] }}<br>with {{ debt[2] }}%APR, repayments of &pound;{{ debt[3] }}<br> paid by {{ debt[5] }} months ({{ debt[6] }} years)</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -61,7 +61,7 @@
             <tbody>
             {% for debt in snowball %}
             <tr>
-                <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[5] }} months ({{ debt[6] }} years)</td>
+                <td>{{ debt[1] }}, &pound;{{ debt[0] }}<br>with {{ debt[2] }}%APR, repayments of &pound;{{ debt[3] }}<br> paid by {{ debt[7] }} months ({{ debt[8] }} years)</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -80,7 +80,7 @@
             <tbody>
             {% for debt in avalanche %}
             <tr>
-                <td>{{ debt[1] }}, &pound;{{ debt[0] }}, at {{ debt[2] }}%APR<br> paid by {{ debt[5] }} months ({{ debt[6] }} years)</td>
+                <td>{{ debt[1] }}, &pound;{{ debt[0] }}<br>with {{ debt[2] }}%APR, repayments of &pound;{{ debt[3] }}<br> paid by {{ debt[9] }} months ({{ debt[10] }} years)</td>
             </tr>
             {% endfor %}
         </tbody>

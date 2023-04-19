@@ -208,11 +208,9 @@ def debt_comparison():
             debt1 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt1_id)
             debt2 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt2_id)
             debt3 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt3_id)
-            stack = [debt1, debt2, debt3]# the computer knows these are the same and is creating 1 object which is causing me issues
-            snowball = [debt1, debt2, debt3]
-            avalanche = [debt1, debt2, debt3]
+            debt_tuple = (debt1, debt2, debt3)# the computer knows these are the same and is creating 1 object which is causing me issues
             
-            comparison = Finance.debt_comparison_calc(stack, snowball, avalanche)
+            comparison = Finance.debt_comparison_calc(debt_tuple)
             stack = comparison[0]
             snowball = comparison[1]
             avalanche = comparison[2]
