@@ -28,6 +28,7 @@ def form_input():
     form = BasicForm()
     if request.method == 'POST':
         username = form.username.data
+        username = username.lowercase()
         homeowner = form.homeowner.data
         salary = form.salary.data
         other = form.other.data
@@ -171,7 +172,6 @@ def calculate_debt():
 
 @app.route('/debt_comparison_form', methods=['GET', 'POST'])
 def debt_comparison():
-    comparison_info = []
     error = ''
     form = ComparisonForm()
     if request.method == 'POST':
