@@ -4,7 +4,7 @@
 
 <div class="container-fluid bg-1 text-center">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <h1>Simple Savings Calculator</h1>
         <h4>Your results</h4>
         <p>Your lump sum investment to save for a {{ savings_data[2] }}, saving {{ savings_data[3] }} each month:
@@ -12,6 +12,9 @@
         <br>
         <br>In total, your investment would be worth approximately &pound;{{ total }}
         </p>
+      </div>
+      <div class="col-sm-6">
+          <img src="{{ url_for('static', filename='images/gift.jpg') }}" class="img-responsive margin" width="90%" alt="Photo of Gift by Jess Bailey on Unsplash">
       </div>
     </div>
   </div>
