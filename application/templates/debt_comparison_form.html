@@ -1,11 +1,32 @@
 {% extends "layout.html" %}
 
 {% block main_content %}
+<h1>Debt Repayment Methods</h1>
+<h4>Snowball, Stack or Avalanche ???</h4>
+<div class="container-fluid bg-1 text-left">
+  <div class="row">
+  <div class="col-sm-6">
+    <div>
+      
+      <p>
+        <ul>
+          <li>DEBT STACK - order by interest rate, pay highest interest rate first</li>
+          <li>DEBT SNOWBALL - order by debt size, pay smallest debt first</li>
+          <li>DEBT AVALANCHE - order by debt size, pay largest debt first</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div>
+      <img src="{{ url_for('static', filename='images/snowballdebts.jpg') }}" class="img-responsive margin" width="30%" alt="woman solving debt problems">
+    </div>
+  </div>
+</div>
 
 <div class="container-fluid bg-1 text-left">
   <div class="row">
   <div class="col-sm-12">
-    <h1>Should I choose a debt snowball or debt stack method ?</h1>
     <p><h4>Enter information about 3 of your debts here and see the difference between a snowball and a stack method...</h4>
       {{ message }}
     <div class="accordion" id="debtcomparisonaccordion">

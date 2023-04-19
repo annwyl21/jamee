@@ -1,7 +1,8 @@
 Savings Calculator
 When people visit our site they use our savings calculator to find out how much they could save over a given number of years.
-The average lump sum people search for is GBP200.00.
+The average lump sum people search for is GBP516.67.
 Those savings are usually for a car.
-1 searches about a car
+3 searches about a car
 1 searches about a computer
 1 searches about a house
+1 searches about a rainy day

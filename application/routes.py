@@ -28,7 +28,6 @@ def form_input():
     form = BasicForm()
     if request.method == 'POST':
         username = form.username.data
-        username = username.lowercase()
         homeowner = form.homeowner.data
         salary = form.salary.data
         other = form.other.data
@@ -120,23 +119,21 @@ def calculate_savings():
         savings_term = form.savings_term.data
         savings_goal = form.savings_goal.data
         if not savings_lump:
-            # if any of those are False/ empty
-            error3 = 'Please enter an initial lump sum and a savings goal'
-        else:
-            if not savings_interest:
-                savings_interest = 5
-            if not savings_term:
-                savings_term = 10
-            if not monthly_saving_amount:
-                monthly_saving_amount = 0
-            if not savings_goal:
-                savings_goal = 'rainy day'
-            new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal, monthly_saving_amount, savings_interest, savings_term)
-            savings_data = DATA_PROVIDER.get_data_from_id('savings', 'savings_total_id', new_savings_id)
-            print(savings_data)
-            calculated_total_savings = Finance.savings_calculator(savings_data)
-            calculated_total_savings = f"{calculated_total_savings:,.02f}"
-            return render_template('savings_calculator.html', total=calculated_total_savings, savings_data=savings_data)
+            savings_lump = 500
+        if not savings_interest:
+            savings_interest = 5
+        if not savings_term:
+            savings_term = 10
+        if not monthly_saving_amount:
+            monthly_saving_amount = 50
+        if not savings_goal:
+            savings_goal = 'rainy day'
+        new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal, monthly_saving_amount, savings_interest, savings_term)
+        savings_data = DATA_PROVIDER.get_data_from_id('savings', 'savings_total_id', new_savings_id)
+        print(savings_data)
+        calculated_total_savings = Finance.savings_calculator(savings_data)
+        calculated_total_savings = f"{calculated_total_savings:,.02f}"
+        return render_template('savings_calculator.html', total=calculated_total_savings, savings_data=savings_data)
 
     return render_template('savings_calculator_form.html', form=form, message=error3, external_link_money_saving_expert=external_link_money_saving_expert)
 
@@ -215,8 +212,7 @@ def debt_comparison():
             
             comparison = Finance.debt_comparison_calc(debt_list)
             debt_stack = comparison[0]
-            debt_snowball = comparison[1]
-            print(debt_snowball)
+            debt_snowball = comparison[1] 
             return render_template('debt_calculator.html', debt_stack=debt_stack, debt_snowball=debt_snowball)
 
     return render_template('debt_comparison_form.html', form=form, message=error)

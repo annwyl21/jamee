@@ -102,7 +102,7 @@ class DataProviderService:
         if user_id is None:
             sql = "SELECT * FROM form order by id desc limit 1"
             self.cursor.execute(sql)
-            data = self.cursor.fetchall()
+            user_data = self.cursor.fetchall()
         else:
             sql = """Select food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes from form where user_id = %s"""
             input_values = (user_id)

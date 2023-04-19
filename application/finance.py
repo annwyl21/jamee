@@ -23,7 +23,7 @@ class Finance:
         print(debt_stack)
         comparison = [debt_stack]
         debt_snowball = debt_nested_list
-        debt_snowball.sort(key = lambda debt: debt[0], reverse=True )  # sorted by loan size
+        debt_snowball.sort(key = lambda debt: debt[0])  # sorted by loan size
         debt_snowball = self.comparison_calc(debt_snowball)
         print(debt_snowball)
         debt_snowball = [debt_snowball]
