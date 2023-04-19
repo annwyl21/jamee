@@ -28,6 +28,7 @@ def form_input():
     form = BasicForm()
     if request.method == 'POST':
         username = form.username.data
+        homeowner = form.homeowner.data
         salary = form.salary.data
         other = form.other.data
         food_drink = form.food_drink.data
@@ -48,24 +49,31 @@ def form_input():
             DATA_PROVIDER.add_income_data(user_id, 'other', other)
             DATA_PROVIDER.add_form_data(user_id, food_drink, housing, energy, petrol, train, bus, eating, holidays, clothes)
             
-            user_data = DATA_PROVIDER.get_form_data(user_id)
-            uk_average_homeowner_data = DATA_PROVIDER.get_form_data(1)
-            
-            if salary > 75000:
-                salary_comparison_data = DATA_PROVIDER.get_form_data(11)
+            user_data = DATA_PROVIDER.get_form_data(user_id)   
+            if salary > 75_000:
+                average_data = 11
                 salary_data = '75K+ pa'
-            elif salary > 55000:
-                salary_comparison_data = DATA_PROVIDER.get_form_data(9)
+            elif salary > 55_000:
+                average_data = 9
                 salary_data = 'between 55K and 75K pa'
-            elif salary > 45000:
-                salary_comparison_data = DATA_PROVIDER.get_form_data(7)
+            elif salary > 45_000:
+                average_data = 7
                 salary_data = 'between 45K and 55K pa'
-            elif salary > 35000:
-                salary_comparison_data = DATA_PROVIDER.get_form_data(5)
+            elif salary > 35_000:
+                average_data = 5
                 salary_data = 'between 35K and 45K pa'
             else:
-                salary_comparison_data = DATA_PROVIDER.get_form_data(3)
+                average_data = 3
                 salary_data = 'less than 25K pa'
+
+            if homeowner:
+                salary_comparison = 1
+            else:
+                salary_comparison = 2
+                average_data +=1
+            
+            uk_average_homeowner_data = DATA_PROVIDER.get_form_data(average_data)
+            salary_comparison_data = DATA_PROVIDER.get_form_data(salary_comparison)
 
             Finance.create_pie(user_data)
             Finance.create_stacked_bar(user_data, salary_comparison_data, uk_average_homeowner_data)
@@ -78,7 +86,7 @@ def form_input():
             return render_template('dashboard.html', title='Dashboard', average=uk_average_household_data, weekly = weekly, monthly=monthly, annual=annual, salary_data=salary_data)
 
     return render_template('dashboard_form.html', title='Form Page', form=form, message=error)
-    #key=value pairs (my_variable_on_html_page = this_thing_here_on this page)
+
 
 
 @app.route('/site_statistics')
@@ -89,9 +97,9 @@ def site_statistics():
     debt_type_frequency = DATA_PROVIDER.frequency_debt_report()   
     Finance.generate_debt_report(average_debt_data, debt_type_frequency)
 
-    average_savings_data = DATA_PROVIDER.average_savings_report() # returns a decimal object
-    average_savings = int(average_savings_data) # recast decimal object as an integer
-    avg = f"{average_savings:,.02f}" # make the integer a formatted string with thousand separator and 2 decimal places for pence
+    average_savings_data = DATA_PROVIDER.average_savings_report()
+    average_savings = int(average_savings_data)
+    avg = f"{average_savings:,.02f}"
     savings_type_frequency = DATA_PROVIDER.frequency_savings_report()   
     Finance.generate_savings_report(average_savings_data, savings_type_frequency)
 

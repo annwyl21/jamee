@@ -128,10 +128,6 @@ class DataProviderService:
         sql = 'Select * from ' + table + ' where ' + table_id + ' = %s'
         self.cursor.execute(sql, id)
         data = self.cursor.fetchone()
-        data = list(data)
-        loan_type = data.pop(1)
-        data = [int(value or 0) for value in data]
-        data.insert(1, loan_type)
         return data
     
     def get_average_monthly_expense_data_for_graph(self):

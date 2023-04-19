@@ -1,4 +1,4 @@
-from wtforms import IntegerField, SubmitField, RadioField, SelectField, StringField
+from wtforms import IntegerField, SubmitField, BooleanField, SelectField, StringField
 from flask_wtf import FlaskForm
 
 
@@ -9,6 +9,7 @@ from flask_wtf import FlaskForm
 
 class BasicForm(FlaskForm):
     username = StringField('Username')
+    homeowner = BooleanField('Homeowner')
     salary = IntegerField('Salary')
     other = IntegerField('Other')
     food_drink = IntegerField('Food and Drink')
