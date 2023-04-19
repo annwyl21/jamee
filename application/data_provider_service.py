@@ -15,7 +15,8 @@ class DataProviderService:
         if sys.platform == 'win32':
             password = 'password'
         else:
-            password = ""
+            # this below I had to change to password = "password" (instead of empty) as otherwise it doesn't load for me
+            password = "password"
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database)
         self.cursor = self.conn.cursor()
 
