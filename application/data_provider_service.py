@@ -1,4 +1,5 @@
 import pymysql
+import sys
 
 
 class DataProviderService:
@@ -9,8 +10,12 @@ class DataProviderService:
         host = 'localhost'
         port = 3306
         user = 'root'
-        password = 'password'
+        #password = 'password'
         database = 'budget_management'
+        if sys.platform == 'win32':
+            password = 'password'
+        else:
+            password = ""
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database)
         self.cursor = self.conn.cursor()
 

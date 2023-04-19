@@ -2,55 +2,58 @@
 
 {% block main_content %}
 
-<div>
-  <h1>Site Statistics</h1>
-  <br>
-  <h4>Debt Calculator</h4>
-  <p>
-    <br>
-    When people visit our site they use our debt calculator to find out how much they will repay in total over the repayment period.
-    <br>
-    The average amount of personal debt that people visiting our site have investigated is &pound;{{ average_debt_data }}.
-    <br>
-    Those debts are usually in the form of a {{ debt_type[0][0] }}.
-    <br>
-    <table>
-      <tr>
-        <th>Type of loan investigated</th>
-        <th>Number of calculations</th>
-      </tr>
-      {% for item in debt_type %}
-      <tr>
-        <td>{{ item [0] }}</td>
-        <td>{{ item [1] }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-  </p>
-  <br>
-  <h4>Savings Calculator</h4>
-  <br>
-  <p>
-    <br>
-    When people visit our site they use our savings calculator to find out how much they could save in total over a given number of years.
-    <br>
-    The average lump_sum that people visiting our site have looked into investing is &pound;{{ average_savings_data }}.
-    <br>
-    Those savings are usually for a {{ savings_type[0][0] }}.
-    <br>
-    <table>
-      <tr>
-        <th>Things people save for:</th>
-        <th>count</th>
-      </tr>
-      {% for item in savings_type %}
-      <tr>
-        <td>{{ item [0] }}</td>
-        <td>{{ item [1] }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-  </p>
+<div class="container-fluid bg-1 text-center">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Site Statistics</h1>
+      <h4>Debt Calculator</h4>
+      <p>
+        <br>
+        When people visit our site they use our debt calculator to find out how much they will repay in total over the repayment period.
+        <br>
+        The average amount of personal debt that people visiting our site have investigated is &pound;{{ average_debt_data }}.
+        <br>
+        Those debts are usually in the form of a {{ debt_type[0][0] }}.
+        <br>
+        <table>
+          <tr>
+            <th>Type of loan investigated</th>
+            <th>Number of calculations</th>
+          </tr>
+          {% for item in debt_type %}
+          <tr>
+            <td>{{ item [0] }}</td>
+            <td>{{ item [1] }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </p>
+      <br>
+      <h4>Savings Calculator</h4>
+      <br>
+      <p>
+        <br>
+        When people visit our site they use our savings calculator to find out how much they could save in total over a given number of years.
+        <br>
+        The average lump_sum that people visiting our site have looked into investing is &pound;{{ average_savings_data }}.
+        <br>
+        Those savings are usually for a {{ savings_type[0][0] }}.
+        <br>
+        <table>
+          <tr>
+            <th>Things people save for:</th>
+            <th>count</th>
+          </tr>
+          {% for item in savings_type %}
+          <tr>
+            <td>{{ item [0] }}</td>
+            <td>{{ item [1] }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </p>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
