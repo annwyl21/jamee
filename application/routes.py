@@ -208,12 +208,14 @@ def debt_comparison():
             debt1 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt1_id)
             debt2 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt2_id)
             debt3 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt3_id)
-            debt_list = [debt1, debt2, debt3]
+            debt_tuple = (debt1, debt2, debt3)# the computer knows these are the same and is creating 1 object which is causing me issues
             
-            comparison = Finance.debt_comparison_calc(debt_list)
-            debt_stack = comparison[0]
-            debt_snowball = comparison[1] 
-            return render_template('debt_calculator.html', debt_stack=debt_stack, debt_snowball=debt_snowball)
+            comparison = Finance.debt_comparison_calc(debt_tuple)
+            stack = comparison[0]
+            snowball = comparison[1]
+            avalanche = comparison[2]
+            print(stack, snowball, avalanche)
+            return render_template('debt_calculator.html', stack=stack, snowball=snowball, avalanche=avalanche)
 
     return render_template('debt_comparison_form.html', form=form, message=error)
 
