@@ -17,19 +17,19 @@ class Finance:
         total_interest = monthly_interest*debt_term
         return total_interest + int(debt_amount)
     
-    def debt_comparison_calc(self, debt_tuple):
-        stack = list(debt_tuple)    
+    def debt_comparison_calc(self, debt_tuple): # the computer knows the stack, snowball and avalanche lists (~~~) are the same and is creating 1 object which is causing me issues
+        stack = list(debt_tuple)   # ~~~ 
         debt_stack = sorted(stack, key=lambda debt: debt[2], reverse=True) # sorted by interest rate descending
         stack = self.comparison_calc(debt_stack)
         comparison = (stack,)
 
-        snowball = list(debt_tuple)  
+        snowball = list(debt_tuple)  # ~~~
         snowball.sort(key = lambda debt: debt[0])  # sorted by loan size ascending
         debt_snowball = self.comparison_calc(snowball)
         debt_snowball = (debt_snowball,)
         comparison += debt_snowball
 
-        avalanche = list(debt_tuple)  
+        avalanche = list(debt_tuple)  # ~~~
         avalanche.sort(key = lambda debt: debt[0], reverse=True)  # sorted by loan size descending
         debt_avalanche = self.comparison_calc(avalanche)
         debt_avalanche = (debt_avalanche,)
