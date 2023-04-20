@@ -1,6 +1,14 @@
 * {
-font-family: 'Montserrat', sans-serif;
+font-family: 'Raleway', sans-serif; 'Montserrat', sans-serif;
 }
+
+/*
+#FDA769 is orange, headings/tables
+#473C33 is dark brown
+white text?
+#ABC270 is green, background?
+#FEC868 is yellow, buttons?
+*/
 
 body {
 margin: 10px;
