@@ -10,7 +10,7 @@ from flask_wtf import FlaskForm
 class BasicForm(FlaskForm):
     username = StringField('Username')
     homeowner = BooleanField('Homeowner')
-    salary = IntegerField('Salary')
+    salary = IntegerField('Gross Salary')
     other = IntegerField('Other')
     food_drink = IntegerField('Food and Drink')
     housing = IntegerField('Housing')
