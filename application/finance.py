@@ -73,19 +73,19 @@ class Finance:
 
     def dashboard_weekly_calculator(self, user_data):
         headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
-        user_data = [f"{(num*12)/52:,.02f}" for num in user_data]
+        user_data = [f"{(abs(num)*12)/52:,.02f}" for num in user_data]
         weekly_user_data = {key:value for key, value in zip(headers_list, user_data)}
         return weekly_user_data
 
     def dashboard_monthly_calculator(self, user_data):
         headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
-        user_data = [f"{num:,.02f}" for num in user_data]
+        user_data = [f"{abs(num):,.02f}" for num in user_data]
         monthly_user_data = {key:value for key, value in zip(headers_list, user_data)}
         return monthly_user_data
 
     def dashboard_annual_calculator(self, user_data):
         headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
-        user_data = [f"{num*12:,.02f}" for num in user_data]
+        user_data = [f"{abs(num)*12:,.02f}" for num in user_data]
         annual_user_data = {key:value for key, value in zip(headers_list, user_data)}
         return annual_user_data
     
