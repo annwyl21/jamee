@@ -82,8 +82,7 @@ span {
 
 /* About us section styling starts */
 
-.h1,
-h1 {
+.h1, h1 {
   font-size: 1.5rem;
 }
 
@@ -92,16 +91,16 @@ h1 {
 }
 
 .card {
-  background: #fff;
+  background: rgba(0, 0, 0, 0.01);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
   border: 1;
   border-radius: 1rem;
 }
 
 .img-hover-zoom--colorize img {
-  border-radius: 80%;
-  width: 150px;
-  height: auto;
+  border-radius: 50%;
+  width: 180px;
+  height: 200px;
   margin-top: 20px;
   padding: 1px;
   transition: transform 0.5s;
@@ -129,15 +128,9 @@ h1 {
   color: #7a7a7a;
 }
 
-.box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .fab {
   font-size: 1.5rem;
-  color: darkgray;
+  color: darkgrey;
   transition: transform 0.5s;
 }
 
@@ -159,8 +152,7 @@ h1 {
 }
 
 @media only screen and (min-width: 1200px) {
-  .h1,
-  h1 {
+  .h1, h1 {
     font-size: 2rem;
   }
 }
