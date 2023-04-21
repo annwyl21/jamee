@@ -2,98 +2,13 @@
 
 {% block main_content %}
 
-<!-- TEXT & LEGEND first bit of responsive code -->
-  <div class="container-fluid bg-1 text-center">
-    <div class="row">
-<!-- This is where the 12 columns are divided into 2 groups of 6 -->
-      <div class="col-sm-6">
-        <h1>Dashboard Results</h1>
-        <p>Average UK Spending (pcm) for salary bracket
-          <br>
-          {{ salary_data }}
-        </p>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Average Spending</th>
-              <th>GBP</th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for key, value in average.items() %}
-          <tr>
-            <td>{{ key.title() }}</td>
-            <td>&pound;{{ value }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-        </table>
-      </div>
-      <div class="col-sm-6">
-        <h4>Key:</h2>
-        <img src="{{ url_for('static', filename='images/legend.jpg') }}" height='100' width='100' alt="Legend">
-      </div>
-    </div>
-  </div>
+<h1>Dashboard Results</h1>
 
-  <!-- GRAPHS second bit of responsive code -->
-  <div class="container-fluid bg-1 text-center">
-    <div class="row">
-<!-- This is where the 12 columns are divided into 2 groups of 6 -->
-      <div class="col-sm-6">
-        <h4>Pie Chart showing your spending breakdown</h2>
-        <img src="{{ url_for('static', filename='images/piechart.png') }}" height='300' width='450' alt="spending pie chart">
-      </div>
-      <div class="col-sm-6">
-        <h4>Stacked Bar Chart showing your spending compared to average UK household spending</h2>
-        <img src="{{ url_for('static', filename='images/barstack.png') }}" height='400' width='450' alt="stacked bar chart">
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <!-- TABLES third bit of responsive code -->
+  <!-- TABLES User Spending Breakdown by week/ month/ year -->
   <div class="container-fluid bg-1 text-center">
     <div class="row">
 <!-- This is where the 12 columns are divided into 3 groups of 4 -->
-      <div class="col-sm-4">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th><h4>Your weekly spending</h4></th>
-              <th>GBP</th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for key, value in weekly.items() %}
-          <tr>
-            <td>{{ key.title() }}</td>
-            <td>&pound;{{ value }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-        </table>
-      </div>
-      <div class="col-sm-4">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th><h4>Your monthly spending</h4></th>
-              <th>GBP</th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for key, value in monthly.items() %}
-          <tr>
-            <td>{{ key.title() }}</td>
-            <td>&pound;{{ value }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-        </table>
-      </div>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <table class="table table-striped">
           <thead>
             <tbody>
@@ -111,7 +26,84 @@
         </tbody>
         </table>
       </div>
+      <div class="col-sm-3">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><h4>Your weekly spending</h4></th>
+              <th>GBP</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for key, value in weekly.items() %}
+          <tr>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+      </div>
+      <div class="col-sm-3">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><h4>Your monthly spending</h4></th>
+              <th>GBP</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for key, value in monthly.items() %}
+          <tr>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+      </div>
+      <div class="col-sm-3">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Average UK Spending (pcm)
+                <br> {{ salary_data }}</th>
+              <th>GBP</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for key, value in average.items() %}
+          <tr>
+            <td>{{ key.title() }}</td>
+            <td>&pound;{{ value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+      </div>
     </div>
   </div>
+
+  <div class="container-fluid bg-1 text-center">
+    <div class="row">
+<!-- This is where the 12 columns are divided into 3 groups of 4 -->
+      <div class="col-sm-4">
+        <h4>Pie Chart showing your spending breakdown</h2>
+        <img src="{{ url_for('static', filename='images/piechart.png') }}" height='300' alt="spending pie chart">
+      </div>
+      <div class="col-sm-4">
+        <h4>Stacked Bar Chart showing your spending compared to average UK household spending</h2>
+        <img src="{{ url_for('static', filename='images/barstack.png') }}" height='400' alt="stacked bar chart">
+      </div>
+      <div class="col-sm-4">
+        <h4>Key:</h2>
+        <img src="{{ url_for('static', filename='images/legend.jpg') }}" height='200' alt="Legend">
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+
 
 {% endblock %}
