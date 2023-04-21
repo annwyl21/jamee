@@ -81,6 +81,7 @@ span {
 }
 
 /* About us section styling starts */
+
 .h1,
 h1 {
   font-size: 1.5rem;
@@ -98,7 +99,7 @@ h1 {
 }
 
 .img-hover-zoom--colorize img {
-  border-radius: 50%;
+  border-radius: 80%;
   width: 150px;
   height: auto;
   margin-top: 20px;
