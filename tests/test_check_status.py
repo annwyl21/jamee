@@ -31,8 +31,8 @@ def test_request_dashboard(client):
     response = client.get("/dashboard")
 # THEN the dashboard page should load and I should see 2 graphs and 3 tables
 # This test is checking to see that the last of those 5 elements has loaded
-    assert b"<h4>My Dashboard</h4>" in response.data
-    # this now only checks that the form loads because the dashboard page is driven by form data and I am not sure how to write a pytest for that yet
+    assert b"<h4>Key:</h4>" in response.data
+    # fails due to a secret key error?
 
 
 
