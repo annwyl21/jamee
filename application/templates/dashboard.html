@@ -11,12 +11,12 @@
       <div class="col-sm-3">
         <table class="table table-striped">
           <thead>
-            <tbody>
             <tr>
               <th><h4>Your annual spending</h4></th>
               <th>GBP</th>
             </tr>
           </thead>
+          <tbody>
           {% for key, value in annual.items() %}
           <tr>
             <td>{{ key.title() }}</td>
