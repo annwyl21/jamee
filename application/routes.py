@@ -159,10 +159,11 @@ def calculate_debt():
                 debt_term = 24
 
             new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term)
-            debt_data = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', new_debt_id)
-            calculated_total_debt = Finance.debt_calculator(debt_data)
+            single_debt_object = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', new_debt_id)
+            
+            calculated_total_debt = Finance.debt_calculator(single_debt_object)
             calculated_total_debt = f"{calculated_total_debt:,.02f}"
-            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_data)
+            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=single_debt_object)
     return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
 
@@ -205,10 +206,10 @@ def debt_comparison():
             debt2_id = DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type, debt2_interest, min2_repayment)
             debt3_id = DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type, debt3_interest, min3_repayment)
             
-            debt1 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt1_id)
-            debt2 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt2_id)
-            debt3 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt3_id)
-            debt_tuple = (debt1, debt2, debt3)
+            debt_object1 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt1_id)
+            debt_object2 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt2_id)
+            debt_object3 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt3_id)
+            debt_tuple = (debt_object1, debt_object2, debt_object3)
             
             comparison = Finance.debt_comparison_calc(debt_tuple)
             stack = comparison[0]

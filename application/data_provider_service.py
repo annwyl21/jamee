@@ -1,5 +1,6 @@
 import pymysql
 import sys
+from application.debt import Debt
 
 
 class DataProviderService:
@@ -110,7 +111,7 @@ class DataProviderService:
             self.cursor.execute(sql, input_values)
             retrieved_data = self.cursor.fetchone()
             user_data = list(retrieved_data)
-            user_data = [int(value or 0) for value in user_data]
+            user_data = [int(value or 0) for value in user_data] # recast as an integer or make it equal to 0 if 'Nonetype'
         return user_data
     
     def get_debt_data_from_id(self, table, table_id, id):
@@ -118,11 +119,9 @@ class DataProviderService:
         sql = 'Select debt_total_figure, debt_source, debt_interest, debt_term, repayment from ' + table + ' where ' + table_id + ' = %s'
         self.cursor.execute(sql, id)
         data = self.cursor.fetchone()
-        data = list(data)
-        loan_type = data.pop(1)
-        data = [int(value or 0) for value in data]
-        data.insert(1, loan_type)
-        return data
+        debt_instance= Debt(debt_total_figure=data[0], debt_source=data[1], debt_interest=data[2], debt_term=data[3], repayment=data[4])
+        debt_object = Debt.get_debt_data(debt_instance)
+        return debt_object
     
     def get_data_from_id(self, table, table_id, id):
         data = []

@@ -17,7 +17,7 @@ class Finance:
         total_interest = monthly_interest*debt_term
         return total_interest + int(debt_amount)
     
-    def debt_comparison_calc(self, debt_tuple): # the computer knows the stack, snowball and avalanche lists (~~~) are the same and is creating 1 object which is causing me issues
+    def debt_comparison_calc(self, debt_tuple): # the computer knows the stack, snowball and avalanche lists (~~~) are the same
         stack = list(debt_tuple)   # ~~~ 
         debt_stack = sorted(stack, key=lambda debt: debt[2], reverse=True) # sorted by interest rate descending
         stack = self.comparison_calc(debt_stack)
@@ -51,9 +51,9 @@ class Finance:
                 balance = balance - repayment - extra_repayment - left_over
                 left_over = 0
                 num_of_months += 1
-            debt.append(num_of_months)
+            debt.append(num_of_months)  #~~~
             years = int(num_of_months/12)
-            debt.append(years)
+            debt.append(years)  #~~~ These 2 appends are appended to all the lists regardless of whether they are the stack, snowball or avalance because the computer seees the nested list as 1 object reference instead of 3
             extra_repayment += repayment
         return nested_list
     
