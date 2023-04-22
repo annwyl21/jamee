@@ -152,7 +152,7 @@ def calculate_debt():
             # if any of those are False/ empty follow this condition to enter default form values
             error = 'Please enter a debt amount'
         else:
-            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term)
+            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term=debt_term)
             debt_instance = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', new_debt_id)
             
             calculated_total_debt = Finance.debt_calculator(debt_instance)
@@ -196,21 +196,20 @@ def debt_comparison():
                 debt3_interest=0
                 min3_repayment=0
             
-            debt1_id = DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type, debt1_interest, min1_repayment)
-            debt2_id = DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type, debt2_interest, min2_repayment)
-            debt3_id = DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type, debt3_interest, min3_repayment)
+            debt1_id = DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type, debt1_interest, repayment=min1_repayment)
+            debt2_id = DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type, debt2_interest, repayment=min2_repayment)
+            debt3_id = DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type, debt3_interest, repayment=min3_repayment)
             
             debt_object1 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt1_id)
             debt_object2 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt2_id)
             debt_object3 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt3_id)
-            debt_tuple = (debt_object1, debt_object2, debt_object3)
             
-            comparison = Finance.debt_comparison_calc(debt_tuple)
-            stack = comparison[0]
-            snowball = comparison[1]
-            avalanche = comparison[2]
-            print(stack, snowball, avalanche)
-            return render_template('debt_calculator.html', stack=stack, snowball=snowball, avalanche=avalanche)
+            Finance.debt_comparison_calc(debt_object1, debt_object2, debt_object3)
+            debt1_dict = debt_object1.debt_dict()
+            debt2_dict = debt_object2.debt_dict()
+            debt3_dict = debt_object3.debt_dict()
+            comparison = [debt1_dict, debt2_dict, debt3_dict]
+            return render_template('debt_calculator.html', comparison=comparison)
 
     return render_template('debt_comparison_form.html', form=form, message=error)
 

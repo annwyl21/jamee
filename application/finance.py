@@ -17,33 +17,36 @@ class Finance:
         total_interest = monthly_interest*debt_term
         return total_interest + debt_amount
     
-    def debt_comparison_calc(self, debt_tuple): # the computer knows the stack, snowball and avalanche lists (~~~) are the same
-        stack = list(debt_tuple)   # ~~~ 
-        debt_stack = sorted(stack, key=lambda debt: debt[2], reverse=True) # sorted by interest rate descending
-        stack = self.comparison_calc(debt_stack)
-        comparison = (stack,)
+    def debt_comparison_calc(self, debt_object1, debt_object2, debt_object3): # the computer knows the stack, snowball and avalanche lists (~~~) are the same
+        stack = [debt_object1, debt_object2, debt_object3]   # ~~~ 
+        debt_stack = sorted(stack, key=lambda debt: debt.get_debt_interest(), reverse=True) # sorted by interest rate descending
+        stack_repayment_periods = self.comparison_calc(debt_stack)
+        debt_object1.set_stack_months(stack_repayment_periods[0])
+        debt_object2.set_stack_months(stack_repayment_periods[1])
+        debt_object3.set_stack_months(stack_repayment_periods[2])
 
-        snowball = list(debt_tuple)  # ~~~
-        snowball.sort(key = lambda debt: debt[0])  # sorted by loan size ascending
-        debt_snowball = self.comparison_calc(snowball)
-        debt_snowball = (debt_snowball,)
-        comparison += debt_snowball
+        snowball = [debt_object1, debt_object2, debt_object3]  # ~~~
+        snowball.sort(key = lambda debt: debt.get_debt_total_figure())  # sorted by loan size ascending
+        snowball_repayment_periods = self.comparison_calc(snowball)
+        debt_object1.set_snowball_months(stack_repayment_periods[0])
+        debt_object2.set_snowball_months(stack_repayment_periods[1])
+        debt_object3.set_snowball_months(stack_repayment_periods[2])
 
-        avalanche = list(debt_tuple)  # ~~~
-        avalanche.sort(key = lambda debt: debt[0], reverse=True)  # sorted by loan size descending
-        debt_avalanche = self.comparison_calc(avalanche)
-        debt_avalanche = (debt_avalanche,)
-        comparison += debt_avalanche
-
-        return comparison
+        avalanche = [debt_object1, debt_object2, debt_object3]  # ~~~
+        avalanche.sort(key = lambda debt: debt.get_debt_total_figure(), reverse=True)  # sorted by loan size descending
+        avalanche_repayment_periods = self.comparison_calc(avalanche)
+        debt_object1.set_avalanche_months(stack_repayment_periods[0])
+        debt_object2.set_avalanche_months(stack_repayment_periods[1])
+        debt_object3.set_avalanche_months(stack_repayment_periods[2])
         
-    def comparison_calc(self, nested_list):
+    def comparison_calc(self, list_of_debts):
+        repayment_period = []
         num_of_months = 0
         extra_repayment = 0
         left_over = 0
-        for debt in nested_list:
-            balance = debt[0]
-            repayment = debt[3]
+        for debt in list_of_debts:
+            balance = debt.get_debt_total_figure()
+            repayment = debt.get_repayment()
             while balance > 0:
                 if balance < repayment:
                     left_over = repayment - balance
@@ -51,11 +54,11 @@ class Finance:
                 balance = balance - repayment - extra_repayment - left_over
                 left_over = 0
                 num_of_months += 1
-            debt.append(num_of_months)  #~~~
-            years = int(num_of_months/12)
-            debt.append(years)  #~~~ These 2 appends are appended to all the lists regardless of whether they are the stack, snowball or avalance because the computer seees the nested list as 1 object reference instead of 3
+            repayment_period.append(num_of_months)  #~~~
+            #years = int(num_of_months/12)
+            #repayment_period.append(years)  #~~~ These 2 appends are appended to all the lists regardless of whether they are the stack, snowball or avalance because the computer seees the nested list as 1 object reference instead of 3
             extra_repayment += repayment
-        return nested_list
+        return repayment_period
     
     def savings_calculator(self, savings_data):
         interest_rate = savings_data[4]/100

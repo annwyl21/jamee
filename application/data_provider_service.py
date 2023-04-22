@@ -68,7 +68,15 @@ class DataProviderService:
         new_form = self.cursor.fetchone()
         return new_form[0]
     
-    def add_debt_data(self, debt_total_figure, debt_source='Personal Loan', debt_interest=None, debt_term=None, repayment=None):
+    def add_debt_data(self, debt_total_figure, debt_source='Personal Loan', debt_interest=None, **kwargs):
+        if 'debt_term' not in kwargs:
+            debt_term = None
+        else:
+            debt_term = kwargs['debt_term']
+        if 'repayment' not in kwargs:
+            repayment = None
+        else:
+            repayment = kwargs['repayment']
         sql = """insert into debt (debt_total_figure, debt_source, debt_interest, debt_term, repayment) values (%s, %s, %s, %s, %s)"""
         input_values = (debt_total_figure, debt_source, debt_interest, debt_term, repayment)
         try:
