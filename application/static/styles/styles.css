@@ -87,9 +87,10 @@ span {
 .aboutus img {
     width: 100%;
 }
-/* *, *:before, *:after {
+
+ *, *:before, *:after {
   box-sizing: inherit;
-}*/
+}
 
 .column {
   float: left;
@@ -123,7 +124,7 @@ span {
   color: grey;
 }
 
-.button {
+/*.button {
   border: none;
   outline: 0;
   display: inline-block;
@@ -131,10 +132,9 @@ span {
   color: white;
   background-color: #000;
   text-align: center;
-  cursor: pointer;
   width: 100%;
 }
 
 .button:hover {
   background-color: #555;
-}
+}*/
