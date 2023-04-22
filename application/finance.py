@@ -1,5 +1,3 @@
-from application.debt import Debt
-
 # import the data manipulation and visualisation tools
 import pandas as pd
 from matplotlib import pyplot as plt

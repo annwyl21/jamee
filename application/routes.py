@@ -150,20 +150,14 @@ def calculate_debt():
         debt_term = form.debt_term.data
         if not debt_amount:
             # if any of those are False/ empty follow this condition to enter default form values
-            if not debt_amount:
-                error = 'Please enter a debt amount'
+            error = 'Please enter a debt amount'
         else:
-            if not debt_interest:
-                debt_interest = 5
-            if not debt_term:
-                debt_term = 24
-
             new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term)
             debt_instance = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', new_debt_id)
             
             calculated_total_debt = Finance.debt_calculator(debt_instance)
             calculated_total_debt = f"{calculated_total_debt:,.02f}"
-            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_instance.get_debt_dict())
+            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_instance)
     return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
 

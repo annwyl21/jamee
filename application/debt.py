@@ -14,12 +14,12 @@ class Debt:
         if self._debt_interest:
             self._debt_interest = int(self._debt_interest)
         else:
-            self._debt_interest = 0
+            self._debt_interest = 5
 
         if self._debt_term:
             self._debt_term = int(self._debt_term)
         else:
-            self._debt_term = 0
+            self._debt_term = 24
         
         if self._repayment:
             self._repayment = int(self._repayment)
@@ -45,11 +45,3 @@ class Debt:
     def get_debt_list(self):
         return [self._debt_total_figure, self._debt_source, self._debt_interest, self._debt_term, self._repayment]
 
-    def get_debt_dict(self):
-        return {
-        'debt_total_figure': self._debt_total_figure,
-        'debt_source': self._debt_source, 
-        'debt_interest': self._debt_interest,
-        'debt_term': self._debt_term,
-        'debt_repayment': self._repayment
-        }

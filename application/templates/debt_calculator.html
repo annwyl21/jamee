@@ -7,9 +7,9 @@
     <h1>Debt Calculator Results</h1>
     {% if total %}
         <div class="col-sm-6">
-            <p>Your debt is in the form of a <span>{{ debt_data['debt_source'] }}</span>
+            <p>Your debt is in the form of a <span>{{ debt_data.get_debt_source() }}</span>
             <br>
-            You borrowed &pound;{{ '%.2f' % debt_data['debt_total_figure'] }} at {{ debt_data['debt_interest'] }}% APR interest over {{ debt_data['debt_term'] }} months.
+            You borrowed &pound;{{ '%.2f' % debt_data.get_debt_total_figure() }} at {{ debt_data.get_debt_interest() }}% APR interest over {{ debt_data.get_debt_term() }} months.
             <br>
             <br>
             In total, you will repay <span>&pound;{{ total }}</span> back to the lender
