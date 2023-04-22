@@ -6,7 +6,6 @@ class Debt:
         self._debt_term = debt_term
         self._repayment = repayment
 
-    def get_debt_data(self):
         if self._debt_total_figure:
             self._debt_total_figure = int(self._debt_total_figure)
         else:
@@ -27,6 +26,30 @@ class Debt:
         else:
             self._repayment = 0
         
-        return [self._debt_total_figure, self._debt_source, self._debt_interest, self._debt_term, self._repayment]
     
+    def get_debt_total_figure(self):
+        return self._debt_total_figure
+    
+    def get_debt_source(self):
+        return self._debt_source
+    
+    def get_debt_interest(self):
+        return self._debt_interest
+    
+    def get_debt_term(self):
+        return self._debt_term
+    
+    def get_repayment(self):
+        return self._repayment
+    
+    def get_debt_list(self):
+        return [self._debt_total_figure, self._debt_source, self._debt_interest, self._debt_term, self._repayment]
 
+    def get_debt_dict(self):
+        return {
+        'debt_total_figure': self._debt_total_figure,
+        'debt_source': self._debt_source, 
+        'debt_interest': self._debt_interest,
+        'debt_term': self._debt_term,
+        'debt_repayment': self._repayment
+        }

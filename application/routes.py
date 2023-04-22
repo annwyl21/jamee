@@ -159,11 +159,11 @@ def calculate_debt():
                 debt_term = 24
 
             new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term)
-            single_debt_object = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', new_debt_id)
+            debt_instance = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', new_debt_id)
             
-            calculated_total_debt = Finance.debt_calculator(single_debt_object)
+            calculated_total_debt = Finance.debt_calculator(debt_instance)
             calculated_total_debt = f"{calculated_total_debt:,.02f}"
-            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=single_debt_object)
+            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_instance.get_debt_dict())
     return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
 

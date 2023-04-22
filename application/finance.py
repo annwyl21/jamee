@@ -1,3 +1,5 @@
+from application.debt import Debt
+
 # import the data manipulation and visualisation tools
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -8,14 +10,14 @@ import seaborn as sns
 class Finance:
 
     def debt_calculator(self, debt_data):
-        debt_term = debt_data[3]
-        interest_rate = debt_data[2]
-        debt_amount = debt_data[0]
+        debt_term = debt_data.get_debt_term()
+        interest_rate = debt_data.get_debt_interest()
+        debt_amount = debt_data.get_debt_total_figure()
         interest_rate = interest_rate/100
-        annual_interest = int(debt_amount) * interest_rate
+        annual_interest = debt_amount * interest_rate
         monthly_interest = annual_interest/12        
         total_interest = monthly_interest*debt_term
-        return total_interest + int(debt_amount)
+        return total_interest + debt_amount
     
     def debt_comparison_calc(self, debt_tuple): # the computer knows the stack, snowball and avalanche lists (~~~) are the same
         stack = list(debt_tuple)   # ~~~ 
