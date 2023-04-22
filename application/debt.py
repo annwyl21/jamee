@@ -66,6 +66,16 @@ class Debt:
         self._avalanche_months = months
         self._avalanche_years = int(months/12)
     
+    def set_comparison_type_months(self, num_of_months, comparison_type):
+        if comparison_type == 'stack':
+            self.set_stack_months(num_of_months)
+        elif comparison_type == 'snowball':
+            self.set_snowball_months(num_of_months)
+        elif comparison_type == 'avalanche':
+            self.set_avalanche_months(num_of_months)
+        else:
+            raise "I don't know the comparison_type"
+    
     def comparison_dict(self):
         return {
             'debt_source': self._debt_source,
