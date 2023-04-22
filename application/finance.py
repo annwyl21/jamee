@@ -17,27 +17,27 @@ class Finance:
         total_interest = monthly_interest*debt_term
         return total_interest + debt_amount
     
-    def debt_comparison_calc(self, debt_object1, debt_object2, debt_object3): # the computer knows the stack, snowball and avalanche lists (~~~) are the same
-        stack = [debt_object1, debt_object2, debt_object3]   # ~~~ 
+    def debt_comparison_calc(self, debt_object1, debt_object2, debt_object3):
+        stack = [debt_object1, debt_object2, debt_object3]
         debt_stack = sorted(stack, key=lambda debt: debt.get_debt_interest(), reverse=True) # sorted by interest rate descending
         stack_repayment_periods = self.comparison_calc(debt_stack)
         debt_object1.set_stack_months(stack_repayment_periods[0])
         debt_object2.set_stack_months(stack_repayment_periods[1])
         debt_object3.set_stack_months(stack_repayment_periods[2])
 
-        snowball = [debt_object1, debt_object2, debt_object3]  # ~~~
+        snowball = [debt_object1, debt_object2, debt_object3]
         snowball.sort(key = lambda debt: debt.get_debt_total_figure())  # sorted by loan size ascending
         snowball_repayment_periods = self.comparison_calc(snowball)
-        debt_object1.set_snowball_months(stack_repayment_periods[0])
-        debt_object2.set_snowball_months(stack_repayment_periods[1])
-        debt_object3.set_snowball_months(stack_repayment_periods[2])
+        debt_object1.set_snowball_months(snowball_repayment_periods[0])
+        debt_object2.set_snowball_months(snowball_repayment_periods[1])
+        debt_object3.set_snowball_months(snowball_repayment_periods[2])
 
-        avalanche = [debt_object1, debt_object2, debt_object3]  # ~~~
+        avalanche = [debt_object1, debt_object2, debt_object3]
         avalanche.sort(key = lambda debt: debt.get_debt_total_figure(), reverse=True)  # sorted by loan size descending
         avalanche_repayment_periods = self.comparison_calc(avalanche)
-        debt_object1.set_avalanche_months(stack_repayment_periods[0])
-        debt_object2.set_avalanche_months(stack_repayment_periods[1])
-        debt_object3.set_avalanche_months(stack_repayment_periods[2])
+        debt_object1.set_avalanche_months(avalanche_repayment_periods[0])
+        debt_object2.set_avalanche_months(avalanche_repayment_periods[1])
+        debt_object3.set_avalanche_months(avalanche_repayment_periods[2])
         
     def comparison_calc(self, list_of_debts):
         repayment_period = []
@@ -54,9 +54,7 @@ class Finance:
                 balance = balance - repayment - extra_repayment - left_over
                 left_over = 0
                 num_of_months += 1
-            repayment_period.append(num_of_months)  #~~~
-            #years = int(num_of_months/12)
-            #repayment_period.append(years)  #~~~ These 2 appends are appended to all the lists regardless of whether they are the stack, snowball or avalance because the computer seees the nested list as 1 object reference instead of 3
+            repayment_period.append(num_of_months)
             extra_repayment += repayment
         return repayment_period
     

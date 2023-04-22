@@ -205,9 +205,9 @@ def debt_comparison():
             debt_object3 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt3_id)
             
             Finance.debt_comparison_calc(debt_object1, debt_object2, debt_object3)
-            debt1_dict = debt_object1.debt_dict()
-            debt2_dict = debt_object2.debt_dict()
-            debt3_dict = debt_object3.debt_dict()
+            debt1_dict = debt_object1.comparison_dict()
+            debt2_dict = debt_object2.comparison_dict()
+            debt3_dict = debt_object3.comparison_dict()
             comparison = [debt1_dict, debt2_dict, debt3_dict]
             return render_template('debt_calculator.html', comparison=comparison)
 

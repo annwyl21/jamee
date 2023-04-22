@@ -42,7 +42,7 @@
             <tbody>
             {% for dict in comparison %}
             <tr>
-                <td>{{ dict['debt_source'] }}, &pound;{{ dict['debt_total_figure'] }}<br>with {{ dict['debt_interest'] }}%APR, repayments of &pound;{{ dict['debt_repayment'] }}<br> paid by {{ dict['stack_paid_months'] }} months</td>
+                <td>{{ dict['debt_source'] }}, &pound;{{ dict['debt_total_figure'] }}<br>with {{ dict['debt_interest'] }}%APR, repayments of &pound;{{ dict['debt_repayment'] }}<br> paid by {{ dict['stack_paid_months'] }} months ({{ dict['stack_paid_years'] }} years)</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -61,7 +61,7 @@
             <tbody>
             {% for dict in comparison %}
             <tr>
-            <td>{{ dict['debt_source'] }}, &pound;{{ dict['debt_total_figure'] }}<br>with {{ dict['debt_interest'] }}%APR, repayments of &pound;{{ dict['debt_repayment'] }}<br> paid by {{ dict['stack_paid_months'] }} months</td>
+            <td>{{ dict['debt_source'] }}, &pound;{{ dict['debt_total_figure'] }}<br>with {{ dict['debt_interest'] }}%APR, repayments of &pound;{{ dict['debt_repayment'] }}<br> paid by {{ dict['snowball_paid_months'] }} months ({{ dict['snowball_paid_years'] }} years)</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -80,7 +80,7 @@
             <tbody>
             {% for dict in comparison %}
             <tr>
-            <td>{{ dict['debt_source'] }}, &pound;{{ dict['debt_total_figure'] }}<br>with {{ dict['debt_interest'] }}%APR, repayments of &pound;{{ dict['debt_repayment'] }}<br> paid by {{ dict['stack_paid_months'] }} months</td>
+            <td>{{ dict['debt_source'] }}, &pound;{{ dict['debt_total_figure'] }}<br>with {{ dict['debt_interest'] }}%APR, repayments of &pound;{{ dict['debt_repayment'] }}<br> paid by {{ dict['avalanche_paid_months'] }} months ({{ dict['avalanche_paid_years'] }} years)</td>
             </tr>
             {% endfor %}
         </tbody>

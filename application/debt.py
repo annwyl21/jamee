@@ -56,20 +56,26 @@ class Debt:
 
     def set_stack_months(self, months):
         self._stack_months = months
+        self._stack_years = int(months/12)
     
     def set_snowball_months(self, months):
         self._snowball_months = months
+        self._snowball_years = int(months/12)
     
     def set_avalanche_months(self, months):
         self._avalanche_months = months
+        self._avalanche_years = int(months/12)
     
-    def debt_dict(self):
+    def comparison_dict(self):
         return {
             'debt_source': self._debt_source,
             'debt_total_figure': self._debt_total_figure,
             'debt_interest': self._debt_interest,
             'debt_repayment': self._repayment,
             'stack_paid_months': self._stack_months,
+            'stack_paid_years': self._stack_years,
             'snowball_paid_months': self._snowball_months,
-            'avalanche_paid_months': self._avalanche_months
+            'snowball_paid_years': self._snowball_years,
+            'avalanche_paid_months': self._avalanche_months,
+            'avalanche_paid_years': self._avalanche_years
         }
