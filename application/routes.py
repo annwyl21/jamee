@@ -236,5 +236,8 @@ def benefits(benefit_name):
 
 
 
+@app.route('/articles')
+def articles():
+    return render_template('articles.html', title='Articles')
 
 
