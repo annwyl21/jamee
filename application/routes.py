@@ -206,6 +206,8 @@ def debt_comparison():
 
             avalanche_approach = sorted(nested_list, key=lambda debt_object: debt_object.get_debt_total_figure(), reverse=True)  # sorted by loan size descending
             avalanche_dict = {order:debt_object for order, debt_object in zip(order_list, avalanche_approach)}
+            # uses a dictionary to hold the order to avoid an object refernce problem
+            # In Python 3.6, the built-in dict class now keeps its items ordered as well
 
             return render_template('debt_calculator.html', stack_dict=stack_dict, snowball_dict=snowball_dict, avalanche_dict=avalanche_dict)
 
