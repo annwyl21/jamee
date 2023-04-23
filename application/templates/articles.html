@@ -10,30 +10,90 @@
 </head>
 <body>
 
+<!--Title box - recent posts-->
+<div class="content clearfix">
+
+
+    <div class="main-content">
+         <h1 class ="recent-post-title">Recent Posts</h1>
+    </div>
+
 <!--Article Content-->
 <div class="content clearfix">
 
 <!--Main content-->
     <div class="main-content">
-         <h1 class ="recent-post-title">Recent Posts</h1>
+         <h1 class ="recent-post-title"> </h1>
         <div class="post">
-            <img src="images/savingspic.jpg" alt="" class="post-image">
+            <img src="{{ url_for('static', filename='images/savingspic.jpg') }}" class="post" alt="savings_article"
+            width="300" height="200">
+
             <div class="post1-preview">
-                <h1><a ref="savingarticle.html">5 Top Ways To Save In 2023</a></h1>
+                <h2><a ref="savingarticle.html">5 Top Ways To Save In 2023</a></h2>
                 <i class="far fa-user">Michelle Quaye</i>
                 &nbsp;
                 <i class="far calendar">April 1st, 2023</i>
                     <br>
                     <br>
                 <p class="preview-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ullamcorper, tellus eget aliquet tincidunt, eros metus elementum tortor, quis pellentesque odio erat tincidunt ante.
-                    Duis erat enim, tristique non semper et, fringilla quis tortor. Curabitur libero neque, interdum quis neque vitae, volutpat dictum ipsum.
-                    Aliquam tristique quam nec est consectetur, vitae aliquet magna venenatis.
+                    Many people are feeling the financial "pinch", due to the current cost of living crisis. The team here at ChipIn are working around the clock to keep you updated on how to manage your financial situation. Your resident expert, Michelle has summarised 5 key methods to help you save your cash.
                 </p>
                 <a href="savingarticle.html" class="btn">Read more</a>
         </div>
         </div>
     </div>
+
+<!--    Article 2-->
+    <div class="content clearfix">
+
+<!--Main content-->
+    <div class="main-content">
+         <h1 class ="recent-post-title"> </h1>
+        <div class="post">
+            <img src="{{ url_for('static', filename='images/countingcoins.jpg') }}" class="post" alt="savings_article"
+            width="300" height="200">
+
+            <div class="post1-preview">
+                <h2><a ref="savingarticle.html">Top Places To Find Money-Saving Discounts</a></h2>
+                <i class="far fa-user">Ellen Houghton</i>
+                &nbsp;
+                <i class="far calendar">April 8th, 2023</i>
+                    <br>
+                    <br>
+                <p class="preview-text">
+                    As the usual cost of your favourite items continues to increase, finding ways to reduce your spending becomes even more important! Your resident expert, Ellen has valuable money-saving discount tips to share with you!
+
+                </p>
+                <a href="discount_article.html" class="btn">Read more</a>
+        </div>
+        </div>
+    </div>
+
+<!--        Article 3-->
+        <div class="content clearfix">
+
+<!--Main content-->
+    <div class="main-content">
+         <h1 class ="recent-post-title"> </h1>
+        <div class="post">
+            <img src="{{ url_for('static', filename='images/mentalhealthdebt.jpg') }}" class="post" alt="savings_article"
+            width="300" height="200">
+
+            <div class="post1-preview">
+                <h2><a ref="savingarticle.html">Debt and Mental Health</a></h2>
+                <i class="far fa-user">Eyasmin Basher</i>
+                &nbsp;
+                <i class="far calendar">April 15th, 2023</i>
+                    <br>
+                    <br>
+                <p class="preview-text">
+                Research from the Royal College of Psychiatrists found that around 50% of adults experiencing debt are also experiencing mental health problems. Your resident expert, Eyasmin investigates this further.
+                </p>
+                <a href="debt_mentalhealtharticle.html" class="btn">Read more</a>
+        </div>
+        </div>
+    </div>
+
 
     <div class="sidebar"></div>
 

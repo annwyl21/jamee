@@ -240,4 +240,8 @@ def benefits(benefit_name):
 def articles():
     return render_template('articles.html', title='Articles')
 
+@app.route('/savingsarticle')
+def savingarticle():
+    return render_template('savingarticle.html', title='5 Top Ways to Save in 2023')
+
 
