@@ -129,5 +129,10 @@ dmypy.json
 .pyre/
 .idea
 
+#created when the site statistics page is viewed, potentially as a downloadable file, an average of all searches performed on the site
 file_output/debt_file.txt
 file_output/savings_file.txt
+
+#created when the dashboard page is viewed, inorder to display the charts on the page, unique to the info entered on the form
+application/static/images/piechart.png
+application/static/images/barstack.png

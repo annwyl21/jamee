@@ -219,10 +219,6 @@ def debt_comparison():
             avalanche_approach = sorted(nested_list, key=lambda debt_object: debt_object.get_debt_total_figure(), reverse=True)  # sorted by loan size descending
             avalanche_dict = {order:debt_object for order, debt_object in zip(order_list, avalanche_approach)}
 
-            # debt1_dict = debt_object1.comparison_dict()
-            # debt2_dict = debt_object2.comparison_dict()
-            # debt3_dict = debt_object3.comparison_dict()
-            # comparison = [debt1_dict, debt2_dict, debt3_dict]
             return render_template('debt_calculator.html', stack_dict=stack_dict, snowball_dict=snowball_dict, avalanche_dict=avalanche_dict)
 
     return render_template('debt_comparison_form.html', form=form, message=error)
