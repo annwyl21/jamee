@@ -232,7 +232,3 @@ def benefits(benefit_name):
     else:
         return render_template('index.html', title='Home Page')
 
-
-
-
-

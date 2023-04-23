@@ -23,6 +23,14 @@ class BasicForm(FlaskForm):
     clothes = IntegerField('Clothes and Footwear')
     submit = SubmitField('Submit')
 
+class SavingsForm(FlaskForm):
+    savings_lump = IntegerField('Initial Lump Sum')
+    monthly_saving_amount = IntegerField('Monthly amount saved')
+    savings_interest = IntegerField('Savings Interest Rate (APR)')
+    savings_term = IntegerField('Savings Term in Years')
+    savings_goal = StringField('My Savings Goal')
+    submit = SubmitField('Submit')
+
 class DebtForm(FlaskForm):
     debt_amount = IntegerField('Debt Amount')
     debt_repayment = IntegerField('Minimum Repayment')
@@ -31,15 +39,6 @@ class DebtForm(FlaskForm):
     debt_type = SelectField('debt_type', choices=[('Personal Loan', 'Personal Loan'), ('Mortgage', 'Mortgage'), ('Overdraft', 'Overdraft'), ('Car Loan', 'Car Loan'), ('Credit Card', 'Credit Card'), ('Store or catalogue', 'Store or Catalogue'), ('BNPL', 'BNPL Buy Now, Pay Later'), ('Other', 'Other, eg. Payday Loan')])
     submit = SubmitField('Submit')
 
-class SavingsForm(FlaskForm):
-    savings_lump = IntegerField('Initial Lump Sum')
-    monthly_saving_amount = IntegerField('Monthly amount saved')
-    savings_interest = IntegerField('Savings Interest Rate (APR)')
-    savings_term = IntegerField('Savings Term in Years')
-    savings_goal = StringField('My Savings Goal')
-    submit = SubmitField('Submit')
-    
-    
 class ComparisonForm(FlaskForm):
     username = StringField('Username')
     debt1_amount = IntegerField('Debt Amount')
