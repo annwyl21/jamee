@@ -2,38 +2,42 @@
 
 {% block main_content %}
 <h1>Debt Repayment Methods</h1>
-<h4>Snowball, Stack or Avalanche ???</h4>
+<br>
+<h4>Snowball, Stack or Avalanche???</h4>
+<br>
 <div class="container-fluid bg-1 text-left">
   <div class="row">
-  <div class="col-sm-6">
-    <div>
-      
+  <div class="debt-pyramid">
       <p>
         <ul>
           <li><span>DEBT STACK</span> order by interest rate, pay highest interest rate first</li>
           <li><span>SNOWBALL</span> order by debt size, pay smallest debt first</li>
           <li><span>DEBT AVALANCHE</span> order by debt size, pay largest debt first</li>
+        <br>
         </ul>
       </p>
-    </div>
   </div>
-  <div class="col-sm-6">
-    <div>
-      <img src="{{ url_for('static', filename='images/snowballdebts.jpg') }}" class="img-responsive margin" width="30%" alt="woman solving debt problems">
-    </div>
+  <br>
+  <br>
+  <div class="debt-pyramid">
+      <img src="{{ url_for('static', filename='images/snowballdebts.jpg') }}" class="img-responsive margin" alt="debt pyramid chart">
   </div>
 </div>
+
+    <br>
+    <br>
 
 <div class="container-fluid bg-1 text-left">
   <div class="row">
   <div class="col-sm-12">
     <p><h4>Enter information about 3 of your debts here and see the difference between a snowball and a stack method...</h4>
-      {{ message }}
+<!--      {{ message }}-->
+    <br>
     <div class="accordion" id="debtcomparisonaccordion">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            <strong>Debt 1</strong>
+            <h5>Debt 1</h5>
           </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -41,11 +45,13 @@
             <div class="form">
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
+                    <br>
                     <select class="form-select" aria-label="Select debt type" name="debt1_type" selected>
                       {% for item in form.debt1_type %}
                       {{ item }}                     
                     {% endfor %}
                     </select>
+                    <br>
                     <div class="mb-3">
                       <label for="debt1_amount" class="form-label">{{ form.debt1_amount.label }}</label>
                       <input type="number" class="form-control" id="debt1_amount" name="debt1_amount" placeholder="5000">
@@ -66,7 +72,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            <strong>Debt 2</strong>
+            <h5>Debt 2</h5>
           </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -74,11 +80,13 @@
             <div class="form">
               <form method="POST" action="">
                   {{ form.hidden_tag() }}
+                  <br>
                   <select class="form-select" aria-label="Select debt type" name="debt2_type" selected>
                     {% for item in form.debt2_type %}
                     {{ item }}                     
                   {% endfor %}
                   </select>
+                  <br>
                   <div class="mb-3">
                     <label for="debt2_amount" class="form-label">{{ form.debt2_amount.label }}</label>
                     <input type="number" class="form-control" id="debt2_amount" name="debt2_amount" placeholder="5000">
@@ -99,7 +107,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            <strong>Debt 3</strong>
+            <h5>Debt 3</h5>
           </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
@@ -107,11 +115,13 @@
             <div class="form">
               <form method="POST" action="">
                   {{ form.hidden_tag() }}
+                  <br>
                   <select class="form-select" aria-label="Select debt type" name="debt3_type" selected>
                     {% for item in form.debt3_type %}
                     {{ item }}                     
                   {% endfor %}
                   </select>
+                  <br>
                   <div class="mb-3">
                     <label for="debt3_amount" class="form-label">{{ form.debt3_amount.label }}</label>
                     <input type="number" class="form-control" id="debt3_amount" name="debt3_amount" placeholder="5000">
@@ -130,7 +140,7 @@
         </div>
       </div>
     </div>
-
+      <br>
     <button type="submit" class="btn btn-primary">Submit</button>            
   </form>
 

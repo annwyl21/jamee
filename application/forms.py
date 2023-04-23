@@ -8,17 +8,17 @@ from flask_wtf import FlaskForm
 
 
 class BasicForm(FlaskForm):
-    username = StringField('Username')
+    username = StringField('Your name')
     homeowner = BooleanField('Homeowner')
     salary = IntegerField('Gross Salary')
     other = IntegerField('Other')
-    food_drink = IntegerField('Food and Drink')
-    housing = IntegerField('Housing')
+    food_drink = IntegerField('Food and Drink (groceries)')
+    housing = IntegerField('Housing (rent or mortgage payments)')
     energy = IntegerField('Energy Bills')
     petrol = IntegerField('Petrol or Diesel')
     train = IntegerField('Train Fares')
     bus = IntegerField('Bus Fares')
-    eating = IntegerField('Eating and Drinking')
+    eating = IntegerField('Eating and Drinking (takeouts, pubs, coffee shops)')
     holidays = IntegerField('Holidays')
     clothes = IntegerField('Clothes and Footwear')
     submit = SubmitField('Submit')
