@@ -24,7 +24,7 @@ class Debt:
         if self._repayment:
             self._repayment = int(self._repayment)
         else:
-            self._repayment = 0
+            self._repayment = 10
         
     
     def get_debt_total_figure(self):

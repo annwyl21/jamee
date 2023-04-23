@@ -149,7 +149,6 @@ def calculate_debt():
         debt_interest = form.debt_interest.data
         debt_term = form.debt_term.data
         if not debt_amount:
-            # if any of those are False/ empty follow this condition to enter default form values
             error = 'Please enter a debt amount'
         else:
             new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term=debt_term)
@@ -185,17 +184,8 @@ def debt_comparison():
         if not debt1_amount or not min1_repayment or not debt1_interest:
             error = 'Please enter a debt amount, minimum repayment and rate of interest'
         else:
-            if not debt1_interest:
-                debt1_interest=0
-            if not debt2_amount or not min2_repayment:
-                debt2_amount=0
-                debt2_interest=0
-                min2_repayment=0
-            if not debt3_amount or not min3_repayment:
-                debt3_amount=0
-                debt3_interest=0
-                min3_repayment=0
-            
+            # at the moment this only works if you enter all 3 debts, it needs a conditional and some more code to make it work if just 2 debts are entered
+            # this was such a cool feature, I wish it wasn't a feature add-on and was more of our MVP centre piece it would have been awesome to have properly coded this as a team
             debt1_id = DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type, debt1_interest, repayment=min1_repayment)
             debt2_id = DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type, debt2_interest, repayment=min2_repayment)
             debt3_id = DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type, debt3_interest, repayment=min3_repayment)
