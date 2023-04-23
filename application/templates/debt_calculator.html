@@ -7,9 +7,9 @@
     <h1>Debt Calculator Results</h1>
     {% if total %}
         <div class="col-sm-6">
-            <p>Your debt is in the form of a <span>{{ debt_data[1] }}</span>
+            <p>Your debt is in the form of a <span>{{ debt_data.get_debt_source() }}</span>
             <br>
-            You borrowed &pound;{{ '%.2f' % debt_data[0] }} at {{ debt_data[2] }}% APR interest over {{ debt_data[3] }} months.
+            You borrowed &pound;{{ '%.2f' % debt_data.get_debt_total_figure() }} at {{ debt_data.get_debt_interest() }}% APR interest over {{ debt_data.get_debt_term() }} months.
             <br>
             <br>
             In total, you will repay <span>&pound;{{ total }}</span> back to the lender
@@ -22,7 +22,7 @@
 </div>
 {% endif %}
         
-    {% if stack %}
+    {% if stack_dict %}
     <div class="col-sm-6">
 <h4>Which is better for you ?</h4>
 </div>
@@ -40,9 +40,9 @@
                 </tr>
             </thead>
             <tbody>
-            {% for debt in stack %}
+            {% for object_instance in stack_dict.values() %}
             <tr>
-                <td>{{ debt[1] }}, &pound;{{ debt[0] }}<br>with {{ debt[2] }}%APR, repayments of &pound;{{ debt[3] }}<br> paid by {{ debt[5] }} months ({{ debt[6] }} years)</td>
+                <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_stack_months() }} months ({{ object_instance.get_stack_years() }} years)</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -59,11 +59,11 @@
                 </tr>
             </thead>
             <tbody>
-            {% for debt in snowball %}
-            <tr>
-                <td>{{ debt[1] }}, &pound;{{ debt[0] }}<br>with {{ debt[2] }}%APR, repayments of &pound;{{ debt[3] }}<br> paid by {{ debt[7] }} months ({{ debt[8] }} years)</td>
-            </tr>
-            {% endfor %}
+                {% for object_instance in snowball_dict.values() %}
+                <tr>
+                    <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_snowball_months() }} months ({{ object_instance.get_snowball_years() }} years)</td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -78,11 +78,11 @@
                 </tr>
             </thead>
             <tbody>
-            {% for debt in avalanche %}
-            <tr>
-                <td>{{ debt[1] }}, &pound;{{ debt[0] }}<br>with {{ debt[2] }}%APR, repayments of &pound;{{ debt[3] }}<br> paid by {{ debt[9] }} months ({{ debt[10] }} years)</td>
-            </tr>
-            {% endfor %}
+                {% for object_instance in avalanche_dict.values() %}
+                <tr>
+                    <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_avalanche_months() }} months ({{ object_instance.get_avalanche_years() }} years)</td>
+                </tr>
+                {% endfor %}
         </tbody>
         </table>
     </div>

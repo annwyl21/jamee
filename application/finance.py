@@ -8,42 +8,35 @@ import seaborn as sns
 class Finance:
 
     def debt_calculator(self, debt_data):
-        debt_term = debt_data[3]
-        interest_rate = debt_data[2]
-        debt_amount = debt_data[0]
+        debt_term = debt_data.get_debt_term()
+        interest_rate = debt_data.get_debt_interest()
+        debt_amount = debt_data.get_debt_total_figure()
         interest_rate = interest_rate/100
-        annual_interest = int(debt_amount) * interest_rate
+        annual_interest = debt_amount * interest_rate
         monthly_interest = annual_interest/12        
         total_interest = monthly_interest*debt_term
-        return total_interest + int(debt_amount)
+        return total_interest + debt_amount
     
-    def debt_comparison_calc(self, debt_tuple): # the computer knows the stack, snowball and avalanche lists (~~~) are the same
-        stack = list(debt_tuple)   # ~~~ 
-        debt_stack = sorted(stack, key=lambda debt: debt[2], reverse=True) # sorted by interest rate descending
-        stack = self.comparison_calc(debt_stack)
-        comparison = (stack,)
+    def debt_comparison_calc(self, debt_object1, debt_object2, debt_object3):
+        stack = [debt_object1, debt_object2, debt_object3]
+        debt_stack = sorted(stack, key=lambda debt: debt.get_debt_interest(), reverse=True) # sorted by interest rate descending
+        self.comparison_calc(debt_stack, 'stack')
 
-        snowball = list(debt_tuple)  # ~~~
-        snowball.sort(key = lambda debt: debt[0])  # sorted by loan size ascending
-        debt_snowball = self.comparison_calc(snowball)
-        debt_snowball = (debt_snowball,)
-        comparison += debt_snowball
+        snowball = [debt_object1, debt_object2, debt_object3]
+        snowball.sort(key = lambda debt: debt.get_debt_total_figure())  # sorted by loan size ascending
+        self.comparison_calc(snowball, 'snowball')
 
-        avalanche = list(debt_tuple)  # ~~~
-        avalanche.sort(key = lambda debt: debt[0], reverse=True)  # sorted by loan size descending
-        debt_avalanche = self.comparison_calc(avalanche)
-        debt_avalanche = (debt_avalanche,)
-        comparison += debt_avalanche
-
-        return comparison
+        avalanche = [debt_object1, debt_object2, debt_object3]
+        avalanche.sort(key = lambda debt: debt.get_debt_total_figure(), reverse=True)  # sorted by loan size descending
+        self.comparison_calc(avalanche, 'avalanche')
         
-    def comparison_calc(self, nested_list):
+    def comparison_calc(self, list_of_debts, comparison_type):
         num_of_months = 0
         extra_repayment = 0
         left_over = 0
-        for debt in nested_list:
-            balance = debt[0]
-            repayment = debt[3]
+        for debt in list_of_debts:
+            balance = debt.get_debt_total_figure()
+            repayment = debt.get_repayment()
             while balance > 0:
                 if balance < repayment:
                     left_over = repayment - balance
@@ -51,11 +44,8 @@ class Finance:
                 balance = balance - repayment - extra_repayment - left_over
                 left_over = 0
                 num_of_months += 1
-            debt.append(num_of_months)  #~~~
-            years = int(num_of_months/12)
-            debt.append(years)  #~~~ These 2 appends are appended to all the lists regardless of whether they are the stack, snowball or avalance because the computer seees the nested list as 1 object reference instead of 3
+            debt.set_comparison_type_months(num_of_months, comparison_type)
             extra_repayment += repayment
-        return nested_list
     
     def savings_calculator(self, savings_data):
         interest_rate = savings_data[4]/100

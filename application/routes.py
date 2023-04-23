@@ -150,20 +150,14 @@ def calculate_debt():
         debt_term = form.debt_term.data
         if not debt_amount:
             # if any of those are False/ empty follow this condition to enter default form values
-            if not debt_amount:
-                error = 'Please enter a debt amount'
+            error = 'Please enter a debt amount'
         else:
-            if not debt_interest:
-                debt_interest = 5
-            if not debt_term:
-                debt_term = 24
-
-            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term)
-            single_debt_object = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', new_debt_id)
+            new_debt_id = DATA_PROVIDER.add_debt_data(debt_amount, debt_type, debt_interest, debt_term=debt_term)
+            debt_instance = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', new_debt_id)
             
-            calculated_total_debt = Finance.debt_calculator(single_debt_object)
+            calculated_total_debt = Finance.debt_calculator(debt_instance)
             calculated_total_debt = f"{calculated_total_debt:,.02f}"
-            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=single_debt_object)
+            return render_template('debt_calculator.html', total=calculated_total_debt, debt_data=debt_instance)
     return render_template('debt_calculator_form.html', form=form, message=error, external_link_investopedia=external_link_investopedia)
 
 
@@ -202,21 +196,34 @@ def debt_comparison():
                 debt3_interest=0
                 min3_repayment=0
             
-            debt1_id = DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type, debt1_interest, min1_repayment)
-            debt2_id = DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type, debt2_interest, min2_repayment)
-            debt3_id = DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type, debt3_interest, min3_repayment)
+            debt1_id = DATA_PROVIDER.add_debt_data(debt1_amount, debt1_type, debt1_interest, repayment=min1_repayment)
+            debt2_id = DATA_PROVIDER.add_debt_data(debt2_amount, debt2_type, debt2_interest, repayment=min2_repayment)
+            debt3_id = DATA_PROVIDER.add_debt_data(debt3_amount, debt3_type, debt3_interest, repayment=min3_repayment)
             
             debt_object1 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt1_id)
             debt_object2 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt2_id)
             debt_object3 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt3_id)
-            debt_tuple = (debt_object1, debt_object2, debt_object3)
             
-            comparison = Finance.debt_comparison_calc(debt_tuple)
-            stack = comparison[0]
-            snowball = comparison[1]
-            avalanche = comparison[2]
-            print(stack, snowball, avalanche)
-            return render_template('debt_calculator.html', stack=stack, snowball=snowball, avalanche=avalanche)
+            # send the debt objects into the comparison calc to find out how long each debt takes to pay off using each debt repayment approach (stack, snowball, avalanche)
+            Finance.debt_comparison_calc(debt_object1, debt_object2, debt_object3)
+
+            #sort the objects ready for display on the page
+            nested_list = [debt_object1, debt_object2, debt_object3]
+            order_list = [1, 2, 3]
+            stack_approach = sorted(nested_list, key=lambda debt_object: debt_object.get_debt_interest(), reverse=True) # sort the debt objects, largest interest rate first
+            stack_dict = {order:debt_object for order, debt_object in zip(order_list, stack_approach)}
+
+            snowball_approach = sorted(nested_list, key=lambda debt_object: debt_object.get_debt_total_figure())  # sorted by loan size ascending
+            snowball_dict = {order:debt_object for order, debt_object in zip(order_list, snowball_approach)}
+
+            avalanche_approach = sorted(nested_list, key=lambda debt_object: debt_object.get_debt_total_figure(), reverse=True)  # sorted by loan size descending
+            avalanche_dict = {order:debt_object for order, debt_object in zip(order_list, avalanche_approach)}
+
+            # debt1_dict = debt_object1.comparison_dict()
+            # debt2_dict = debt_object2.comparison_dict()
+            # debt3_dict = debt_object3.comparison_dict()
+            # comparison = [debt1_dict, debt2_dict, debt3_dict]
+            return render_template('debt_calculator.html', stack_dict=stack_dict, snowball_dict=snowball_dict, avalanche_dict=avalanche_dict)
 
     return render_template('debt_comparison_form.html', form=form, message=error)
 

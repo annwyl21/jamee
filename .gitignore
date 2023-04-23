@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 .idea
 
-debt_file.txt
-savings_file.txt
+file_output/debt_file.txt
+file_output/savings_file.txt
