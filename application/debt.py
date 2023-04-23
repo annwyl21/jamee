@@ -45,11 +45,20 @@ class Debt:
     def get_stack_months(self):
         return self._stack_months
     
+    def get_stack_years(self):
+        return self._stack_years
+    
     def get_snowball_months(self):
         return self._snowball_months
     
+    def get_snowball_years(self):
+        return self._snowball_years
+    
     def get_avalanche_months(self):
         return self._avalanche_months
+    
+    def get_avalanche_years(self):
+        return self._avalanche_years
     
     def get_debt_list(self):
         return [self._debt_total_figure, self._debt_source, self._debt_interest, self._debt_term, self._repayment]

@@ -42,7 +42,7 @@
             <tbody>
             {% for object_instance in stack_dict.values() %}
             <tr>
-                <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_stack_months }} months ({{ object_instance.get_stack_years }} years)</td>
+                <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_stack_months() }} months ({{ object_instance.get_stack_years() }} years)</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -61,7 +61,7 @@
             <tbody>
                 {% for object_instance in snowball_dict.values() %}
                 <tr>
-                    <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_stack_months }} months ({{ object_instance.get_stack_years }} years)</td>
+                    <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_snowball_months() }} months ({{ object_instance.get_snowball_years() }} years)</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -80,7 +80,7 @@
             <tbody>
                 {% for object_instance in avalanche_dict.values() %}
                 <tr>
-                    <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_stack_months }} months ({{ object_instance.get_stack_years }} years)</td>
+                    <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_avalanche_months() }} months ({{ object_instance.get_avalanche_years() }} years)</td>
                 </tr>
                 {% endfor %}
         </tbody>
