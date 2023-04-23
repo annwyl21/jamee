@@ -6,52 +6,8 @@
     <div class="row">
     <div class="col-sm-8">
       <h1>How much could my savings be worth?</h1>
+      <br>
       <h4>Saving is tough, try these tips to help:</h4>
-
-      <div class="accordion" id="savingsaccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-              <strong>Tip 1</strong>
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <strong>About to splurge? Save the same sum first.</strong> Next time you want to buy a treat from your usual spending money – a £30 dress, say – make yourself save the £30 first. For example stop yourself buying that coffee out (£3 saved), make a few extra veggie meals (£10 saved etc.) until you hit £30. Now switch this sum from your current account into your savings account. This way, you’ll save extra, get in the habit of cutting back on spending and give yourself time to make sure you really want that dress.
-              <br>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              <strong>Tip 2</strong>
-            </button>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <strong>Try a ‘no spend’ weekend</strong> Set yourself a ‘no spend weekend’ – one every other month if you can. Do activities like going on walks, movie night, board games, free museums. And if you use up any leftover food from the week as well, this can all really make your salary go further every month.
-              <br>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              <strong>Tip 3</strong>
-            </button>
-          </h2>
-          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <strong>Make some choices, we often spend money because we are bored.</strong> We spend money like we spend time to entertain ourselves so make some clear choices about the things you enjoy and really target your spending. If you think about what you want to buy it is easier to say that you don't want to buy something.
-              <br>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a href="{{ external_link_money_saving_expert }}" target="_blank">Ask Martin Lewis, the money saving expert</a>
-
-
 
 <!--Planning your budget carousel -->
 
@@ -77,6 +33,18 @@
           <h5>Is your tax code correct?</h5>
           <p>It is worth it to check whether you are over paying tax, as if the code is incorrect you can get some money back.</p>
         </div>
+        <div class="carousel-item">
+          <h5>About to splurge? Save the same sum first</h5>
+          <p>Next time you want to buy a treat from your usual spending money – a £30 dress, say – make yourself save the £30 first. For example stop yourself buying that coffee out (£3 saved), make a few extra veggie meals (£10 saved etc.) until you hit £30. Now switch this sum from your current account into your savings account. This way, you’ll save extra, get in the habit of cutting back on spending and give yourself time to make sure you really want that dress.</p>
+        </div>
+        <div class="carousel-item">
+          <h5>Try a ‘no spend’ weekend</h5>
+          <p>Set yourself a ‘no spend weekend’ – one every other month if you can. Do activities like going on walks, movie night, board games, free museums. And if you use up any leftover food from the week as well, this can all really make your salary go further every month.</p>
+        </div>
+        <div class="carousel-item">
+          <h5>Make some choices, we often spend money because we are bored</h5>
+          <p>We spend money like we spend time to entertain ourselves so make some clear choices about the things you enjoy and really target your spending. If you think about what you want to buy it is easier to say that you don't want to buy something.</p>
+        </div>
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -89,10 +57,12 @@
         <span class="visually-hidden">Next</span>
       </button>
       </div>
-
+      <br>
+      <a href="{{ external_link_money_saving_expert }}" target="_blank">Ask Martin Lewis, the money saving expert</a>
+      <br>
+      <br>
     </div>
       <div class="col-sm-4">
-      <br>
       <h4>Savings Calculator</h4>
       {{ message }}
         <div class="form">
