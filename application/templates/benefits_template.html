@@ -1,19 +1,55 @@
 {% extends "layout.html" %}
 
 {% block main_content %}
+<!--<h1>{{ title }}</h1>-->
+<!--<br>-->
+<!--{% set endpoint, how, what  = data %}-->
+<!--<h4>How it works</h4>-->
+<!--<br>-->
+<!--{{ how }}-->
+<!--<br><br>-->
+<!--<h4>What you'll get</h4>-->
+<!--<br>-->
+<!--{{ what }}-->
+<!--<br>-->
+<!--<br>-->
+<!--<p>To find out more about your eligibility, visit <a href="https://www.gov.uk/{{ endpoint }}">{{ endpoint }}</a></p>-->
 
-<h1>{{ title }}</h1>
-<br>
-{% set endpoint, how, what  = data %}
-<p>How it works</p>
-<br>
-{{ how }}
-<br><br>
-<p>What you'll get</p>
-<br>
-{{ what }}
-<br>
-<br>
-<p>To find out more about your eligibility, visit https://www.gov.uk/{{ endpoint }}</p>
+<!--new section-->
+    <div class="container-fluid bg-1 text-left">
+      <div class="row">
+      <!-- Giving it a bit of space -->
+      <div class="col-sm-12">
+        <h1>{{ title }}</h1>
+          <br>
+          {% set endpoint, how, what  = data %}
+        <div class="accordion" id="dashboard_accordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <h5>How it works</h5>
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                  <p>{{ how }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <h5>What you'll get</h5>
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                  <p>{{ what }}</p>
+                <br>
+                  <p>To find out more about your eligibility, visit the following government website: <a href="https://www.gov.uk/{{ endpoint }}" class="benefits-link">{{ endpoint }}</a></p>
+              </div>
+            </div>
+          </div>
 
+<!--end point-->
 {% endblock %}
