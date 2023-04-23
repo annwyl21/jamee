@@ -1,5 +1,5 @@
 * {
-font-family: 'Raleway', sans-serif; 'Montserrat', sans-serif;
+    font-family: 'Raleway', sans-serif; 'Montserrat', sans-serif;
 }
 
 /*
@@ -11,15 +11,19 @@ white text?
 */
 
 body {
-margin: 10px;
-text-align: center;
-background-color: #C5D1EB;
-color: #0B1D51;
+    margin: 10px;
+    text-align: center;
+    background-color: white;
+    color: #0B1D51;
+}
+
+.accordion-body {
+    background-color: #C5D1EB;
 }
 
 /* this makes the nav bar and its background transparent, overriding the bootstrap template */
 .bg-body-tertiary {
---bs-bg-opacity: 0;
+    --bs-bg-opacity: 0;
 }
 
 /*landing page*/
@@ -33,26 +37,25 @@ color: #0B1D51;
     margin-bottom: 40px;
 }
 
-/* Hide the carousel text when the screen is less than 600 pixels wide */
-/*@media (max-width: 600px) {
-    .carousel-caption {
-        display: none;
-    }
-}*/
-
 #disclaimer, .col-left p {
     margin-top: 20px;
-}
-
-a {
-
 }
 
 table, th, td {
     border: 1px solid black;
   }
 
-h2, h3, h5, p {
+h1, h2, h3, h4, h5 {
+    text-align: center;
+    font-weight: bold;
+}
+
+p {
+    text-align: justify;
+}
+
+a {
+    display: block;
     text-align: center;
 }
 
@@ -66,6 +69,7 @@ input:placeholder-shown {
 
 .carousel-item p {
     margin: 15x;
+    text-align: justify;
 }
 
 .well {
@@ -80,3 +84,52 @@ span {
     font-weight: bold;
 }
 
+.aboutus {
+    box-sizing: border-box;
+}
+
+.column {
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+
+@media screen and (max-width: 650px) {
+    .column {
+    width: 100%;
+    display: block;
+    }
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    padding: 0 16px;
+}
+
+.container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.title {
+    color: grey;
+}
+
+.debt-pyramid {
+    display: flex;
+    align-items; center;
+    justify-content: center;
+}
+
+.container-fluid img {
+   width: 50%;
+}
+
+.benefits-link {
+    display: inline-block;
+}
