@@ -118,8 +118,6 @@ def calculate_savings():
         savings_interest = form.savings_interest.data
         savings_term = form.savings_term.data
         savings_goal = form.savings_goal.data
-        # if not savings_lump:
-        #     savings_lump = 
         if not savings_interest:
             savings_interest = 5
         if not savings_term:
