@@ -22,7 +22,7 @@
 </div>
 {% endif %}
         
-    {% if comparison %}
+    {% if stack_dict %}
     <div class="col-sm-6">
 <h4>Which is better for you ?</h4>
 </div>
@@ -40,9 +40,9 @@
                 </tr>
             </thead>
             <tbody>
-            {% for dict in comparison %}
+            {% for object_instance in stack_dict.values() %}
             <tr>
-                <td>{{ dict['debt_source'] }}, &pound;{{ dict['debt_total_figure'] }}<br>with {{ dict['debt_interest'] }}%APR, repayments of &pound;{{ dict['debt_repayment'] }}<br> paid by {{ dict['stack_paid_months'] }} months ({{ dict['stack_paid_years'] }} years)</td>
+                <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_stack_months }} months ({{ object_instance.get_stack_years }} years)</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -59,11 +59,11 @@
                 </tr>
             </thead>
             <tbody>
-            {% for dict in comparison %}
-            <tr>
-            <td>{{ dict['debt_source'] }}, &pound;{{ dict['debt_total_figure'] }}<br>with {{ dict['debt_interest'] }}%APR, repayments of &pound;{{ dict['debt_repayment'] }}<br> paid by {{ dict['snowball_paid_months'] }} months ({{ dict['snowball_paid_years'] }} years)</td>
-            </tr>
-            {% endfor %}
+                {% for object_instance in snowball_dict.values() %}
+                <tr>
+                    <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_stack_months }} months ({{ object_instance.get_stack_years }} years)</td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -78,11 +78,11 @@
                 </tr>
             </thead>
             <tbody>
-            {% for dict in comparison %}
-            <tr>
-            <td>{{ dict['debt_source'] }}, &pound;{{ dict['debt_total_figure'] }}<br>with {{ dict['debt_interest'] }}%APR, repayments of &pound;{{ dict['debt_repayment'] }}<br> paid by {{ dict['avalanche_paid_months'] }} months ({{ dict['avalanche_paid_years'] }} years)</td>
-            </tr>
-            {% endfor %}
+                {% for object_instance in avalanche_dict.values() %}
+                <tr>
+                    <td>{{ object_instance.get_debt_source() }}, &pound;{{ '%.2f' % object_instance.get_debt_total_figure() }}<br>with {{ object_instance.get_debt_interest() }}%APR, repayments of &pound;{{ object_instance.get_repayment() }}<br> paid by {{ object_instance.get_stack_months }} months ({{ object_instance.get_stack_years }} years)</td>
+                </tr>
+                {% endfor %}
         </tbody>
         </table>
     </div>

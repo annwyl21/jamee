@@ -204,12 +204,26 @@ def debt_comparison():
             debt_object2 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt2_id)
             debt_object3 = DATA_PROVIDER.get_debt_data_from_id('debt', 'debt_total_id', debt3_id)
             
+            # send the debt objects into the comparison calc to find out how long each debt takes to pay off using each debt repayment approach (stack, snowball, avalanche)
             Finance.debt_comparison_calc(debt_object1, debt_object2, debt_object3)
-            debt1_dict = debt_object1.comparison_dict()
-            debt2_dict = debt_object2.comparison_dict()
-            debt3_dict = debt_object3.comparison_dict()
-            comparison = [debt1_dict, debt2_dict, debt3_dict]
-            return render_template('debt_calculator.html', comparison=comparison)
+
+            #sort the objects ready for display on the page
+            nested_list = [debt_object1, debt_object2, debt_object3]
+            order_list = [1, 2, 3]
+            stack_approach = sorted(nested_list, key=lambda debt_object: debt_object.get_debt_interest(), reverse=True) # sort the debt objects, largest interest rate first
+            stack_dict = {order:debt_object for order, debt_object in zip(order_list, stack_approach)}
+
+            snowball_approach = sorted(nested_list, key=lambda debt_object: debt_object.get_debt_total_figure())  # sorted by loan size ascending
+            snowball_dict = {order:debt_object for order, debt_object in zip(order_list, snowball_approach)}
+
+            avalanche_approach = sorted(nested_list, key=lambda debt_object: debt_object.get_debt_total_figure(), reverse=True)  # sorted by loan size descending
+            avalanche_dict = {order:debt_object for order, debt_object in zip(order_list, avalanche_approach)}
+
+            # debt1_dict = debt_object1.comparison_dict()
+            # debt2_dict = debt_object2.comparison_dict()
+            # debt3_dict = debt_object3.comparison_dict()
+            # comparison = [debt1_dict, debt2_dict, debt3_dict]
+            return render_template('debt_calculator.html', stack_dict=stack_dict, snowball_dict=snowball_dict, avalanche_dict=avalanche_dict)
 
     return render_template('debt_comparison_form.html', form=form, message=error)
 
