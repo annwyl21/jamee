@@ -50,7 +50,12 @@ table, th, td {
     border: 1px solid black;
 }
 
-h1, h2, h3, h4, h5, th, td {
+td {
+    color: black;
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, th {
     text-align: center;
     font-weight: bold;
     color: #0077B6;
@@ -91,17 +96,18 @@ span {
 }
 
 .aboutus {
-/*    box-sizing: border-box;*/
+    box-sizing: border-box;
     display: inline-block;
     overflow-x: hidden;
+    max-width: fit-content;
 }
 
 .column {
     float: left;
     display: flex;
-    justify-content: center;
+/*    justify-content: center;*/
 /*    display: inline-block;*/
-/*    width: 33.3%;*/
+    width: 33.3%;
     margin-bottom: 16px;
     padding: 0 8px;
 }
@@ -115,6 +121,7 @@ span {
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+/*    display: inline-block;*/
 }
 
 .container {
@@ -128,8 +135,21 @@ span {
 }
 
 .title {
-    color: grey;
+    color: #ABC270;
+    text-align: center;
 }
+
+/* dashboard results */
+.dashboard-img {
+    display: flex;
+    align-items; center;
+    justify-content: center;
+}
+
+.dashboard-img img {
+   width: 100%;
+}
+
 
 /* stack snowball page */
 .debt-pyramid {
@@ -138,7 +158,7 @@ span {
     justify-content: center;
 }
 
-.container-fluid img {
+.debt-pyramid img {
    width: 50%;
 }
 
