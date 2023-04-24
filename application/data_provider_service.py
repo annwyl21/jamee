@@ -20,7 +20,7 @@ class DataProviderService:
             password = ''
         else:
             # this below I had to change to password = "password" (instead of empty) as otherwise it doesn't load for me
-            password = ""
+            password = "password"
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database)
         self.cursor = self.conn.cursor()
 
