@@ -14,13 +14,13 @@ class DataProviderService:
         host = 'localhost'
         port = 3306
         user = 'root'
-        #password = 'password'
+        password = ''
         database = 'budget_management'
         if sys.platform == 'win32':
-            password = 'password'
+            password = ''
         else:
             # this below I had to change to password = "password" (instead of empty) as otherwise it doesn't load for me
-            password = "password"
+            password = ""
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database)
         self.cursor = self.conn.cursor()
 

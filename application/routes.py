@@ -19,6 +19,16 @@ def home():
 @app.route('/contact')
 def contact():
     return render_template('contact.html', title='Contact Us')
+    
+    
+ 
+@app.route('/articles')
+def articles():
+    return render_template('articles.html', title='Articles')
+
+@app.route('/savingsarticle')
+def savingarticle():
+    return render_template('savingarticle.html', title='3 Top Ways to Save in 2023')
 
 
 
@@ -233,4 +243,5 @@ def benefits(benefit_name):
         return render_template('benefits_template.html', title='Universal Credit', data=info_benefits[0])
     else:
         return render_template('index.html', title='Home Page')
+
 

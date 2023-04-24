@@ -133,3 +133,73 @@ span {
 .benefits-link {
     display: inline-block;
 }
+
+
+
+/*Article content*/
+.content {
+    width: 90%
+    margin: 30px auto 30px;
+    border: 10px auto solid blue;
+}
+
+/*Main article information*/
+.clearfix::after {
+    content:'';
+    display: block;
+    clear:both;
+}
+
+.content .main-content {
+width: 80%
+float: center;
+margin: 20px
+border: 1px solid blue;
+padding: 15px;
+background: #e7f5fe;
+}
+
+.btn {
+    padding: .5rem 1rem;
+    background: solid blue;
+    color: blue;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+
+}
+
+.btn:hover {
+color: #c585f7;
+background: solid blue;
+}
+
+
+
+/*.content .main-content .post {
+width: 20%;
+height: 270px;
+float: left;
+margin: 10px;
+border-radius: 5px;
+background: white;
+}*/
+
+.content. main-content .post .post-image {
+width: 20%
+height: 20%;
+float: center;
+}
+
+.content .main-content .recent-post-title {
+    margin: 20px;
+}
+
+
+/*Article sidebar*/
+/*.content .sidebar {
+    width: 30%;
+    float: right;
+    border: 1px dashed blue;
+    height: 300px;*/
+}
+
