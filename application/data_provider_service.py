@@ -1,6 +1,7 @@
 import pymysql
 import sys
 from application.debt import Debt
+from application.saving import Saving
 
 class EmptyTuple(Exception):
     pass
@@ -13,13 +14,13 @@ class DataProviderService:
         host = 'localhost'
         port = 3306
         user = 'root'
-        #password = 'password'
+        password = ''
         database = 'budget_management'
         if sys.platform == 'win32':
-            password = 'password'
+            password = ''
         else:
             # this below I had to change to password = "password" (instead of empty) as otherwise it doesn't load for me
-            password = "password"
+            password = ""
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database)
         self.cursor = self.conn.cursor()
 
@@ -130,9 +131,17 @@ class DataProviderService:
         self.cursor.execute(sql, id)
         data = self.cursor.fetchone()
         debt_instance= Debt(debt_total_figure=data[0], debt_source=data[1], debt_interest=data[2], debt_term=data[3], repayment=data[4])
-        #debt_list = Debt.get_debt_data(debt_instance)
         return debt_instance
-    
+
+    def get_saving_data_from_id(self, table, table_id, id):
+        data = []
+        sql = 'Select savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term from ' + table + ' where ' + table_id + ' = %s'
+        self.cursor.execute(sql, id)
+        data = self.cursor.fetchone()
+        saving_instance = Saving(savings_total_figure=data[0], savings_source=data[1], monthly_saving_amount=data[2],
+                                 savings_interest=data[3], savings_term=data[4])
+        return saving_instance
+
     def get_data_from_id(self, table, table_id, id):
         data = []
         sql = 'Select * from ' + table + ' where ' + table_id + ' = %s'
