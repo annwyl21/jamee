@@ -89,15 +89,21 @@
 <!-- This is where the 12 columns are divided into 3 groups of 4 -->
       <div class="col-sm-4">
         <h4>Pie Chart showing your spending breakdown</h4>
-        <img src="{{ url_for('static', filename='images/piechart.png') }}" height='300' alt="spending pie chart">
+        <div class="dashboard-img">
+          <img src="{{ url_for('static', filename='images/piechart.png') }}" alt="spending pie chart">
+        </div>
       </div>
       <div class="col-sm-4">
         <h4>Stacked Bar Chart showing your spending compared to average UK household spending</h4>
-        <img src="{{ url_for('static', filename='images/barstack.png') }}" height='400' alt="stacked bar chart">
+        <div class="dashboard-img">
+          <img src="{{ url_for('static', filename='images/barstack.png') }}" alt="stacked bar chart">
+        </div>
       </div>
       <div class="col-sm-4">
         <h4>Key:</h4>
-        <img src="{{ url_for('static', filename='images/legend.jpg') }}" height='200' alt="Legend">
+        <div class="dashboard-img">
+          <img src="{{ url_for('static', filename='images/legend.jpg') }}" height="200" width="150" alt="Legend">
+        </div>
       </div>
     </div>
   </div>

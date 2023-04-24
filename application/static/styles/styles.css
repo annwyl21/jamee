@@ -17,13 +17,10 @@ body {
     color: #0B1D51;
 }
 
-.accordion-body {
-    background-color: #C5D1EB;
-}
-
 /* this makes the nav bar and its background transparent, overriding the bootstrap template */
 .bg-body-tertiary {
-    --bs-bg-opacity: 0;
+/*    --bs-bg-opacity: 0;*/
+    background-color: #FDA769!important;
 }
 
 /*landing page*/
@@ -33,8 +30,17 @@ body {
     min-height:200px;
 }
 
-.carousel-caption {
+.carousel-caption h3, .carousel-caption p {
     margin-bottom: 40px;
+    color: white;
+    text-align: center;
+    text-shadow: black;
+}
+
+/* this changes the disclaimer and submit buttons colour */
+#disclaimer, .submit {
+    background-color: #FDA769;
+    border-color: #FDA769;
 }
 
 #disclaimer, .col-left p {
@@ -43,11 +49,17 @@ body {
 
 table, th, td {
     border: 1px solid black;
-  }
+}
 
-h1, h2, h3, h4, h5 {
+td {
+    color: black;
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, th {
     text-align: center;
     font-weight: bold;
+    color: #FDA769;
 }
 
 p {
@@ -86,10 +98,15 @@ span {
 
 .aboutus {
     box-sizing: border-box;
+    display: inline-block;
+    overflow-x: hidden;
 }
 
 .column {
     float: left;
+    display: flex;
+/*    justify-content: center;*/
+/*    display: inline-block;*/
     width: 33.3%;
     margin-bottom: 16px;
     padding: 0 8px;
@@ -116,25 +133,53 @@ span {
     display: table;
 }
 
-.title {
-    color: grey;
+.container-aboutus {
+    max-width: 500px;
+    padding: 20px;
 }
 
+.title {
+    color: #ABC270;
+    text-align: center;
+}
+
+/* dashboard results */
+.dashboard-img {
+    display: flex;
+    align-items; center;
+    justify-content: center;
+}
+
+.dashboard-img img {
+   width: 100%;
+}
+
+
+/* stack snowball page */
 .debt-pyramid {
     display: flex;
     align-items; center;
     justify-content: center;
 }
 
-.container-fluid img {
+.debt-pyramid img {
    width: 50%;
 }
 
+/* benefits page */
 .benefits-link {
     display: inline-block;
 }
 
 
+<<<<<<< HEAD
+footer {
+    text-align: center;
+    background-color: #FDA769;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+=======
 
 /*Article content*/
 .content {
@@ -201,5 +246,6 @@ float: center;
     float: right;
     border: 1px dashed blue;
     height: 300px;*/
+>>>>>>> main
 }
 
