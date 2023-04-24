@@ -26,10 +26,17 @@ def contact():
 def articles():
     return render_template('articles.html', title='Articles')
 
-@app.route('/savingsarticle')
+@app.route('/savingarticle')
 def savingarticle():
-    return render_template('savingarticle.html', title='3 Top Ways to Save in 2023')
+    return render_template('savingarticle.html', title='3 Top Ways Save in 2023')
 
+@app.route('/discount_article')
+def discount_article():
+    return render_template('discount_article.html', title='Top Places to Find Money-Saving Discounts')
+
+@app.route('/debt_mentalhealtharticle')
+def debt_mentalhealtharticle():
+    return render_template('debt_mentalhealtharticle.html', title='Debt and Mental Health')
 
 
 @app.route('/dashboard_form', methods=['GET', 'POST'])
