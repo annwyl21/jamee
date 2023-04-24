@@ -326,6 +326,3 @@ values
     (200, 'computer', 50, 8, 5),
     (300, 'house', 500, 2, 20);
 
-select * from debt;
-
-
