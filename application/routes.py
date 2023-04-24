@@ -144,11 +144,11 @@ def calculate_savings():
         if not savings_goal:
             savings_goal = 'rainy day'
         new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal, monthly_saving_amount, savings_interest, savings_term)
-        savings_data = DATA_PROVIDER.get_data_from_id('savings', 'savings_total_id', new_savings_id)
+        saving_instance = DATA_PROVIDER.get_saving_data_from_id('savings', 'savings_total_id', new_savings_id)
         
-        calculated_total_savings = Finance.savings_calculator(savings_data)
+        calculated_total_savings = Finance.savings_calculator(saving_instance)
         calculated_total_savings = f"{calculated_total_savings:,.02f}"
-        return render_template('savings_calculator.html', total=calculated_total_savings, savings_data=savings_data)
+        return render_template('savings_calculator.html', total=calculated_total_savings, savings_data=saving_instance)
 
     return render_template('savings_calculator_form.html', form=form, message=error3, external_link_money_saving_expert=external_link_money_saving_expert)
 

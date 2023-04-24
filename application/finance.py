@@ -37,21 +37,24 @@ class Finance:
         for debt in list_of_debts:
             balance = debt.get_debt_total_figure()
             repayment = debt.get_repayment()
-            while balance > 0:
-                if balance < repayment:
-                    left_over = repayment - balance
-                    balance = 0
-                balance = balance - repayment - extra_repayment - left_over
-                left_over = 0
-                num_of_months += 1
+            try:
+                while balance > 0:
+                    if balance < repayment:
+                        left_over = repayment - balance
+                        balance = 0
+                    balance = balance - repayment - extra_repayment - left_over
+                    left_over = 0
+                    num_of_months += 1
+            except Exception as ex:
+                raise ValueError("False argument in comparison_calc - maybe a repayment is zero")
             debt.set_comparison_type_months(num_of_months, comparison_type)
             extra_repayment += repayment
     
     def savings_calculator(self, savings_data):
-        interest_rate = savings_data[4]/100
-        principal_amount = savings_data[1]
-        savings_term_in_years = savings_data[5]
-        monthly_amount_saved = savings_data[3]
+        interest_rate = savings_data.get_savings_interest()/100
+        principal_amount = savings_data.get_savings_total_figure()
+        savings_term_in_years = savings_data.get_savings_term()
+        monthly_amount_saved = savings_data.get_monthly_saving_amount()
         interest = principal_amount*interest_rate*savings_term_in_years
         saved = (savings_term_in_years*12)*monthly_amount_saved
         return principal_amount + saved + interest
@@ -99,7 +102,7 @@ class Finance:
     # code to create a pie chart using a list
     def create_pie(self, user_data):
         headers_list = ['food and drink', 'housing', 'energy bills', 'petrol or diesel', 'train fares', 'bus fares', 'eating and drinking', 'holidays', 'clothes and footwear']
-        plt.switch_backend('Agg') 
+        plt.switch_backend('Agg') # this changes where the computer generates the chart because that caused a problem on the Mac but not on windows
         colours = sns.color_palette('deep')
         df = pd.DataFrame({'expenditure': headers_list, 'spending': user_data})
         plt.figure(figsize=(6,4))
@@ -107,7 +110,6 @@ class Finance:
         plt.pie(df['spending'], colors=colours, autopct='%d%%')
         plt.axis('equal')
         #plt.title("Test Pie Chart")
-        #plt.legend(df['expenditure'], loc='upper right', bbox_to_anchor=(1,1), fontsize=7)
         plt.savefig('application/static/images/piechart.png', transparent=True)
         # use beautiful seaborn colours
         # creates a dataframe that matplot can use
@@ -120,7 +122,7 @@ class Finance:
     # code to create a stacked bar chart using a list
     def create_stacked_bar(self, user_list, salary_average, uk_average):
         #c = sns.color_palette('deep')
-        plt.switch_backend('Agg') 
+        plt.switch_backend('Agg') # this changes where the computer generates the chart because that caused a problem on the Mac but not on windows
         expenditure = ['My Spending', 'Average in your salary bracket', 'UK Average']
         housing = [user_list[0], salary_average[0], uk_average[0]]
         groceries = [user_list[1], salary_average[1], uk_average[1]]
@@ -157,7 +159,7 @@ class Finance:
         plt.ylabel("Spending Type in £'s")
         #plt.legend(("Housing", "Food and Drink", "Energy Bills", "Fuel", "Train Fares", "Bus Fares", "Eating and Drinking", "Holidays", "Clothes and Footwear"))
         plt.savefig('application/static/images/barstack.png', transparent=True)
-        # this can be created using a dataframe but I didn't learn that, I might have to to use the nice seaborn colours
+        # this can be created using a dataframe but I didn't learn that
         # assign the list variables to the appropriate y_axis categories
         # define the number of columns in the stacked bar chart
         # calculations to add up the height of the stacks
@@ -167,9 +169,6 @@ class Finance:
         # just have 2 markers (x-ticks) on the x-axis because the length of the expenditure list is 2
         # use the strings in the expenditure list to label (xticklabels) those markers
         # add titles, legend etc and save
-
-
-
 
 
 

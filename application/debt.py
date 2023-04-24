@@ -88,6 +88,7 @@ class Debt:
             self.set_avalanche_months(num_of_months)
         else:
             raise "I don't know the comparison_type"
+        # if all the conditions fail then raise an exception
     
     def comparison_dict(self):
         return {

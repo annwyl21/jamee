@@ -1,7 +1,10 @@
 import pymysql
 import sys
 from application.debt import Debt
+from application.saving import Saving
 
+class EmptyTuple(Exception):
+    pass
 
 class DataProviderService:
     def __init__(self):
@@ -17,7 +20,7 @@ class DataProviderService:
             password = ''
         else:
             # this below I had to change to password = "password" (instead of empty) as otherwise it doesn't load for me
-            password = ""
+            password = "password"
         self.conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database)
         self.cursor = self.conn.cursor()
 
@@ -128,9 +131,17 @@ class DataProviderService:
         self.cursor.execute(sql, id)
         data = self.cursor.fetchone()
         debt_instance= Debt(debt_total_figure=data[0], debt_source=data[1], debt_interest=data[2], debt_term=data[3], repayment=data[4])
-        #debt_list = Debt.get_debt_data(debt_instance)
         return debt_instance
-    
+
+    def get_saving_data_from_id(self, table, table_id, id):
+        data = []
+        sql = 'Select savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term from ' + table + ' where ' + table_id + ' = %s'
+        self.cursor.execute(sql, id)
+        data = self.cursor.fetchone()
+        saving_instance = Saving(savings_total_figure=data[0], savings_source=data[1], monthly_saving_amount=data[2],
+                                 savings_interest=data[3], savings_term=data[4])
+        return saving_instance
+
     def get_data_from_id(self, table, table_id, id):
         data = []
         sql = 'Select * from ' + table + ' where ' + table_id + ' = %s'
@@ -156,34 +167,67 @@ class DataProviderService:
 
 # retrieve data for benefits pages
     def get_benefits_data(self, benefit_requested):
-        sql = "SELECT benefit_name, how, what FROM benefits where benefit_name = '" + benefit_requested + "'"
-        self.cursor.execute(sql)
-        retrieved_data = self.cursor.fetchall()
-        return retrieved_data
+        try:
+            sql = "SELECT benefit_name, how, what FROM benefits where benefit_name = '" + benefit_requested + "'"
+            self.cursor.execute(sql)
+            retrieved_data = self.cursor.fetchall()
+        except Exception as ex:
+            print("Failed to query CMD for benefits data - possible problem with an element on nav bar, the endpoint wasn't passed as an argument and the query failed")
+        if retrieved_data == (None,):
+            raise EmptyTuple("Query Returns Empty Tuple - possibly database problem")
+        else:
+            return retrieved_data
     
 
 
 # retrieve data for site stats pages
     def average_debt_report(self):
-        sql = """select avg(debt_total_figure) from debt"""
-        self.cursor.execute(sql)
-        average_debt_entered = self.cursor.fetchone()
-        return average_debt_entered[0]
+        try:
+            sql = """select avg(debt_total_figure) from debt"""
+            self.cursor.execute(sql)
+            average_debt_entered = self.cursor.fetchone()
+        except Exception as ex:
+            print("Failed to query database for average debt total")
+        if average_debt_entered == (None,):
+            raise EmptyTuple("Query Returns Empty Tuple - Debt data missing from database")
+        else:
+            return average_debt_entered[0]
+        # this try/ exception can be viewed when you comment out, teardown and reload your database without debt data (lines 309+ in the jamee*.sql script)
+        # don't forget to comment it back in, teardown and re-load your database before the presentation though!
     
     def frequency_debt_report(self):
-        sql = """SELECT debt_source, COUNT(*) AS freq FROM debt group by debt_source order by freq desc"""
-        self.cursor.execute(sql)
-        frequency_debt_type_entered = self.cursor.fetchall()
-        return frequency_debt_type_entered
+        try:
+            sql = """SELECT debt_source, COUNT(*) AS freq FROM debt group by debt_source order by freq desc"""
+            self.cursor.execute(sql)
+            frequency_debt_type_entered = self.cursor.fetchall()
+        except Exception as ex:
+            print("Failed to query database for debt frequency data")
+        if frequency_debt_type_entered == (None,):
+            raise EmptyTuple("Query returns empty Tuple - Debt data missing from database")
+        else:
+            return frequency_debt_type_entered
     
     def average_savings_report(self):
-        sql = """select avg(savings_total_figure) from savings"""
-        self.cursor.execute(sql)
-        average_debt_entered = self.cursor.fetchone()
-        return average_debt_entered[0]
+        try:
+            sql = """select avg(savings_total_figure) from savings"""
+            self.cursor.execute(sql)
+            average_savings_entered = self.cursor.fetchone()
+        except Exception as ex:
+            print("Failed to query database for average savings data")
+        if average_savings_entered == (None,):
+            raise EmptyTuple("Query returns empty tuple - Savings data missing from database")
+        else:
+            return average_savings_entered[0]
     
     def frequency_savings_report(self):
-        sql = """SELECT savings_source, COUNT(*) AS freq FROM savings group by savings_source order by freq desc"""
-        self.cursor.execute(sql)
-        frequency_debt_type_entered = self.cursor.fetchall()
-        return frequency_debt_type_entered
+        try:
+            sql = """SELECT savings_source, COUNT(*) AS freq FROM savings group by savings_source order by freq desc"""
+            self.cursor.execute(sql)
+            frequency_savings_type_entered = self.cursor.fetchall()
+        except Exception as ex:
+            print("Failed to query database for savings frequency data")
+        if frequency_savings_type_entered == (None,):
+            raise EmptyTuple("Query returns empty tuple - Savings data missing from database")
+        else:
+            return frequency_savings_type_entered
+
