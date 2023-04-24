@@ -37,6 +37,11 @@ body {
     margin-bottom: 40px;
 }
 
+#disclaimer {
+    background-color: #ABC270;
+    border:
+}
+
 #disclaimer, .col-left p {
     margin-top: 20px;
 }
@@ -132,4 +137,9 @@ span {
 
 .benefits-link {
     display: inline-block;
+}
+
+/* extra styling 24 April 2023 Eyasmin */
+.accordion-header {
+    background-color: #ABC270;
 }
