@@ -12,7 +12,7 @@ white text?
 
 body {
     margin: 10px;
-    text-align: center;
+    text-align: left;
     background-color: white-smoke;
     color: #4A5759;
 }
@@ -170,8 +170,7 @@ span {
    width: 50%;
 }
 
-/* benefits page */
-.benefits-link {
+.content-link {
     display: inline-block;
 }
 
@@ -186,9 +185,11 @@ footer {
 
 /*Article content*/
 .content {
-    width: 90%
+    /*width: 90%
     margin: 30px auto 30px;
-/*    border: 10px auto solid blue;*/
+    border: 10px auto solid blue;*/
+    /*text-align: left;*/
+/*    display: inline-block;*/
 }
 
 /*Main article information*/
