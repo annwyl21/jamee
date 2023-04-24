@@ -180,8 +180,27 @@ footer {
     text-align: center;
     background-color: #FDA769;
     position: absolute;
-    margin: 0;
-    padding: 0;
+
+
+/* accordion styling additions */
+
+.accordion-toggle {
+    background-color: gray;
+    display: block;
+    padding: 10px;
+    margin: -10px -15px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.accordion-toggle.collapsed {
+    background-color: white;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #0c63e4;
+    background-color: #FEB7EE;
+}
 
 /*Article content*/
 .content {
