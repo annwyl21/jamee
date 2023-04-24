@@ -126,7 +126,7 @@ def calculate_savings():
             monthly_saving_amount = 50
         if not savings_goal:
             savings_goal = 'rainy day'
-        get_saving_data_from_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal, monthly_saving_amount, savings_interest, savings_term)
+        new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal, monthly_saving_amount, savings_interest, savings_term)
         saving_instance = DATA_PROVIDER.get_saving_data_from_id('savings', 'savings_total_id', new_savings_id)
         
         calculated_total_savings = Finance.savings_calculator(saving_instance)
