@@ -1,8 +1,15 @@
-# jamee
-A website/ dashboard for personal financial tracking
+# Friends
+A website / dashboard for personal financial tracking
 
-- install the requirements
-- run the app.py file to start the site locally
+- Install the requirements
+```bash
+pip install -r requirements.txt
+```
+- Create the database in MySql using the script: `application/static/scripts/jamee_user_database.sql`
+- Run the app.py file to start the site locally
+```bash
+python -m flask run
+```
 
 # Problem-Solving
 
@@ -11,15 +18,6 @@ A website/ dashboard for personal financial tracking
     - Our Database code is held in Static/ Scripts
         - run `teardown_script.sql` to drop old versions of the database
         - run `jamee_user_database.sql` to rebuild the new database
-
-# Site Guide
-
-- static folder holds 3 folders; images, styles and scripts (which has our mysql database code)
-- we have 3 .py files that hold various classes;
-    - data_provider_service (our database connection and class methods relating to the database)
-    - finance (our graphs and other class mathods relating to our finance calculator code)
-    - forms (our code relating to adding data from the form to the database)
-- we have a tests folder that holds the pytests and a .github folder that holds the code to run the automatic code checker every time we do a pull request so we can merge with confidence
 
 ## Before Coding
 
