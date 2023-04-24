@@ -171,15 +171,14 @@ span {
     display: inline-block;
 }
 
+/* turns footer orange */
 
-<<<<<<< HEAD
 footer {
     text-align: center;
     background-color: #FDA769;
     position: absolute;
     margin: 0;
     padding: 0;
-=======
 
 /*Article content*/
 .content {
@@ -246,6 +245,5 @@ float: center;
     float: right;
     border: 1px dashed blue;
     height: 300px;*/
->>>>>>> main
 }
 
