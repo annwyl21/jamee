@@ -1,4 +1,4 @@
-class Savings:
+class Saving:
     def __init__(self, savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term):
         self._savings_total_figure = savings_total_figure
         self._savings_source = savings_source

@@ -1,6 +1,7 @@
 import pymysql
 import sys
 from application.debt import Debt
+from application.saving import Saving
 
 class EmptyTuple(Exception):
     pass
@@ -132,14 +133,14 @@ class DataProviderService:
         debt_instance= Debt(debt_total_figure=data[0], debt_source=data[1], debt_interest=data[2], debt_term=data[3], repayment=data[4])
         return debt_instance
 
-    def get_savings_data_from_id(self, table, table_id, id):
+    def get_saving_data_from_id(self, table, table_id, id):
         data = []
         sql = 'Select savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term from ' + table + ' where ' + table_id + ' = %s'
         self.cursor.execute(sql, id)
         data = self.cursor.fetchone()
-        savings_instance = Savings(savings_total_figure=data[0], savings_source=data[1], monthly_saving_amount=data[2], savings_interest=data[3],
-                             savings_term=data[4])
-        return savings_instance
+        saving_instance = Saving(savings_total_figure=data[0], savings_source=data[1], monthly_saving_amount=data[2],
+                                 savings_interest=data[3], savings_term=data[4])
+        return saving_instance
 
     def get_data_from_id(self, table, table_id, id):
         data = []
