@@ -118,8 +118,6 @@ def calculate_savings():
         savings_interest = form.savings_interest.data
         savings_term = form.savings_term.data
         savings_goal = form.savings_goal.data
-        if not savings_lump:
-            savings_lump = 500
         if not savings_interest:
             savings_interest = 5
         if not savings_term:
@@ -130,7 +128,7 @@ def calculate_savings():
             savings_goal = 'rainy day'
         new_savings_id = DATA_PROVIDER.add_savings_data(savings_lump, savings_goal, monthly_saving_amount, savings_interest, savings_term)
         savings_data = DATA_PROVIDER.get_data_from_id('savings', 'savings_total_id', new_savings_id)
-        print(savings_data)
+        
         calculated_total_savings = Finance.savings_calculator(savings_data)
         calculated_total_savings = f"{calculated_total_savings:,.02f}"
         return render_template('savings_calculator.html', total=calculated_total_savings, savings_data=savings_data)
@@ -208,6 +206,8 @@ def debt_comparison():
 
             avalanche_approach = sorted(nested_list, key=lambda debt_object: debt_object.get_debt_total_figure(), reverse=True)  # sorted by loan size descending
             avalanche_dict = {order:debt_object for order, debt_object in zip(order_list, avalanche_approach)}
+            # uses a dictionary to hold the order to avoid an object refernce problem
+            # In Python 3.6, the built-in dict class now keeps its items ordered as well
 
             return render_template('debt_calculator.html', stack_dict=stack_dict, snowball_dict=snowball_dict, avalanche_dict=avalanche_dict)
 
@@ -233,8 +233,4 @@ def benefits(benefit_name):
         return render_template('benefits_template.html', title='Universal Credit', data=info_benefits[0])
     else:
         return render_template('index.html', title='Home Page')
-
-
-
-
 

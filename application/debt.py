@@ -22,9 +22,13 @@ class Debt:
             self._debt_term = 24
         
         if self._repayment:
-            self._repayment = int(self._repayment)
+            self._repayment = abs(int(self._repayment))
+
         else:
             self._repayment = 10
+            # entering a repayment of zero will break our debt calculators 
+            # (there is a while loop that continues until a loan amount is paid - reaches a zero value, if repayment = 0 it creates an infinite loop) 
+            # so we have a default repayment of 10
         
     
     def get_debt_total_figure(self):
