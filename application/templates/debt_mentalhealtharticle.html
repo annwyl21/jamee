@@ -2,61 +2,84 @@
 
 {% block main_content %}
 
-      <div class="main-content">
-         <h1 class ="recent-post-title"> </h1>
-        <div class="post">
-            <img src="{{ url_for('static', filename='images/mentalhealthdebt.jpg') }}" class="post" alt="savings_article"
-            width="300" height="200">
-    <title>Debt and Mental Health</title>
-            <h1>Debt and Mental Health</h1>
-             <i class="far fa-user">Authors: Eyasmin Basher and Michelle Quaye, April 8th 2023</i>
-            <br>
-            <br>
-            <p>
+<div class="container-sm">
+    <div class="articles-img">
+        <img src="{{ url_for('static', filename='images/mentalhealthdebt.jpg') }}" class="post" alt="savings_article"
+        width="300" height="200">
+    </div>
+</div>
+<br>
+
+<div class="container-sm">
+    <article>
+        <h1>Debt and Mental Health</h1>
+        <p class="title">Authors: Eyasmin Basher and Michelle Quaye, April 8th 2023</p>
+        <br>
+
+        <p>
             50% of adults have ill mental-health linked to the stresses of debt (Royal College of Psychiatrists, 2010).
             <br>
             Debt has been shown to have an impact on:
-            <ul>
-            <li> Emotional regulation</li>
-            <li> Personal relationships</li>
-            <li> Self-esteem</li>
-            <li> Social inclusion</li>
-            <br>
-            (Mind, 2023)
-        </ul>
+                <ul>
+                    <li> Emotional regulation</li>
+                    <li> Personal relationships</li>
+                    <li> Self-esteem</li>
+                    <li> Social inclusion</li>
+                    <br>
+                (Mind, 2023)
+                </ul>
+        </p>
+        <br>
 
-            <br>
+        <p>
             So what is being done to help people going through ill mental health due to debt? (Mind, 2023)
             <br>
             <ul>
-                <li>Money Advice Liaison Groups: These are forums created to provide an empathetic service with information
+                <li>
+                    <span>Money Advice Liaison Groups:</span> These are forums created to provide an empathetic service with information
                     and advice. These groups also provide guidance to financial organisations on how to communicate clearly and with more
                     understanding to customers via 'Good practice mental health guidelines' (2009).
                 </li>
-                <li>Credit Crunch Stressline: This is an NHS helpline for people experiencing emotional distress due to
-                issues with debt and wider financial difficulties. This helpline provides support and advice.</li>
-                <li>The Lending Code: This is a protocol created by The British Banking Association (2005) on how creditors
-                should treat customers experiencing financial problems alongside associated mental health conditions.</li>
-                <li>Government Policy: New Horizons is a partnership organisation with the government to support
-                public health research and information for organisations on how to best tackle debt and mental health
-                in daily practice (Department of Health, 2011). </li>
+                <li>
+                    <span>Credit Crunch Stressline:</span> This is an NHS helpline for people experiencing emotional distress due to
+                    issues with debt and wider financial difficulties. This helpline provides support and advice.
+                </li>
+                <li>
+                    <span>The Lending Code:</span> This is a protocol created by The British Banking Association (2005) on how creditors
+                    should treat customers experiencing financial problems alongside associated mental health conditions.
+                </li>
+                <li>
+                    Government Policy: <span>New Horizons</span> is a partnership organisation with the government to support
+                    public health research and information for organisations on how to best tackle debt and mental health
+                    in daily practice (Department of Health, 2011).
+                </li>
             </ul>
-                <br>
+        </p>
+        <br>
+
+        <p>
             We would recommend that you please seek professional support if you are experiencing financial difficulty and  that is
             affecting your wellbeing.
-            <br>
+        </p>
+        <br>
+
+        <span>
+        <p>
             If you or anyone you know is in a mental health crisis, please call one of the following:
             <br>
-            <ul><li>Samaritans: 116 123</li></ul>
-            <ul><li>NHS 111</li></ul>
-            <ul><li>999</li></ul>
-            </p>
+            <ul>
+                <li>Samaritans 116 123</li>
+                <li>NHS 111</li>
+                <li>999</li>
+            </ul>
+        </p>
+        </span>
 
 
-</head>
-<body>
+    <br>
+    <br>
+</article>
+</div>
 
-</body>
-</html>
 
 {% endblock %}
