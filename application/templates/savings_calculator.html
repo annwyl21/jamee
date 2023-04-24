@@ -7,8 +7,8 @@
       <div class="col-sm-6">
         <h1>Simple Savings Calculator</h1>
         <h4>Your results</h4>
-        <p>Your lump sum investment of {{ '%.2f' % savings_data[1] }} to save for a {{ savings_data[2] }}, saving {{ savings_data[3] }} each month:
-        <br>If you saved &pound;{{ '%.2f' % savings_data[3] }} at {{ savings_data[4] }}% APR interest over {{ savings_data[5] }} years
+        <p>Your lump sum investment of &pound;{{ '%.2f' % savings_data.get_savings_total_figure() }} to save for a {{ savings_data.get_savings_source() }}, saving &pound;{{ '%.2f' % savings_data.get_monthly_saving_amount() }} each month:
+        <br>If you saved &pound;{{ '%.2f' % savings_data.get_monthly_saving_amount() }} at {{ savings_data.get_savings_interest() }}% APR interest over {{ savings_data.get_savings_term() }} years
         <br>
         <br>In total, your investment would be worth approximately <span>&pound;{{ total }}</span>
         </p>
