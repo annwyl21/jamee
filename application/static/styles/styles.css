@@ -17,10 +17,6 @@ body {
     color: #0B1D51;
 }
 
-.accordion-body {
-    background-color: #C5D1EB;
-}
-
 /* this makes the nav bar and its background transparent, overriding the bootstrap template */
 .bg-body-tertiary {
     --bs-bg-opacity: 0;
@@ -33,13 +29,17 @@ body {
     min-height:200px;
 }
 
-.carousel-caption {
+.carousel-caption h3, .carousel-caption p {
     margin-bottom: 40px;
+    color: white;
+    text-align: center;
+    text-shadow: black;
 }
 
-#disclaimer {
+/* this changes the disclaimer and submit buttons colour */
+#disclaimer, .submit {
     background-color: #ABC270;
-    border:
+    border-color: #ABC270;
 }
 
 #disclaimer, .col-left p {
@@ -48,11 +48,12 @@ body {
 
 table, th, td {
     border: 1px solid black;
-  }
+}
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, th, td {
     text-align: center;
     font-weight: bold;
+    color: #0077B6;
 }
 
 p {
@@ -125,6 +126,7 @@ span {
     color: grey;
 }
 
+/* stack snowball page */
 .debt-pyramid {
     display: flex;
     align-items; center;
@@ -135,11 +137,9 @@ span {
    width: 50%;
 }
 
+/* benefits page */
 .benefits-link {
     display: inline-block;
 }
 
-/* extra styling 24 April 2023 Eyasmin */
-.accordion-header {
-    background-color: #ABC270;
-}
+/* extra styling Eyasmin */
