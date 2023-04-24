@@ -2,78 +2,90 @@
 
 {% block main_content %}
 
+<div class="container-sm">
+<article>
+    <div class="articles-img">
+        <img src="{{ url_for('static', filename='images/countingcoins.jpg') }}" class="post" alt="savings_article"
+        width="300" height="200">
+    </div>
 
-    <div class="main-content">
-         <h1 class ="recent-post-title"> </h1>
-        <div class="post">
-            <img src="{{ url_for('static', filename='images/countingcoins.jpg') }}" class="post" alt="savings_article"
-            width="300" height="200">
-
-    <title>Top Places to Find Money-Saving Discounts</title>
-</head>
-<body>
-
-<h1>Top Places to Find Money-Saving Discounts</h1>
- <i class="far fa-user">Authors: Ellen Houghton and Eyasmin Basher, April 8th 2023</i>
-
-<h2> 1. Voucher sites. </h2>
-
-<p> <ul> Managing your finances should not mean going without all the things that make you happy!
-    Thankfully there are websites that offer voucher cards or voucher discount codes for you to use.
-    Try to use them quickly! Many codes or voucher options have a short expiry window.
+    <h1>Top Places to Find Money-Saving Discounts</h1>
+     <p class="title">Authors: Ellen Houghton and Eyasmin Basher, April 8th 2023</p>
     <br>
     <br>
-     Examples of cashback sites include:
-            <br>
-            <li><a href="https://www.wowcher.co.uk/{{user_wowcher}}">Wowcher</a> </li>
-            <li><a href="https://www.groupon.co.uk/{{user_groupon}}">Groupon</a> </li>
-            <li><a href="https://www.hotukdeals.com/{{user_hotukdeals}}">Hot UK Deals</a></li>
 
-    </ul>
+    <h2>Voucher sites</h2>
 
-    <h2> 2. Cashback sites. </h2>
-
-    <p> <ul> When purchasing items online such as food, clothes or event tickets, rather than going to retailers directly,
-            you could visit those same companies via a cashback site and get paid for your custom!
-            You can sign up for these sites (which are usually free or very low cost, via an annual subscription.
-            Once logged in, access the companies you wish to purchase from and get ordering! After your purchases,
-            an amount of saved cashback earnings will accumalate in your account.
-            <br>
-            <br>
-            After you reach a certain total/threshold, you can withdraw the money you have accumulated over time.
-            <br>
-            <br>
-            Examples of cashback sites include:
-            <br>
-            <li><a href="https://www.quidco.co.uk/{{user_quidco}}">Quidco</a> </li>
-            <li><a href="https://www.topcashback.co.uk/{{user_topcashback}}">Top Cashback</a></li>
-            <li><a href="https://www.kidstart.co.uk/{{user_kidstart}}">KidStart</a></li>
-
-        </ul>
-
-    <h2> 3. Eligibility passes. </h2>
-    <p> <ul> Are you a student, healthcare worker, emergency service staff or retired?
-    You could be eligible for special eligibility passes!
-    <br>
-    <br>
-    Examples include:
-            <li>Travel passes:<a href="https://tfl.gov.uk/fares/free-and-discounted-travel/freedom-pass{{user_freedompass}}">Freedom Pass (60 years and over in London)</a>
-                <a href="https://tfl.gov.uk/fares/free-and-discounted-travel{{user_zippass}}">Zip Oyster Photocards (11-15 years, 16-17 years in London)</a>
-                <a href="https://tfl.gov.uk/fares/free-and-discounted-travel{{user_18zippass}}">18+ Oyster Photocards (London) </a>
-                <a href="https://www.railcard.co.uk/16-25/{{user_1625rail}}">16-25 RailCard (UK) </a>
-                <a href="https://www.railcard.co.uk/26-30/{{user_2630rail}}">26-30 RailCard (UK) </a>
-
-                </li>
-            <li>University Cards: Some stores will provide you a discount with your university card alone. For other companies,
-            you would need to sign up for sites such as
-                <a href="https://www.myunidays.com/GB/en-GB{{user_unidays}}">UNIDAYS </a> and <a href="https://www.nus.org.uk/student_discounts{{user_NUS}}">NUS</a>
-            </li>
-            <li>NHS and emergency workers: Some stores will provide you a discount with your staff card alone.
-            For other companies, you would need to sign up for sites such as
-                <a href="https://www.bluelightcard.co.uk/{{user_bluelightcard}}">Blue Light Card</a>to enjoy discounts.</li>
-    </ul>
+    <p>
+        Managing your finances should not mean going without all the things that make you happy! Thankfully there are websites that offer voucher cards or voucher discount codes for you to use. Try to use them quickly! Many codes or voucher options have a short expiry window.
     </p>
-</body>
-</html>
+
+    <p>
+        Examples of cashback sites include:
+        <ul>
+            <li><a href="https://www.wowcher.co.uk/{{user_wowcher}}" class="content-link">Wowcher</a> </li>
+            <li><a href="https://www.groupon.co.uk/{{user_groupon}}" class="content-link">Groupon</a> </li>
+            <li><a href="https://www.hotukdeals.com/{{user_hotukdeals}}" class="content-link">Hot UK Deals</a></li>
+        </ul>
+    </p>
+    <br>
+
+    <h2>Cashback sites</h2>
+
+    <p>
+        When purchasing items online such as food, clothes or event tickets, rather than going to retailers directly, you could visit those same companies via a cashback site and get paid for your custom! You can sign up for these sites (which are usually free or very low cost, via an annual subscription. Once logged in, access the companies you wish to purchase from and get ordering! After your purchases, an amount of saved cashback earnings will accumulate in your account.
+    </p>
+    <p>
+        After you reach a certain total/threshold, you can withdraw the money you have accumulated over time.
+    </p>
+    <p>
+        Examples of cashback sites include:
+        <ul>
+            <li><a href="https://www.quidco.co.uk/{{user_quidco}}" class="content-link">Quidco</a> </li>
+            <li><a href="https://www.topcashback.co.uk/{{user_topcashback}}" class="content-link">Top Cashback</a></li>
+            <li><a href="https://www.kidstart.co.uk/{{user_kidstart}}" class="content-link">KidStart</a></li>
+        </ul>
+    </p>
+    <br>
+
+    <h2>Eligibility passes</h2>
+    <p>
+        Are you a student, healthcare worker, emergency service staff or retired? You could be eligible for special eligibility passes!
+    </p>
+    <p>
+        Examples include:
+        <br>
+        <ul>
+            <li>Travel passes:
+                <ul>
+                    <li><a href="https://tfl.gov.uk/fares/free-and-discounted-travel/freedom-pass{{user_freedompass}}" class="content-link">Freedom Pass (60 years and over in London)</a></li>
+                    <li><a href="https://tfl.gov.uk/fares/free-and-discounted-travel{{user_zippass}}" class="content-link">Zip Oyster Photocards (11-15 years, 16-17 years in London)</a></li>
+                    <li><a href="https://tfl.gov.uk/fares/free-and-discounted-travel{{user_18zippass}}" class="content-link">18+ Oyster Photocards (London) </a></li>
+                    <li><a href="https://www.railcard.co.uk/16-25/{{user_1625rail}}" class="content-link">16-25 RailCard (UK) </a></li>
+                    <li><a href="https://www.railcard.co.uk/26-30/{{user_2630rail}}" class="content-link">26-30 RailCard (UK) </a></li>
+                </ul>
+            </li>
+
+            <br>
+
+            <li>
+                University Cards: Some stores will provide you a discount with your university card alone. For other companies, you would need to sign up for sites such as
+                <a href="https://www.myunidays.com/GB/en-GB{{user_unidays}}" class="content-link">UNIDAYS </a> and <a href="https://www.nus.org.uk/student_discounts{{user_NUS}}" class="content-link">NUS</a>
+            </li>
+
+            <br>
+
+            <li>
+                NHS and emergency workers: Some stores will provide you a discount with your staff card alone. For other companies, you would need to sign up for sites such as
+                <a href="https://www.bluelightcard.co.uk/{{user_bluelightcard}}" class="content-link">Blue Light Card</a> to enjoy discounts.
+            </li>
+        </ul>
+    </p>
+
+    <br>
+    <br>
+
+</article>
+</div>
 
 {% endblock %}
