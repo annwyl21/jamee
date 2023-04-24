@@ -51,10 +51,10 @@ class Finance:
             extra_repayment += repayment
     
     def savings_calculator(self, savings_data):
-        interest_rate = savings_data[4]/100
-        principal_amount = savings_data[1]
-        savings_term_in_years = savings_data[5]
-        monthly_amount_saved = savings_data[3]
+        interest_rate = savings_data.get_saving_data()/100
+        principal_amount = savings_data.get_savings_total_figure()
+        savings_term_in_years = savings_data.get_savings_term()
+        monthly_amount_saved = savings_data.get_monthly_saving_amount()
         interest = principal_amount*interest_rate*savings_term_in_years
         saved = (savings_term_in_years*12)*monthly_amount_saved
         return principal_amount + saved + interest
