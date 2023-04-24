@@ -19,7 +19,8 @@ body {
 
 /* this makes the nav bar and its background transparent, overriding the bootstrap template */
 .bg-body-tertiary {
-    --bs-bg-opacity: 0;
+/*    --bs-bg-opacity: 0;*/
+    background-color: #FDA769!important;
 }
 
 /*landing page*/
@@ -172,6 +173,6 @@ span {
 
 #footer {
     align-items; center;
-    background-color: #ABC270;
+    background-color: #FDA769;
     width: 100%;
 }
