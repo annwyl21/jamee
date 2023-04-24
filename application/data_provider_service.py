@@ -130,9 +130,17 @@ class DataProviderService:
         self.cursor.execute(sql, id)
         data = self.cursor.fetchone()
         debt_instance= Debt(debt_total_figure=data[0], debt_source=data[1], debt_interest=data[2], debt_term=data[3], repayment=data[4])
-        #debt_list = Debt.get_debt_data(debt_instance)
         return debt_instance
-    
+
+    def get_savings_data_from_id(self, table, table_id, id):
+        data = []
+        sql = 'Select savings_total_figure, savings_source, monthly_saving_amount, savings_interest, savings_term from ' + table + ' where ' + table_id + ' = %s'
+        self.cursor.execute(sql, id)
+        data = self.cursor.fetchone()
+        savings_instance = Savings(savings_total_figure=data[0], savings_source=data[1], monthly_saving_amount=data[2], savings_interest=data[3],
+                             savings_term=data[4])
+        return savings_instance
+
     def get_data_from_id(self, table, table_id, id):
         data = []
         sql = 'Select * from ' + table + ' where ' + table_id + ' = %s'

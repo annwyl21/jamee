@@ -6,9 +6,7 @@ class Savings:
         self._savings_interest = savings_interest
         self._savings_term = savings_term
 
-
     # getters
-
 
     def get_savings_total_figure(self):
         return self._savings_total_figure
