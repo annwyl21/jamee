@@ -38,8 +38,8 @@ body {
 
 /* this changes the disclaimer and submit buttons colour */
 #disclaimer, .submit {
-    background-color: #ABC270;
-    border-color: #ABC270;
+    background-color: #FDA769;
+    border-color: #FDA769;
 }
 
 #disclaimer, .col-left p {
@@ -58,7 +58,7 @@ td {
 h1, h2, h3, h4, h5, th {
     text-align: center;
     font-weight: bold;
-    color: #0077B6;
+    color: #FDA769;
 }
 
 p {
@@ -168,3 +168,10 @@ span {
 }
 
 /* extra styling Eyasmin */
+
+
+#footer {
+    align-items; center;
+    background-color: #ABC270;
+    width: 100%;
+}
