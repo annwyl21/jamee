@@ -28,7 +28,7 @@ def articles():
 
 @app.route('/savingsarticle')
 def savingarticle():
-    return render_template('savingarticle.html', title='5 Top Ways to Save in 2023')
+    return render_template('savingarticle.html', title='3 Top Ways to Save in 2023')
 
 
 
