@@ -104,12 +104,15 @@ span {
     font-weight: bold;
 }
 
-.row aboutus {
+.aboutus {
     box-sizing: border-box;
     display: inline-block;
     overflow-x: hidden;
-    margin-right: 120px!important;
-    margin-left: 120px!important;
+}
+
+#aboutus {
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 .column {
