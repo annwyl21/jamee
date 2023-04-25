@@ -60,7 +60,7 @@ td {
 .table-striped>tbody>tr:nth-child(odd)>th {
      background-color: #D2D4C8;
      text-align: center;
-     color: #473C33;
+     color: #4A5759;
    }
 
 h1, h2, h3, h4, h5, th {
@@ -104,10 +104,12 @@ span {
     font-weight: bold;
 }
 
-.aboutus {
+.row aboutus {
     box-sizing: border-box;
     display: inline-block;
     overflow-x: hidden;
+    margin-right: 120px!important;
+    margin-left: 120px!important;
 }
 
 .column {
@@ -144,6 +146,7 @@ span {
 .container-aboutus {
     max-width: 500px;
     padding: 20px;
+    margin: 10px;
 }
 
 .title {
@@ -180,6 +183,7 @@ footer {
     text-align: center;
     background-color: #FDA769;
     position: absolute;
+    }
 
 
 /* accordion styling additions */
@@ -198,8 +202,8 @@ footer {
 }
 
 .accordion-button:not(.collapsed) {
-    color: #0c63e4;
-    background-color: #FEB7EE;
+    color: #473C33;
+    background-color: #D2D4C8;
 }
 
 /*Article content*/
@@ -262,6 +266,6 @@ footer {
     width: 30%;
     float: right;
     border: 1px dashed blue;
-    height: 300px;*/
-}
+    height: 300px;}*/
+
 
