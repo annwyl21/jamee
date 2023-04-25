@@ -43,6 +43,11 @@ body {
     text-shadow: black;
 }
 
+.why-chipin {
+    color: #4A5759;
+    text-decoration: none;
+}
+
 /* this changes the disclaimer and submit buttons colour */
 #disclaimer, .submit {
     background-color: #FDA769;
