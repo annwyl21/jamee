@@ -12,7 +12,7 @@ white text?
 
 body {
     margin: 10px;
-    text-align: center;
+    text-align: left;
     background-color: white-smoke;
     color: #4A5759;
 }
@@ -47,6 +47,10 @@ body {
     margin-top: 20px;
 }
 
+#disclaimer {
+    text-align: center;
+}
+
 table, th, td {
     border: 1px solid black;
 }
@@ -60,7 +64,7 @@ td {
 .table-striped>tbody>tr:nth-child(odd)>th {
      background-color: #D2D4C8;
      text-align: center;
-     color: #473C33;
+     color: #4A5759;
    }
 
 h1, h2, h3, h4, h5, th {
@@ -110,6 +114,11 @@ span {
     overflow-x: hidden;
 }
 
+#aboutus {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
 .column {
     float: left;
     display: flex;
@@ -144,15 +153,17 @@ span {
 .container-aboutus {
     max-width: 500px;
     padding: 20px;
+    margin: 10px;
 }
 
 .title {
     color: #ABC270;
     text-align: center;
+    font-style: italic;
 }
 
 /* dashboard results */
-.dashboard-img {
+.dashboard-img, .debt-pyramid, .articles-img {
     display: flex;
     align-items; center;
     justify-content: center;
@@ -164,18 +175,12 @@ span {
 
 
 /* stack snowball page */
-.debt-pyramid {
-    display: flex;
-    align-items; center;
-    justify-content: center;
-}
 
 .debt-pyramid img {
    width: 50%;
 }
 
-/* benefits page */
-.benefits-link {
+.content-link {
     display: inline-block;
 }
 
@@ -185,14 +190,36 @@ footer {
     text-align: center;
     background-color: #FDA769;
     position: absolute;
-    margin: 0;
-    padding: 0;
+    }
+
+
+/* accordion styling additions */
+
+.accordion-toggle {
+    background-color: gray;
+    display: block;
+    padding: 10px;
+    margin: -10px -15px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.accordion-toggle.collapsed {
+    background-color: white;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #473C33;
+    background-color: #D2D4C8;
+}
 
 /*Article content*/
 .content {
-    width: 90%
+    /*width: 90%
     margin: 30px auto 30px;
-/*    border: 10px auto solid blue;*/
+    border: 10px auto solid blue;*/
+    /*text-align: left;*/
+/*    display: inline-block;*/
 }
 
 /*Main article information*/
@@ -202,14 +229,12 @@ footer {
     clear:both;
 }
 
-.content .main-content {
-    width: 80%
-    float: center;
+/*.main-content {
+    border: 1px blue;
+    padding: 5px;
+    background: #e7f5fe;
     margin: 20px
-/*    border: 1px solid blue;*/
-    padding: 15px;
-    /*background: #e7f5fe;*/
-}
+}*/
 
 /*.btn {
     padding: .5rem 1rem;
@@ -224,8 +249,6 @@ footer {
     background: solid blue;
 }*/
 
-
-
 /*.content .main-content .post {
     width: 20%;
     height: 270px;
@@ -235,22 +258,21 @@ footer {
     background: white;
 }*/
 
-.content. main-content .post .post-image {
+/*.content. main-content .post .post-image {
     width: 20%
     height: 20%;
     float: center;
-}
+}*/
 
-.content .main-content .recent-post-title {
+/*.content .main-content .recent-post-title {
     margin: 20px;
-}
-
+}*/
 
 /*Article sidebar*/
 /*.content .sidebar {
     width: 30%;
     float: right;
     border: 1px dashed blue;
-    height: 300px;*/
-}
+    height: 300px;}*/
+
 

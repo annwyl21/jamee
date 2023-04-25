@@ -2,45 +2,49 @@
 
 {% block main_content %}
 
-    <div class="main-content">
-         <h1 class ="recent-post-title"> </h1>
-        <div class="post">
-            <img src="{{ url_for('static', filename='images/savingspic.jpg') }}" class="post" alt="savings_article"
-            width="300" height="200">
+<div class="container-sm">
+    <div class="articles-img">
+        <img src="{{ url_for('static', filename='images/savingspic.jpg') }}" class="post" alt="savings_article"
+        width="300" height="200">
+    </div>
+</div>
+<br>
 
+<div class="container-sm">
+<article>
+    <h1>Top Ways to Save in 2023</h1>
+    <p class="title">Authors: Michelle Quaye and Eyasmin Basher, April 1st 2023</p>
+    <br>
+    <h2>Make a plan!</h2>
+    <p>
+        It is important to have a goal. What would you like to save for? How much money would you like to save? Is there a deadline for when this money should be saved?
+        <ul>
+            <li> Set a schedule of savings totals and deadlines for them. </li>
+            <li> Be realistic with your timings. It may take longer to save for bigger savings projects such as saving for housing renovations. Some savings totals may be small but consistent e.g. an emergency fund. </li>
+            <li> Use a tool to help you with your goals. Our <a href="./savings_calculator_form" target="_blank" class="content-link">ChipIn Savings Calculator</a> can help with this! </li>
+        </ul>
+    </p>
 
-<h1>Top Ways to Save in 2023 </h1>
- <i class="far fa-user">Authors: Michelle Quaye and Eyasmin Basher, April 1st 2023</i>
+<br>
 
-<h2> 1. Make a plan!</h2>
+    <h2>Record your outgoing money (expenses). </h2>
+    <p>
+        Keep a regular record of your expenses to find patterns in where the most of your money is going
+    </p>
+    <p>
+        Identify any areas that could be classed as ‘avoidable’ spending and ‘unavoidable spending’.
+        Try to prioritise reducing any items of spending that can be classed as ‘avoidable’ spending e.g. taxi journeys instead of the bus depending on your situation. Our <a href="./dashboard_form" target="_blank" class="content-link">ChipIn Dashboard</a> can help you to analyse your spending!
+    </p>
 
-<p> <ul> It is important to have a goal. What would you like to save for? How much money would you like to save? Is there a deadline for when this money should be saved?
+<br>
 
-    <li> Set a schedule of savings totals and deadlines for them. </li>
-    <li> Be realistic with your timings. It may take longer to save for bigger savings projects such as saving for housing renovations.
-        Some savings totals may be small but consistent e.g. an emergency fund. </li>
-    <li> Use a tool to help you with your goals. Our <a href="./savings_calculator_form">ChipIn Savings Calculator</a> can help with this! </li>
+    <h2>Set reminders/automatic actions.</h2>
+    <p>
+        Set yourself timed reminders of when to save. This could be on payday, at the start of the month or in an arranged standing order with your bank to your current account. Reminders and routines can be encouraging and help you to stay focused on your goals.
+    </p>
 
-</ul>
-</p>
-
-
-
-<h2> 2. Record your outgoing money (expenses). </h2>
-<p>
-<ul>
-    <li> Keep a regular record of your expenses to find patterns in where the most of your money is going to. </li>
-    <li> Identify any areas that could be classed as ‘avoidable’ spending and ‘unavoidable spending’.
-        Try to prioritise reducing any items of spending that can be classed as ‘avoidable’ spending e.g. taxi journeys instead of the bus depending on your situation.
-        Our <a href="./dashboard_form">ChipIn Dashboard</a> can help you to analyse your spending! </li> </ul>
-</p>
-
-
-<h2> 3. Set reminders/automatic actions. </h2>
-<p>
-<ul> <li> Set yourself timed reminders of when to save. This could be on payday, at the start of the month or in an arranged standing order with your bank to your current account.
-    Reminders and routines can be encouraging and help you to stay focused on your goals. </li></ul>
-</p>
-
-
+<br>
+<br>
+</article>
+</div>
 {% endblock %}

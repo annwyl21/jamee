@@ -16,10 +16,10 @@ def home():
     return render_template('index.html', title='ChipIn Home Page')
 
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html', title='Contact Us')
-    
+# @app.route('/contact')
+# def contact():
+#     return render_template('contact.html', title='Contact Us')
+#
     
  
 @app.route('/articles')
