@@ -16,6 +16,7 @@ body {
     text-align: left;
     background-color: white-smoke;
     color: #4A5759;
+    font-size: 1.7em;
 }
 
 .bg-body-tertiary {
@@ -41,6 +42,11 @@ body {
     color: white;
     text-align: center;
     text-shadow: black;
+}
+
+.why-chipin {
+    color: #4A5759;
+    text-decoration: none;
 }
 
 /* this changes the disclaimer and submit buttons colour */
@@ -170,6 +176,7 @@ span {
     color: #ABC270;
     text-align: center;
     font-style: italic;
+    font-size: 1em;
 }
 
 /* dashboard results */
