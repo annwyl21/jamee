@@ -17,7 +17,7 @@ class DataProviderService:
         password = ''
         database = 'budget_management'
         if sys.platform == 'win32':
-            password = ''
+            password = 'password'
         else:
             # uncomment or comment out the below depending on your mysql password
             password = "password"
