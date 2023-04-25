@@ -198,9 +198,9 @@ span {
 /* turns footer orange */
 
 footer {
-    text-align: center;
     background-color: #FDA769;
     position: absolute;
+    font-size: small;
 }
 
 /* accordion styling additions */
