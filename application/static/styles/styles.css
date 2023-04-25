@@ -1,14 +1,15 @@
+/*
+Site Palette
+#FDA769 orange, for titles and headings, nav and footer backgrounds, buttons
+#ABC270 green, to make some headings pop more
+#4A5759 for text colour
+white-smoke for website background colour
+#D2D4C8 for tables and accordion colour
+*/
+
 * {
     font-family: 'Raleway', sans-serif;
 }
-
-/*
-#FDA769 is orange, headings/tables
-#473C33 is dark brown
-white text?
-#ABC270 is green, background?
-#FEC868 is yellow, buttons?
-*/
 
 body {
     margin: 10px;
@@ -17,8 +18,8 @@ body {
     color: #4A5759;
 }
 
-/* this makes the nav bar and its background transparent, overriding the bootstrap template */
 .bg-body-tertiary {
+/* the bs bs opacity to 0 makes the nav bar and its background transparent, overriding the bootstrap template */
 /*    --bs-bg-opacity: 0;*/
     background-color: #FDA769!important;
 }
@@ -28,7 +29,7 @@ body {
     flex-grow: 0;
 }
 
-/*landing page*/
+/* landing page carousel */
 .carousel-inner img {
     width: 100%;
     margin: auto;
@@ -72,10 +73,16 @@ td {
      color: #4A5759;
    }
 
-h1, h2, h3, h4, h5, th {
+h1, h2, h3, h4, h5 {
     text-align: center;
     font-weight: bold;
     color: #FDA769;
+}
+
+th {
+    color: #ABC270;
+    text-align: center;
+    font-weight: bold;
 }
 
 p {
@@ -127,8 +134,6 @@ span {
 .column {
     float: left;
     display: flex;
-/*    justify-content: center;*/
-/*    display: inline-block;*/
     width: 33.3%;
     margin-bottom: 16px;
     padding: 0 8px;
@@ -168,6 +173,7 @@ span {
 }
 
 /* dashboard results */
+
 .dashboard-img, .debt-pyramid, .articles-img {
     display: flex;
     align-items; center;
@@ -195,8 +201,7 @@ footer {
     text-align: center;
     background-color: #FDA769;
     position: absolute;
-    }
-
+}
 
 /* accordion styling additions */
 
@@ -216,15 +221,6 @@ footer {
 .accordion-button:not(.collapsed) {
     color: #473C33;
     background-color: #D2D4C8;
-}
-
-/*Article content*/
-.content {
-    /*width: 90%
-    margin: 30px auto 30px;
-    border: 10px auto solid blue;*/
-    /*text-align: left;*/
-/*    display: inline-block;*/
 }
 
 /*Main article information*/
