@@ -23,6 +23,11 @@ body {
     background-color: #FDA769!important;
 }
 
+/* this aligns the nav items to the right */
+.navbar-collapse {
+    flex-grow: 0;
+}
+
 /*landing page*/
 .carousel-inner img {
     width: 100%;
