@@ -1,5 +1,5 @@
-# Friends (JAMEE created by Jaya, Abigail, Michelle, Eyasmin & Ellen)
-A website / dashboard for personal financial tracking and managements of debt repayment.
+Team Friends (JAMEE created by Jaya, Abigail, Michelle, Eyasmin & Ellen)
+# A website / dashboard for personal financial tracking and management of debt repayments.
 
 - Install the requirements
 ```bash
